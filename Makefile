@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+         #
+#    By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 12:57:38 by vicrodri          #+#    #+#              #
-#    Updated: 2023/07/31 17:43:36 by vicrodri         ###   ########.fr        #
+#    Updated: 2023/08/11 13:22:54 by erigolon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,12 @@ NAME	=	minishell
 
 CC	=	gcc
 
+# -lreadline /opt/vagrant/embedded/lib -I /opt/vagrant/embedded/include/readline
 CFLAGS	=	-Wall -Wextra -Werror
+
+USER = $(shell whoami)
+LIBS = -L "/Users/$(USER)/.brew/opt/readline/lib" -lreadline
+RLHEADER = -I "/Users/$(USER)/.brew/opt/readline/include"
 
 INC			= libft/
 
@@ -25,7 +30,7 @@ SOURCES	=	$(wildcard src/*.c)
 OBJECTS	=	$(SOURCES:.c=.o)
 
 %.o: %.c
-	@$(CC)$(FLAGS) -c $< -o $@
+	@$(CC)$(FLAGS) -c $< -o $@ $(RLHEADER)
 
 all: $(LIBFT)	$(NAME)
 
@@ -33,7 +38,7 @@ $(LIBFT):
 	@make -C $(INC)
 
 $(NAME)		: $(LIBFT) $(OBJECTS) 
-	@$(CC) $(CFLAGS) $(LIBFT) $(OBJECTS) -lreadline -o $(NAME)
+	@$(CC) $(CFLAGS) $(LIBFT) $(LIBS) $(OBJECTS) -o $(NAME) 
 			@echo "$(GREEN)$(NAME) -> program created! $(DEFAULT)"
 
 clean:

@@ -3,23 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/08/03 18:26:08 by vicrodri         ###   ########.fr       */
+/*   Updated: 2023/08/04 15:54:40 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "../libft/libft.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
 int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	t_minishell	minishell;
 
+	
 	while (1)
 	{
+		signal(SIGINT, ft_handler);
+		signal(SIGQUIT, ft_handler);
 		input = readline("minishell$ ");
 		add_history(input);
 		if (ft_strncmp(ft_strtrim(input, " "), "exit", 4) == 0)
