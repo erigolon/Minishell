@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/08/04 15:54:40 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/08/21 17:12:07 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,17 @@ int	main(int argc, char **argv, char **envp)
 	char		*input;
 	t_minishell	minishell;
 
-	
+	signal(SIGINT, ft_handler);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		signal(SIGINT, ft_handler);
-		signal(SIGQUIT, ft_handler);
 		input = readline("minishell$ ");
+		if (!input)
+		{
+			free(input);
+			printf("exit\n");
+			return (0);
+		}
 		add_history(input);
 		if (ft_strncmp(ft_strtrim(input, " "), "exit", 4) == 0)
 		{

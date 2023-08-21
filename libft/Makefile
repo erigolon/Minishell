@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+         #
+#    By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/26 11:56:36 by vicrodri          #+#    #+#              #
-#    Updated: 2023/07/13 12:06:30 by vicrodri         ###   ########.fr        #
+#    Updated: 2023/08/21 15:48:50 by erigolon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,10 +39,10 @@ $(NAME): $(OBJCS)
 all: $(NAME)
 
 clean:
-	rm -f $(OBJCS) $(BONUS_OBJCS)
+	@rm -f $(OBJCS) $(BONUS_OBJCS)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 

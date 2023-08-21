@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/08/04 13:04:05 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/08/14 12:18:43 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char	**ft_splitpipex(char const *str, char c);
 void	ft_paths(char **envp, t_minishell *minishell);
 void	ft_getcmd(t_minishell *minishell, char **envp);
 void	free_arrays(char **arg);
-void	ft_handler(int signal);
+void	ft_handler(int signum);
+void	ft_handler_quit(int signum);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 12:57:38 by vicrodri          #+#    #+#              #
-#    Updated: 2023/08/11 13:22:54 by erigolon         ###   ########.fr        #
+#    Updated: 2023/08/21 15:48:16 by erigolon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,18 +37,18 @@ all: $(LIBFT)	$(NAME)
 $(LIBFT):
 	@make -C $(INC)
 
-$(NAME)		: $(LIBFT) $(OBJECTS) 
+$(NAME): $(LIBFT) $(OBJECTS) 
 	@$(CC) $(CFLAGS) $(LIBFT) $(LIBS) $(OBJECTS) -o $(NAME) 
-			@echo "$(GREEN)$(NAME) -> program created! $(DEFAULT)"
+	@echo "$(GREEN)$(NAME) -> program created! $(DEFAULT)"
 
 clean:
-		rm -f $(OBJECTS)
-		@make -C $(INC) clean
-		@echo "$(YELLOW)$(NAME) -> Object files deleted. "
+	@rm -f $(OBJECTS)
+	@make -C $(INC) clean
+	@echo "$(YELLOW)$(NAME) -> Object files deleted. "
 
 fclean:	clean
-		rm -f $(NAME)
-		@echo "$(RED)$(NAME) program -> Program and objects files deleted. "
+	@rm -f $(NAME)
+	@echo "$(RED)$(NAME) program -> Program and objects files deleted. "
 
 re:	fclean all
 
