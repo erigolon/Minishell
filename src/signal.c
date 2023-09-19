@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:59:31 by erigolon          #+#    #+#             */
-/*   Updated: 2023/08/18 12:39:57 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/09/19 11:26:46 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <readline/history.h>
 #include <termios.h>
 
+// Aquí se maneja tanto la señnal SIGQUIT como SIGINT
 void	ft_handler(int signum)
 {
 	struct termios	prompt;

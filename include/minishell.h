@@ -6,13 +6,14 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/09/18 13:08:51 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/09/19 15:01:51 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "../libft/libft.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -34,5 +35,6 @@ void	ft_getcmd(t_minishell *minishell, char **envp);
 void	free_arrays(char **arg);
 void	ft_handler(int signum);
 void	ft_handler_quit(int signum);
+int		ft_pwd(void);
 
 #endif
