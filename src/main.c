@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/08/21 17:12:07 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/09/18 13:08:09 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,22 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+/*static void	ft_leaks(void)
+{
+	system("leaks -q minishell");
+}*/
+
 int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	t_minishell	minishell;
 
-	signal(SIGINT, ft_handler);
-	signal(SIGQUIT, SIG_IGN);
+	rl_catch_signals = 0;
+//	atexit(ft_leaks);
 	while (1)
 	{
+		signal(SIGINT, ft_handler);
+		signal(SIGQUIT, ft_handler);
 		input = readline("minishell$ ");
 		if (!input)
 		{
