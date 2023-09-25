@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/09/19 15:01:51 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/09/22 12:46:26 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@
 
 typedef struct minishell
 {
+	char	**env;
 	char	**paths;
 	char	**input;
 	char	*cmd;
 	int		child_pid;
+	int		exit_status;
 }	t_minishell;
 
 char	**ft_splitpipex(char const *str, char c);
@@ -35,6 +37,9 @@ void	ft_getcmd(t_minishell *minishell, char **envp);
 void	free_arrays(char **arg);
 void	ft_handler(int signum);
 void	ft_handler_quit(int signum);
+void	ft_handler_child(int signum);
 int		ft_pwd(void);
+void	ft_env(t_minishell *ms);
+void	ft_exit(void);
 
 #endif

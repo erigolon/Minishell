@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/04 12:59:31 by erigolon          #+#    #+#             */
-/*   Updated: 2023/09/21 13:13:33 by erigolon         ###   ########.fr       */
+/*   Created: 2023/09/22 12:34:32 by erigolon          #+#    #+#             */
+/*   Updated: 2023/09/22 12:41:53 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-#include "../libft/libft.h"
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <termios.h>
+#include "../../include/minishell.h"
 
-// Aquí se maneja tanto la señnal SIGQUIT como SIGINT
-void	ft_handler(int signum)
+void	ft_env(t_minishell *ms)
 {
-	if (signum == SIGINT)
+	int	i;
+
+	i = 0;
+	while (ms->env[i])
 	{
-		printf("\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-		signal(SIGINT, ft_handler);
+		ft_putendl_fd(ms->env[i], 1);
+		i++;
 	}
 }

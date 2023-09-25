@@ -6,7 +6,7 @@
 #    By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 12:57:38 by vicrodri          #+#    #+#              #
-#    Updated: 2023/08/21 15:48:16 by erigolon         ###   ########.fr        #
+#    Updated: 2023/09/22 11:52:28 by erigolon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,9 @@ RLHEADER = -I "/Users/$(USER)/.brew/opt/readline/include"
 
 INC			= libft/
 
-LIBFT		= $(INC)libft.a
+LIBFT		= $(INC)libft.a 
 
-SOURCES	=	$(wildcard src/*.c)	
+SOURCES	=	$(wildcard src/*.c)	$(wildcard src/builtins/*.c)	
 
 OBJECTS	=	$(SOURCES:.c=.o)
 

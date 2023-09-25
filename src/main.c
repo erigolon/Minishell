@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/09/19 15:02:40 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/09/21 12:56:03 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,15 @@ int	main(int argc, char **argv, char **envp)
 		if (!input)
 		{
 			free(input);
-			printf("exit\n");
+			ft_exit();
 			return (0);
 		}
 		add_history(input);
-		if (ft_strncmp(ft_strtrim(input, " "), "pwd", 3) == 0)
+		if (ft_strncmp(ft_strtrim(input, " "), "exit", 3) == 0)
 		{
-			ft_pwd();
-//			free(input);
-//			ft_printf("exit\n");
-//			return (0);
+			free(input);
+			ft_exit();
+			return (0);
 		}
 		else
 		{

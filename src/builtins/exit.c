@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 14:24:08 by erigolon          #+#    #+#             */
-/*   Updated: 2023/09/19 15:07:36 by erigolon         ###   ########.fr       */
+/*   Created: 2023/09/20 13:29:00 by erigolon          #+#    #+#             */
+/*   Updated: 2023/09/22 12:38:46 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
-int	ft_pwd(void)
+void	ft_exit(void)
 {
-	char	buffer[1024];
-
-	if (getcwd(buffer, 1024))
-	{
-		printf("%s\n", buffer);
-		return (0);
-	}
-	else
-		return (1);
+	ft_putstr_fd("exit\n", 2);
 }
