@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/09/22 12:46:26 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:56:34 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,78 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <signal.h>
+# include <sys/types.h>
 # include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
+typedef struct token
+{
+	int				type;
+	char			*str;
+	int				status;
+	int				escaped;
+	int				join_next;
+	struct token	*next;
+	struct token	*prev;
+}	t_token;
+
+typedef struct lexer
+{
+	struct token	*token_list;
+	int				n_tokens;
+	int				error;
+}	t_lexer;
+
+typedef struct cmdlist
+{
+	char			**arg;
+	char			*path;
+	char			*fd_in;
+	char			*fd_out;
+	int				i_fd_in;
+	int				i_fd_out;
+	int				append;
+	struct cmdlist	*next;
+	struct cmdlist	*prev;
+}	t_cmdlist;
+
+typedef struct envlist
+{
+	char			*env;
+	char			*value;
+	struct envlist	*next;
+	struct envlist	*prev;
+
+}	t_envlist;
+
 typedef struct minishell
 {
-	char	**env;
-	char	**paths;
-	char	**input;
-	char	*cmd;
-	int		child_pid;
-	int		exit_status;
+	struct cmdlist	*cmdlist;
+	struct envlist	*envlist;
+	t_lexer			*lexer;
+	char			**paths;
+	char			*path;
+	char			**input;
+	pid_t			child_pid;
+	char			**envp;
+	int				fd_pipe[2];
+	int				i;
+	int				i_pipe;
+	unsigned char	exit_status;
+	int				exit;
+	char			*cmd;
 }	t_minishell;
 
-char	**ft_splitpipex(char const *str, char c);
-void	ft_paths(char **envp, t_minishell *minishell);
-void	ft_getcmd(t_minishell *minishell, char **envp);
-void	free_arrays(char **arg);
-void	ft_handler(int signum);
-void	ft_handler_quit(int signum);
-void	ft_handler_child(int signum);
-int		ft_pwd(void);
-void	ft_env(t_minishell *ms);
-void	ft_exit(void);
+char		**ft_splitpipex(char const *str, char c);
+void		ft_paths(char **envp, t_minishell *minishell);
+void		ft_getcmd(t_minishell *minishell, char **envp);
+void		free_arrays(char **arg);
+t_envlist	*env_list(t_minishell *ms);
+void		ft_handler(int signum);
+int			ft_pwd(void);
+void		ft_env(t_minishell *ms);
+void		ft_exit(void);
 
 #endif

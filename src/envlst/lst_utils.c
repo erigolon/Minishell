@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/22 12:34:32 by erigolon          #+#    #+#             */
-/*   Updated: 2023/09/25 12:38:49 by erigolon         ###   ########.fr       */
+/*   Created: 2023/09/25 14:26:30 by erigolon          #+#    #+#             */
+/*   Updated: 2023/09/25 14:36:03 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_env(t_minishell *ms)
+void	split_n_fill_env(t_envlist	*new_env, char *env)
 {
 	int	i;
 
 	i = 0;
-	while (ms->envp[i])
-	{
-		ft_putendl_fd(ms->envp[i], 1);
+	while (env[i] && env[i] != '=')
 		i++;
-	}
+	if (new_env->env)
+		free(new_env->env);
+	new_env->env = ft_calloc(sizeof(char), i + 2);
+	ft_strlcpy(new_env->env, env, i + 1);
+	if (new_env->value)
+		free(new_env->value);
+	if (env[i] == '=')
+		new_env->value = ft_strdup(&env[i + 1]);
+	else
+		new_env->value = NULL;
+	return (new_env);
 }

@@ -6,7 +6,7 @@
 #    By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 12:57:38 by vicrodri          #+#    #+#              #
-#    Updated: 2023/09/22 11:52:28 by erigolon         ###   ########.fr        #
+#    Updated: 2023/09/25 14:24:34 by erigolon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ INC			= libft/
 
 LIBFT		= $(INC)libft.a 
 
-SOURCES	=	$(wildcard src/*.c)	$(wildcard src/builtins/*.c)	
+SOURCES	=	$(wildcard src/*.c)	$(wildcard src/builtins/*.c) $(wildcard src/envlst/*.c)
 
 OBJECTS	=	$(SOURCES:.c=.o)
 

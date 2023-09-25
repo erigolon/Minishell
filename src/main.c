@@ -6,17 +6,11 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/09/21 12:56:03 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:03:00 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include "../libft/libft.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 
 /*static void	ft_leaks(void)
 {
@@ -28,6 +22,9 @@ int	main(int argc, char **argv, char **envp)
 	char		*input;
 	t_minishell	minishell;
 
+	minishell.envp = envp;
+	printf("%s\n", minishell.envp[0]);
+//	minishell.envlist = env_list(&minishell);
 	rl_catch_signals = 0;
 //	atexit(ft_leaks);
 	while (1)
