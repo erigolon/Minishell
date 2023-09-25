@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   splitpipex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:25:30 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/08/03 16:39:41 by vicrodri         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:34:41 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,22 @@ int	ft_strcontpipex(char const *s, char c)
 		if (s[i] == '\'' || s[i] == 34)
 		{
 			i++;
-			while ((s[i] != '\'' || s[i] != 34) && s[i] != 0)
+			while ((s[i] != '\'' && s[i] != 34) && s[i] != 0)
+					i++;
+			if (s[i] == '\'' || s[i] == 34)
+			{	
 				i++;
-			if (s[i++] == '\'' || s[i] == 34)
 				n++;
+			}
 		}
 		if ((s[i + 1] == c || s[i + 1] == '\0') && s[i] != c)
 			n++;
+		// else if ((s[i + 1] == '>' || s[i + 1] == '<' || s[i + 1] == '|')
+		// 	&& (s[i] != c || s[i + 2] != c))
+		// 	n++;
 		i++;
 	}
+	printf("%d\n", n);
 	return (n);
 }
 
@@ -103,11 +110,17 @@ char	**ft_splitpipex(char const *str, char c)
 		if (str[i] == '\'' || str[i] == 34)
 		{
 			split[word++] = ft_wordpipexcom(&str[i++]);
-			while ((str[i] != '\'' || str[i] != 34) && str[i] != 0)
+			while ((str[i] != '\'' && str[i] != 34) && str[i] != 0)
 				i++;
 		}
 		else if (str[i] != c && str[i] != 0)
 			split[word++] = ft_wordpipex(&str[i], c);
+		else if (str[i] != '|' && str[i] != 0)
+			split[word++] = ft_wordpipex(&str[i], '|');
+		else if (str[i] != '<' && str[i] != 0)
+			split[word++] = ft_wordpipex(&str[i], '<');
+		else if (str[i] != '>' && str[i] != 0)
+			split[word++] = ft_wordpipex(&str[i], '>');
 		while (str[i] != c && str[i] != 0)
 			i++;
 	}
