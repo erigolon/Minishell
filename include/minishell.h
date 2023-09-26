@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/09/26 11:24:11 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:03:26 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct minishell
 {
 	struct cmdlist	*cmdlist;
 	struct envlist	*envlist;
+	struct envlist	*export;
 	t_lexer			*lexer;
 	char			**paths;
 	char			*path;
@@ -97,5 +98,6 @@ void		ft_handler(int signum);
 int			ft_pwd(void);
 void		ft_env(t_minishell *ms);
 void		ft_exit(void);
+void	ft_export(t_minishell *ms);
 
 #endif
