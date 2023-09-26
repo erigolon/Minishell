@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:32:08 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/09/23 17:35:50 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:01:19 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,17 @@ t_lexer	*ft_tokenizer(char *input, t_minishell *minishell)
 	lexer = ft_calloc(1, sizeof(t_lexer));
 	lexer->error = 0;
 	minishell->input = ft_splitpipex(input, ' ');
-	printf("lexer->token_list->str = %s\n", minishell->input[0]);
-	// printf("lexer->token_list->str = %s\n", minishell->input[1]);
-	// printf("lexer->token_list->str = %s\n", minishell->input[2]);
-
 	ft_expander(*minishell);
-	printf("lexer->token_list->str = %s\n", minishell->input[0]);
+		printf("lexer->token_list->str = %s\n", minishell->input[0]);
+	printf("lexer->token_list->str = %s\n", minishell->input[1]);
+	printf("lexer->token_list->str = %s\n", minishell->input[2]);
+	printf("lexer->token_list->str = %s\n", minishell->input[3]);
+	printf("lexer->token_list->str = %s\n", minishell->input[4]);
+	
+	printf("lexer->token_list->str = %s\n", minishell->input[5]);
+	printf("lexer->token_list->str = %s\n", minishell->input[6]);
+printf("lexer->token_list->str = %s\n", minishell->input[7]);
+printf("lexer->token_list->str = %s\n", minishell->input[8]);
 	// while (minishell->input[i])
 	// {
 	// 	ft_token_add_back(&lexer->token_list, new_token(lexer->token_list, minishell->input[i]));
