@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/09/26 13:03:26 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:15:05 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,8 @@ typedef struct minishell
 	char			**paths;
 	char			*path;
 	char			**input;
-	pid_t			child_pid;
 	char			**envp;
-	int				fd_pipe[2];
-	int				i;
+	pid_t			child_pid;
 	int				i_pipe;
 	unsigned char	exit_status;
 	int				exit;
