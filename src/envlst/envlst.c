@@ -6,13 +6,38 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 12:44:29 by erigolon          #+#    #+#             */
-/*   Updated: 2023/09/25 14:22:35 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/09/26 11:50:34 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-t_envlist	*lsdnew_env(char *env)
+t_envlist	*lstlast_env(t_envlist *lst)
+{
+	if (!lst)
+		return (0);
+	while (lst->next != 0)
+		lst = lst->next;
+	return (lst);
+}
+
+void	lstadd_back_env(t_envlist **envlst, t_envlist *new)
+{
+	t_envlist	*back;
+
+	if (envlst && new)
+	{
+		if (!*envlst)
+			*envlst = new;
+		else
+		{
+			back = lstlast_env(*envlst);
+			back->next = new;
+		}
+	}
+}
+
+t_envlist	*lstnew_env(char *env)
 {
 	t_envlist	*new_env;
 

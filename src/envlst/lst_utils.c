@@ -6,13 +6,13 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:26:30 by erigolon          #+#    #+#             */
-/*   Updated: 2023/09/25 14:36:03 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/09/26 11:22:15 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	split_n_fill_env(t_envlist	*new_env, char *env)
+t_envlist	*split_n_fill_env(t_envlist	*new_env, char *env)
 {
 	int	i;
 

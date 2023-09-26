@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/09/25 14:03:00 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/09/26 12:07:20 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int	main(int argc, char **argv, char **envp)
 	t_minishell	minishell;
 
 	minishell.envp = envp;
-	printf("%s\n", minishell.envp[0]);
-//	minishell.envlist = env_list(&minishell);
+	minishell.envlist = env_list(&minishell);
 	rl_catch_signals = 0;
 //	atexit(ft_leaks);
 	while (1)

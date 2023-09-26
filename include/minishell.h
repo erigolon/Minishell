@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/09/25 13:56:34 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/09/26 11:24:11 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,15 @@ char		**ft_splitpipex(char const *str, char c);
 void		ft_paths(char **envp, t_minishell *minishell);
 void		ft_getcmd(t_minishell *minishell, char **envp);
 void		free_arrays(char **arg);
+
+// Manejo y creación de la lista de variables de entorno
 t_envlist	*env_list(t_minishell *ms);
+t_envlist	*split_n_fill_env(t_envlist	*new_env, char *env);
+
+// Manejo de señales
 void		ft_handler(int signum);
+
+// Builtins
 int			ft_pwd(void);
 void		ft_env(t_minishell *ms);
 void		ft_exit(void);
