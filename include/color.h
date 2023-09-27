@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 14:24:08 by erigolon          #+#    #+#             */
-/*   Updated: 2023/09/27 12:12:12 by erigolon         ###   ########.fr       */
+/*   Created: 2023/09/27 12:29:48 by erigolon          #+#    #+#             */
+/*   Updated: 2023/09/27 12:31:00 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#ifndef _COLOR_H_
+#define _COLOR_H_
 
-int	ft_pwd(void)
-{
-	char	buffer[1024];
+# define RESET_COLOR	"\033[0m"
+# define CYAN_BOLD    	"\033[1;36m"
+# define BLUE_BOLD    	"\033[1;34m"
 
-	if (getcwd(buffer, 1024))
-	{
-		printf("%s\n", buffer);
-		return (0);
-	}
-	else
-		return (1);
-}
+# define READLINE_MSG	"\033[1;36mminishell\033[34m$ \033[0m"
+
+#endif

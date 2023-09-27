@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/09/26 15:15:05 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:42:52 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
+# include "color.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -67,7 +68,7 @@ typedef struct minishell
 {
 	struct cmdlist	*cmdlist;
 	struct envlist	*envlist;
-	struct envlist	*export;
+	struct envlist	*explist;
 	t_lexer			*lexer;
 	char			**paths;
 	char			*path;
@@ -95,7 +96,7 @@ void		ft_handler(int signum);
 // Builtins
 int			ft_pwd(void);
 void		ft_env(t_minishell *ms);
-void		ft_exit(void);
-void	ft_export(t_minishell *ms);
+void		ft_exit(t_minishell *ms);
+void		ft_export(t_minishell *ms);
 
 #endif
