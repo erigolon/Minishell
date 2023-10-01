@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/09/27 12:42:52 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/01 18:25:53 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,6 @@
 # include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-
-typedef struct token
-{
-	int				type;
-	char			*str;
-	int				status;
-	int				escaped;
-	int				join_next;
-	struct token	*next;
-	struct token	*prev;
-}	t_token;
-
-typedef struct lexer
-{
-	struct token	*token_list;
-	int				n_tokens;
-	int				error;
-}	t_lexer;
 
 typedef struct cmdlist
 {
@@ -69,16 +51,11 @@ typedef struct minishell
 	struct cmdlist	*cmdlist;
 	struct envlist	*envlist;
 	struct envlist	*explist;
-	t_lexer			*lexer;
-	char			**paths;
-	char			*path;
-	char			**input;
 	char			**envp;
+	char			**input;
 	pid_t			child_pid;
-	int				i_pipe;
 	unsigned char	exit_status;
 	int				exit;
-	char			*cmd;
 }	t_minishell;
 
 char		**ft_splitpipex(char const *str, char c);
@@ -87,8 +64,9 @@ void		ft_getcmd(t_minishell *minishell, char **envp);
 void		free_arrays(char **arg);
 
 // Manejo y creación de la lista de variables de entorno
-t_envlist	*env_list(t_minishell *ms);
+t_envlist	*env_list(char	**envp);
 t_envlist	*split_n_fill_env(t_envlist	*new_env, char *env);
+void		free_envlst(t_envlist *envlst);
 
 // Manejo de señales
 void		ft_handler(int signum);

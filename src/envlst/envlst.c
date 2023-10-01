@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 12:44:29 by erigolon          #+#    #+#             */
-/*   Updated: 2023/09/26 11:50:34 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/01 18:25:28 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,36 @@ t_envlist	*lstnew_env(char *env)
 	return (new_env);
 }
 
-t_envlist	*env_list(t_minishell *ms)
+t_envlist	*env_list(char	**envp)
 {
 	t_envlist	*lst;
 	int			i;
 
 	i = 0;
-	while (ms->envp[i])
+	while (envp[i])
 	{
 		if (i == 0)
-			lst = lstnew_env(ms->envp[i]);
+			lst = lstnew_env(envp[i]);
 		else
-			lstadd_back_env(&lst, lstnew_env(ms->envp[i]));
+			lstadd_back_env(&lst, lstnew_env(envp[i]));
 		i++;
 	}
 	return (lst);
+}
+
+void	free_envlst(t_envlist *envlst)
+{
+	t_envlist	*temp;
+
+	if (!envlst)
+		return ;
+	while (envlst)
+	{
+		temp = envlst->next;
+		free(envlst->env);
+		if (envlst->value)
+			free(envlst->value);
+		free(envlst);
+		envlst = temp;
+	}
 }
