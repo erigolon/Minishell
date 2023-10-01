@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 18:46:54 by erigolon          #+#    #+#             */
-/*   Updated: 2023/09/28 07:10:29 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/01 19:39:12 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,11 @@ void	ft_getcmd(t_minishell minishell, char *cmdargs)
 		{
 			break ;
 		}
+		else
+		{
+			free(minishell.cmds->path);
+			minishell.cmds->path = NULL;
+		}
 	}
 }
 
@@ -124,17 +129,17 @@ void	ft_path(char *input, t_minishell minishell)
 	builtin[4] = "unset";
 	builtin[5] = "env";
 	builtin[6] = "exit";
-	while (builtin[i])
+	if (input[0] != '|' && input[0] != '<' && input[0] != '>')
+	{
+		ft_getcmd(minishell, input);
+
+	}
+	while (i < 7)
 	{
 		if (ft_strncmp(input, builtin[i], ft_strlen(builtin[i])) == 0)
 		{
 			minishell.cmds->path = NULL;
 			break ;
-		}
-		else
-		{
-			ft_getcmd(minishell, input);
-			printf("%s\n", minishell.cmds->path);
 		}
 		i++;
 	}
@@ -143,16 +148,25 @@ void	ft_path(char *input, t_minishell minishell)
 void	ft_parser(t_minishell minishell)
 {
 	int i;
+	int j;
 
 	i = 0;
+	j = 0;
 	minishell.cmds = ft_cmdlstnew(NULL);
+	minishell.cmds->cmd = ft_calloc(ft_strlen(*minishell.input) + 1, sizeof(char *));
 	while (minishell.input[i])
 	{
-		if(i == 0)
+		if (minishell.input[i][0] != '<' && minishell.input[i][0] != '>'
+			&& minishell.input[i][0] != '|')
+		{	
 			ft_path(minishell.input[i], minishell);
-	
+			printf("path: %s\n", minishell.cmds->path);
+			minishell.cmds->cmd[j] = ft_strdup(minishell.input[i]);
+			j++;
+
+		}
 		if (minishell.input[i][0] == '|')
-			write(1, "hola", 4);
+			break;
 		i++;
 	}
 
