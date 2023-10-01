@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/09/18 11:51:50 by vicrodri         ###   ########.fr       */
+/*   Updated: 2023/09/27 21:42:32 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 
 void	ft_free_minishell(t_minishell *minishell)
 {
-	free(minishell->path);
 	free(minishell->input);
-	free_arrays(minishell->paths);
-	free_arrays(minishell->input);
-	free_arrays(minishell->envp);
 }
 
 
@@ -27,14 +23,13 @@ int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	t_minishell	minishell;
-	t_lexer		*lex;
 
 	(void)argc;
 	(void)argv;
 	signal(SIGINT, ft_handler);
 	signal(SIGQUIT, SIG_IGN);
 	minishell.envp = envp;
-	minishell.i = 0;
+	
 	while (1)
 	{
 		input = readline("minishell$ ");
@@ -53,7 +48,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		else
 		{
-			lex = ft_tokenizer(input, &minishell);
+			ft_tokenizer(input, &minishell);
 			// minishell.input = ft_splitpipex(input, ' ');
 			// ft_paths(&minishell);
 			// minishell.child_pid = fork();

@@ -6,12 +6,12 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:25:30 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/09/26 16:57:22 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/09/27 21:03:50 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-#include "../libft/libft.h"
+#include "../../include/minishell.h"
+#include "../../libft/libft.h"
 
 int	ft_strcontpipex(char const *s, char c)
 {
@@ -37,7 +37,6 @@ int	ft_strcontpipex(char const *s, char c)
 			n++;
 		i++;
 	}
-	printf("%d\n", n);
 	return (n);
 }
 // arreglar los dobles cmd
@@ -62,7 +61,6 @@ int	ft_strcontcmd(char const *s, char c)
 		}
 		i++;
 	}
-	printf("%d\n", n);
 	return (n);
 }
 
