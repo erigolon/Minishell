@@ -6,7 +6,7 @@
 /*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:32:08 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/01 18:55:17 by vicrodri         ###   ########.fr       */
+/*   Updated: 2023/10/01 19:51:27 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ void	ft_tokenizer(char *input, t_minishell *minishell)
 {
 	minishell->input = ft_splitpipex(input, ' ');
 	ft_expander(*minishell);
-	ft_parser(*minishell);
+	ft_parser(minishell);
 	printf("path: %s\n", minishell->cmds->path);
-	// printf("cmd: %s\n", minishell->cmds->cmd[0]);
-	// printf("cmd: %s\n", minishell->cmds->cmd[1]);
-	// printf("cmd: %s\n", minishell->cmds->cmd[2]);
+	printf("cmd: %s\n", minishell->cmds->cmd[0]);
+	printf("cmd: %s\n", minishell->cmds->cmd[1]);
+	printf("cmd: %s\n", minishell->cmds->cmd[2]);
 	
 
 }

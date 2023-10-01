@@ -6,7 +6,7 @@
 /*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/01 19:38:53 by vicrodri         ###   ########.fr       */
+/*   Updated: 2023/10/01 19:49:08 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ typedef struct minishell
 
 char	**ft_splitpipex(char const *str, char c);
 void	ft_paths(t_minishell *minishell);
-void	ft_getcmd(t_minishell minishell, char *cmdargs);
+void	ft_getcmd(t_minishell *minishell, char *cmdargs);
 void	ft_pipe(t_minishell *minishell);
 void	ft_handler(int signum);
 void	ft_handler_quit(int signum);
-void	ft_parser(t_minishell minishell);
+void	ft_parser(t_minishell *minishell);
 void	ft_tokenizer(char *input, t_minishell *minishell);
 
 #endif
