@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/01 18:25:53 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/02 12:33:24 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,9 @@ typedef struct minishell
 	int				exit;
 }	t_minishell;
 
-char		**ft_splitpipex(char const *str, char c);
-void		ft_paths(char **envp, t_minishell *minishell);
-void		ft_getcmd(t_minishell *minishell, char **envp);
-void		free_arrays(char **arg);
+// Duplicación del string
+char	**ft_strddup(char **envp);
+void	free_str(char **str, int i);
 
 // Manejo y creación de la lista de variables de entorno
 t_envlist	*env_list(char	**envp);

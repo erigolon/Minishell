@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/01 18:44:22 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/02 12:42:34 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int argc, char **argv, char **envp)
 
 void	free_all(t_minishell *ms)
 {
-	// Liberar el duplicado de envp
+	free_str(ms->envp, 0);
 	free_envlst(ms->envlist);
 	free_envlst(ms->explist);
 	free (ms);
@@ -83,7 +83,7 @@ t_minishell	*init_ms(char **envp)
 	t_minishell	*ms;
 
 	ms = ft_calloc(1, sizeof(t_minishell));
-	ms->envp = envp;/* duplicado de envp */
+	ms->envp = ft_strddup(envp);
 	ms->envlist = env_list(envp);
 	ms->explist = env_list(envp);
 	ms->exit = 1;
