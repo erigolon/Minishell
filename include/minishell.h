@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/02 12:33:24 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:54:43 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ typedef struct minishell
 }	t_minishell;
 
 // Duplicación del string
-char	**ft_strddup(char **envp);
-void	free_str(char **str, int i);
+char		**ft_strddup(char **envp);
+void		free_str(char **str, int i);
 
 // Manejo y creación de la lista de variables de entorno
 t_envlist	*env_list(char	**envp);
@@ -73,7 +73,11 @@ void		ft_handler(int signum);
 // Builtins
 int			ft_pwd(void);
 void		ft_env(t_minishell *ms);
-void		ft_exit(t_minishell *ms);
+
+void		ft_exit(t_minishell *ms, char **nb);
+void		exit_test(t_minishell *ms);
+
 void		ft_export(t_minishell *ms);
+void		ft_echo(char **str);
 
 #endif
