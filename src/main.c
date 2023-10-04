@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/03 15:55:24 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:49:13 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ int	main(int argc, char **argv, char **envp)
 	atexit(ft_leaks);/* Borrar esto en un futuro */
 	rl_catch_signals = 0;
 	ms = init_ms(envp);
-	exit_test(ms);
 	while (ms->exit)
 	{
 		signal(SIGINT, ft_handler);

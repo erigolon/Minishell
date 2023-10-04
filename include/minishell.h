@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/03 15:54:43 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:32:41 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void		free_str(char **str, int i);
 // Manejo y creación de la lista de variables de entorno
 t_envlist	*env_list(char	**envp);
 t_envlist	*split_n_fill_env(t_envlist	*new_env, char *env);
+void		sort_envlst(t_envlist **lst);
 void		free_envlst(t_envlist *envlst);
 
 // Manejo de señales
@@ -73,11 +74,8 @@ void		ft_handler(int signum);
 // Builtins
 int			ft_pwd(void);
 void		ft_env(t_minishell *ms);
-
 void		ft_exit(t_minishell *ms, char **nb);
-void		exit_test(t_minishell *ms);
-
-void		ft_export(t_minishell *ms);
+void		ft_export(t_minishell *ms, char **str);
 void		ft_echo(char **str);
 
 #endif
