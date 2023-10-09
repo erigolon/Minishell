@@ -6,15 +6,11 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:59:31 by erigolon          #+#    #+#             */
-/*   Updated: 2023/09/21 13:13:33 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/09 11:21:50 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include "../libft/libft.h"
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <termios.h>
 
 // Aquí se maneja tanto la señnal SIGQUIT como SIGINT
 void	ft_handler(int signum)

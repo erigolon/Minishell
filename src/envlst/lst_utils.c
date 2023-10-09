@@ -6,11 +6,29 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:26:30 by erigolon          #+#    #+#             */
-/*   Updated: 2023/10/04 15:11:58 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/05 11:24:30 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+t_envlist	*check_env(char *env, t_envlist *explist)
+{
+	t_envlist	*tmp;
+
+	if (!explist)
+		return (NULL);
+	tmp = explist;
+	while (tmp)
+	{
+		if (!ft_strncmp(env, tmp->env, 100))
+			break ;
+		tmp = tmp->next;
+	}
+	if (tmp)
+		return (tmp);
+	return (NULL);
+}
 
 void	sort_envlst(t_envlist **lst)
 {

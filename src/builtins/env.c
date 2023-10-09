@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 12:34:32 by erigolon          #+#    #+#             */
-/*   Updated: 2023/10/02 12:49:56 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/05 10:40:19 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	ft_env(t_minishell *ms)
 	lst = ms->envlist;
 	while (lst)
 	{
-		printf("%s=%s\n", lst->env, lst->value);
+		if (lst->value)
+			printf("%s=%s\n", lst->env, lst->value);
 		lst = lst->next;
 	}
 }

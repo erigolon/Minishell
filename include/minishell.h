@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/04 14:32:41 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/09 11:23:18 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <termios.h>
 
 typedef struct cmdlist
 {
@@ -64,9 +65,12 @@ void		free_str(char **str, int i);
 
 // Manejo y creación de la lista de variables de entorno
 t_envlist	*env_list(char	**envp);
+t_envlist	*lstnew_env(char *env);
+void		lstadd_back_env(t_envlist **envlst, t_envlist *new);
 t_envlist	*split_n_fill_env(t_envlist	*new_env, char *env);
 void		sort_envlst(t_envlist **lst);
 void		free_envlst(t_envlist *envlst);
+t_envlist	*check_env(char *env, t_envlist *explist);
 
 // Manejo de señales
 void		ft_handler(int signum);
@@ -77,5 +81,8 @@ void		ft_env(t_minishell *ms);
 void		ft_exit(t_minishell *ms, char **nb);
 void		ft_export(t_minishell *ms, char **str);
 void		ft_echo(char **str);
+
+// Pruebas
+void		testing(t_minishell *ms);
 
 #endif
