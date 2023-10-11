@@ -6,11 +6,29 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:26:30 by erigolon          #+#    #+#             */
-/*   Updated: 2023/10/05 11:24:30 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:43:51 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	delete_env(t_envlist **lst)
+{
+	if (!lst)
+		return ;
+	if ((*lst)->next && (*lst)->prev)
+	{
+		(*lst)->prev->next = (*lst)->next;
+		(*lst)->next->prev = (*lst)->prev;
+	}
+	else if ((*lst)->next)
+		(*lst)->next->prev = NULL;
+	else if ((*lst)->prev)
+		(*lst)->prev->next = NULL;
+	(*lst)->prev = NULL;
+	(*lst)->next = NULL;
+	free_envlst(*lst);
+}
 
 t_envlist	*check_env(char *env, t_envlist *explist)
 {

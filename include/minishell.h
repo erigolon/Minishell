@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/09 11:23:18 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:43:25 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void		lstadd_back_env(t_envlist **envlst, t_envlist *new);
 t_envlist	*split_n_fill_env(t_envlist	*new_env, char *env);
 void		sort_envlst(t_envlist **lst);
 void		free_envlst(t_envlist *envlst);
+void		delete_env(t_envlist **lst);
 t_envlist	*check_env(char *env, t_envlist *explist);
 
 // Manejo de señales
@@ -80,6 +81,7 @@ int			ft_pwd(void);
 void		ft_env(t_minishell *ms);
 void		ft_exit(t_minishell *ms, char **nb);
 void		ft_export(t_minishell *ms, char **str);
+void		ft_unset(t_minishell *ms, char **str);
 void		ft_echo(char **str);
 
 // Pruebas

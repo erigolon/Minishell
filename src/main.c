@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/09 11:44:54 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/11 09:55:20 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	free_all(t_minishell *ms)
 	free_envlst(ms->explist);
 	free (ms);
 }
+
 void	free_loop(t_minishell *ms, char *prompt)
 {
 	free(prompt);
