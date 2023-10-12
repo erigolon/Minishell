@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   splitpipex.c                                       :+:      :+:    :+:   */
+/*   splitms.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:25:30 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/09/27 21:03:50 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/05 20:10:27 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	ft_strcontpipex(char const *s, char c)
 			n++;
 		i++;
 	}
+	printf("n = %d\n", n);
 	return (n);
 }
 // arreglar los dobles cmd
@@ -53,14 +54,17 @@ int	ft_strcontcmd(char const *s, char c)
 	while (s[i] != '\0')
 	{
 		if ((s[i] == c) && !(s[i - 1] == ' '
-				&& (s[i + 1] == ' ' || s[i +1] == '\0')))
+				&& (s[i + 1] == ' ' || s[i + 1] == '\0')))
 		{
 			n++;
 			if (s[i - 1] != ' ' && s[i + 1]!= '\0' && s[i + 1] != ' ' && i > 0)
 				n++;
+			if(s[i + 1] == c)
+				i++;
 		}
 		i++;
 	}
+	printf("n = %d\n", n);
 	return (n);
 }
 
@@ -115,19 +119,28 @@ char	*ft_wordcmd(char const *str, char s)
 {
 	char	*word;
 
-	word = malloc(sizeof(char) * (3));
-	if (!word)
-		return (0);
-	word[1] = 0;
-	word[0] = s;
+	if (str[0] == s && str[1] == s)
+	{	
+		word = ft_calloc(3, sizeof(char));
+		word[2] = 0;
+		word[0] = s;
+		word[1] = s;
+	}
+	else
+	{
+		word = ft_calloc(2, sizeof(char));
+		word[1] = 0;
+		word[0] = s;
+	}
 	return (word);
 }
 
-char	**ft_splitpipex(char const *str, char c)
+char	**ft_splitms(char const *str, char c)
 {
 	char	**split;
 	int		word;
 	int		i;
+	int		com;
 
 	word = 0;
 	i = 0;
@@ -143,22 +156,37 @@ char	**ft_splitpipex(char const *str, char c)
 			i++;
 		if (str[i] == '\'' || str[i] == 34)
 		{
+			com = str[i];
 			split[word++] = ft_wordpipexcom(&str[i++]);
-			while ((str[i] != '\'' && str[i] != 34) && str[i] != 0)
+			while ((str[i] != com) && str[i] != 0)
 				i++;
-			while (str[i] != c && str[i] != '<' && str[i] != 0)
-			i++;
+			if (str[i] == com)
+				i++;
+			// while (str[i] != c && str[i] != '<' && str[i] != 0)
+			// i++;
 		}
 		else if (str[i] == '<')
+		{
 			split[word++] = ft_wordcmd(&str[i++], '<');
+			if(str[i] == '<')
+				i++;
+		}	
 		else if (str[i] == '>')
+		{
 			split[word++] = ft_wordcmd(&str[i++], '>');
+			if(str[i] == '>')
+				i++;
+		}	
 		else if (str[i] == '|')
+		{
 			split[word++] = ft_wordcmd(&str[i++], '|');
+			if(str[i] == '|')
+				i++;
+		}	
 		else if (str[i] != c && str[i] != 0)
 		{	
 			split[word++] = ft_wordpipex(&str[i], c);
-			while (str[i] != c && str[i] != '<' && str[i] != 0)
+			while (str[i] != c && str[i] != '<' && str[i] != '>' && str[i] != '|' && str[i] != 0)
 			i++;
 		}
 	}

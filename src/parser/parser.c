@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 18:46:54 by erigolon          #+#    #+#             */
-/*   Updated: 2023/10/01 19:54:29 by vicrodri         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:25:07 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*ft_join(char *path, char *cmd)
 	return (tmp2);
 }
 
-void	ft_getcmd(t_minishell *minishell, char *cmdargs)
+void	ft_getcmd(t_minishell *minishell,t_cmdlist *cmds, char *cmdargs)
 {
 	int		i;
 	char	**paths;
@@ -101,22 +101,22 @@ void	ft_getcmd(t_minishell *minishell, char *cmdargs)
 	while (paths[++i])
 	{
 		if (cmdargs[0] == '/' || cmdargs[0] == '.')
-			minishell->cmds->path = ft_strdup(cmdargs);
+			cmds->path = ft_strdup(cmdargs);
 		else
-			minishell->cmds->path = ft_join(paths[i], cmdargs);
-		if (access(minishell->cmds->path, X_OK) == 0)
+			cmds->path = ft_join(paths[i], cmdargs);
+		if (access(cmds->path, X_OK) == 0)
 		{
 			break ;
 		}
 		else
 		{
-			free(minishell->cmds->path);
-			minishell->cmds->path = NULL;
+			free(cmds->path);
+			cmds->path = NULL;
 		}
 	}
 }
 
-void	ft_path(char *input, t_minishell *minishell)
+void	ft_path(t_minishell *minishell, char *input, t_cmdlist *cmds)
 {
 	char	*builtin[7];
 	int		i;
@@ -131,14 +131,14 @@ void	ft_path(char *input, t_minishell *minishell)
 	builtin[6] = "exit";
 	if (input[0] != '|' && input[0] != '<' && input[0] != '>')
 	{
-		ft_getcmd(minishell, input);
+		ft_getcmd(minishell, cmds, input);
 
 	}
 	while (i < 7)
 	{
 		if (ft_strncmp(input, builtin[i], ft_strlen(builtin[i])) == 0)
 		{
-			minishell->cmds->path = NULL;
+			cmds->path = NULL;
 			break ;
 		}
 		i++;
@@ -149,25 +149,42 @@ void	ft_parser(t_minishell *minishell)
 {
 	int i;
 	int j;
+	int fd;
 
 	i = 0;
 	j = 0;
-	minishell->cmds = ft_cmdlstnew(NULL);
-	minishell->cmds->cmd = ft_calloc(ft_strlen(*minishell->input) + 1, sizeof(char *));
+
+	t_cmdlist *current_cmd = ft_cmdlstnew(NULL);
+	current_cmd->cmd = ft_calloc(ft_strlen(minishell->input[i]), sizeof(char));
+	minishell->cmds = current_cmd;
+
 	while (minishell->input[i])
 	{
 		if (minishell->input[i][0] != '<' && minishell->input[i][0] != '>'
 			&& minishell->input[i][0] != '|')
-		{	
-			if (minishell->cmds->path == NULL)
-				ft_path(minishell->input[i], minishell);
-			minishell->cmds->cmd[j] = ft_strdup(minishell->input[i]);
+		{
+			if (current_cmd->path == NULL)
+				ft_path(minishell, minishell->input[i], current_cmd);
+			current_cmd->cmd[j] = ft_strdup(minishell->input[i]);
 			j++;
-
 		}
-		if (minishell->input[i][0] == '|')
-			break;
+		else if (minishell->input[i][0] == '<')
+			{
+				current_cmd->i_fd_in = open(minishell->input[i + 1], O_RDONLY);
+				dup2(current_cmd->i_fd_out, STDOUT_FILENO);
+			}
+		else if (minishell->input[i][0] == '>')
+		{
+			current_cmd->i_fd_out = open(minishell->input[i + 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
+			dup2(current_cmd->i_fd_out, STDIN_FILENO);
+		}
+		else if (minishell->input[i][0] == '|')
+		{
+			ft_cmdlstadd_back(&current_cmd, ft_cmdlstnew(NULL));
+			current_cmd = current_cmd->next;
+			current_cmd->cmd = ft_calloc(ft_strlen(minishell->input[i]), sizeof(char));
+			j = 0;
+		}
 		i++;
 	}
-
 }

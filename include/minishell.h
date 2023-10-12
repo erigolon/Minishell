@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/01 19:49:08 by vicrodri         ###   ########.fr       */
+/*   Updated: 2023/10/12 09:24:37 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,24 @@ typedef struct minishell
 	t_cmdlist		*cmds;
 	struct envlist	*envlist;
 	struct envlist	*export;
+	char			*line;
 	char			**input;
 	char			**envp;
 	pid_t			child_pid;
 }	t_minishell;
 
-char	**ft_splitpipex(char const *str, char c);
-void	ft_paths(t_minishell *minishell);
-void	ft_getcmd(t_minishell *minishell, char *cmdargs);
-void	ft_pipe(t_minishell *minishell);
+char	**ft_splitms(char const *str, char c);
 void	ft_handler(int signum);
 void	ft_handler_quit(int signum);
+
+// dividir la cadena de entrada en pequeños trozos o tokens
+//para manejar mejor las tuberías, redirecciones y expansiones.
+void	ft_lexer(char *input, t_minishell *minishell);
+
+void	ft_expander(char *input, t_minishell *minishell);
+
+//almacenar la cadena tokenizada y guardarla de forma útil para 
+//que el ejecutor pueda utilizarla posteriormente.
 void	ft_parser(t_minishell *minishell);
-void	ft_tokenizer(char *input, t_minishell *minishell);
 
 #endif
