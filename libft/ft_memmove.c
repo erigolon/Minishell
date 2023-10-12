@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 15:57:49 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/04/21 11:14:33 by vicrodri         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:36:26 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t			i;
 	unsigned char	*str;
 	unsigned char	*result;
 
-	i = 0;
 	str = (unsigned char *)src;
 	result = (unsigned char *)dst;
 	if (str > result)
