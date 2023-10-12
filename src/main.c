@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/12 09:27:00 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:16:17 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	main(int argc, char **argv, char **envp)
 		else
 		{
 			ms.line = ft_strdup(input);
-			printf("%s\n", ms.line);
-			ft_expander(ms.line, &ms);
+			// ft_expander(&ms);
+			printf("after expander: %s\n", ms.line);
 			ms.input = ft_splitms(ms.line, ' ');
 			int i = 0;
 			while (ms.input[i])
@@ -65,7 +65,7 @@ int	main(int argc, char **argv, char **envp)
 				i++;
 			}
 			// ft_lexer(input, &ms);
-			// free(input);
+			free(input);
 			free(ms.line);
 			
 		}

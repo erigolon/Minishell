@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/12 09:24:37 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/12 13:45:34 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_handler_quit(int signum);
 //para manejar mejor las tuberías, redirecciones y expansiones.
 void	ft_lexer(char *input, t_minishell *minishell);
 
-void	ft_expander(char *input, t_minishell *minishell);
+void	ft_expander(t_minishell *minishell);
 
 //almacenar la cadena tokenizada y guardarla de forma útil para 
 //que el ejecutor pueda utilizarla posteriormente.

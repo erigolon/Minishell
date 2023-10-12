@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   splitms.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:25:30 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/05 20:10:27 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/12 13:34:27 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ int	ft_strcontpipex(char const *s, char c)
 			n++;
 		i++;
 	}
-	printf("n = %d\n", n);
 	return (n);
 }
-// arreglar los dobles cmd
 
 int	ft_strcontcmd(char const *s, char c)
 {
@@ -64,7 +62,6 @@ int	ft_strcontcmd(char const *s, char c)
 		}
 		i++;
 	}
-	printf("n = %d\n", n);
 	return (n);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:32:08 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/12 09:24:20 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:14:49 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,41 @@ size_t	ft_strlenenv(const char *str)
 	return (i);
 }
 
-void	ft_expander(char *input, t_minishell *ms)
+void ft_countquotes(char *input)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	while (input[i])
+	{
+		if (input[i] == '\'')
+			j++;
+		if (input[i] == '\"')
+			k++;
+		i++;
+	}
+	if (j % 2 != 0 || k % 2 != 0)
+	{
+		printf("Error: quotes\n");
+		exit(1);
+	}
+}
+
+void	ft_expander(t_minishell *ms)
 {
 	int	i;
 	int	j;
 	int k;
+	int l;
 	char *tmp;
 
 	i = 0;
 	j = 0;
+	l = 0;
 	while (ms->line[i])
 	{
 		if (ms->line[i] == '\'' && j != 1)
@@ -63,9 +89,14 @@ void	ft_expander(char *input, t_minishell *ms)
 				k++;
 			}
 		}
-		if (ms->line[i] == '$')
+		else if (ms->line[i] == '$')
 		{
-			
+			l = i;
+			while (ms->line[l] != ' ' && ms->line[l] != '\0' && ms->line[l] != '\"' && ms->line[l] != '\'')
+				l++;
+			tmp = ft_strdup(&ms->line[l]);
+			ft_bzero(&ms->line[i], ft_strlen(&ms->line[i]));
+			ft_strlcat(ms->line, tmp, ft_strlen(ms->line) + ft_strlen(tmp) + 1);
 		}
 		i++;
 	}
