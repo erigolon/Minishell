@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/11 11:43:25 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/12 11:49:20 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,13 @@
 
 typedef struct cmdlist
 {
-	char			**arg;
+	char			**cmd;
 	char			*path;
 	char			*fd_in;
 	char			*fd_out;
 	int				i_fd_in;
 	int				i_fd_out;
-	int				append;
 	struct cmdlist	*next;
-	struct cmdlist	*prev;
 }	t_cmdlist;
 
 typedef struct envlist
@@ -52,6 +50,7 @@ typedef struct minishell
 	struct cmdlist	*cmdlist;
 	struct envlist	*envlist;
 	struct envlist	*explist;
+	char			*line;
 	char			**envp;
 	char			**input;
 	pid_t			child_pid;
@@ -62,6 +61,16 @@ typedef struct minishell
 // Duplicación del string
 char		**ft_strddup(char **envp);
 void		free_str(char **str, int i);
+
+// dividir la cadena de entrada en pequeños trozos o tokens
+//para manejar mejor las tuberías, redirecciones y expansiones.
+void		ft_lexer(char *input, t_minishell *minishell);
+
+void		ft_expander(char *input, t_minishell *minishell);
+
+//almacenar la cadena tokenizada y guardarla de forma útil para 
+//que el ejecutor pueda utilizarla posteriormente.
+void		ft_parser(t_minishell *minishell);
 
 // Manejo y creación de la lista de variables de entorno
 t_envlist	*env_list(char	**envp);
