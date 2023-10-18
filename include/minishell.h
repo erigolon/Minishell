@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/18 15:03:13 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/18 17:25:08 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,27 @@ void		free_str(char **str, int i);
 
 // dividir la cadena de entrada en pequeños trozos o tokens
 //para manejar mejor las tuberías, redirecciones y expansiones.
-void		ft_lexer(char *input, t_minishell *minishell);
+char		**ft_splitms(char const *str, char c);
+int			ft_strcontpipex(char const *s, char c);
+int			ft_strcontcmd(char const *s, char c);
 
-void		ft_expander(char *input, t_minishell *minishell);
+
+
+//expandir las variables de entorno y las variables de shell
+void		ft_expander(t_minishell *ms);
+void		ft_expander_directory(t_minishell *ms);
+
+//eliminar las comillas de la cadena de entrada (comprobar que estan pares)
+void		ft_quotestrim(t_minishell *ms);
 
 //almacenar la cadena tokenizada y guardarla de forma útil para 
 //que el ejecutor pueda utilizarla posteriormente.
 void		ft_parser(t_minishell *minishell);
+t_cmdlist	*ft_cmdlstlast(t_cmdlist *lst);
+void		ft_cmdlstadd_back(t_cmdlist **cmdlist, t_cmdlist *new);
+t_cmdlist	*ft_cmdlstnew(void *content);
+char		**get_paths(char **envp);
+char		*ft_join(char *path, char *cmd);
 
 // Manejo y creación de la lista de variables de entorno
 t_envlist	*env_list(char	**envp);
