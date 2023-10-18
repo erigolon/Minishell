@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/12 12:02:53 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:03:13 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void		ft_exit(t_minishell *ms, char **nb);
 void		ft_export(t_minishell *ms, char **str);
 void		ft_unset(t_minishell *ms, char **str);
 void		ft_echo(char **str);
+void		ft_cd(t_minishell *ms, char *str);
 
 // Pruebas
 void		testing(t_minishell *ms);

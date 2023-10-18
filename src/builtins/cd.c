@@ -6,33 +6,36 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:48:45 by erigolon          #+#    #+#             */
-/*   Updated: 2023/10/18 13:24:21 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:21:15 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	set_new_pwd(t_minishell *ms, char *oldpwd)
+void	cd_update(t_minishell *ms, char **dir)
 {
-	
-}
+	t_envlist	*old;
+	t_envlist	*pwd;
+	char		**export;
 
-void	ft_cd(t_minishell *ms, char **str)
-{
-	if (str[0] && str[1])
+	export = ft_calloc(sizeof(char *), 4);
+	old = check_env("OLDPWD", ms->explist);
+	pwd = check_env("PWD", ms->explist);
+	if (!old)
+		export[0] = ft_strdup("");
+	else if (pwd)
+		export[0] = ft_strjoin("OLDPWD=", pwd->value);
+	else
+		export[0] = ft_strjoin("OLDPWD", dir[0]);
+	if (pwd)
 	{
-		ms->exit_status = 1;
-		return (ft_putstr_fd("minishell: exit: too many arguments\n", 2));
+		export[3] = NULL;
+		export[3] = getcwd(export[3], 0);
+		export[1] = ft_strjoin("PWD=", export[3]);
 	}
-	set_new_pwd(ms, "OLDPWD");
-}
-/*
-void	cd_update(void)
-{
-}
-
-void	cd_error(void)
-{	
+	ft_export(ms, export);
+	free_str(export, 0);
+	free_str(dir, 0);
 }
 
 int	check_home( t_minishell *ms, char *str, char **tmp)
@@ -44,7 +47,9 @@ int	check_home( t_minishell *ms, char *str, char **tmp)
 		env = check_env("HOME", ms->explist);
 		if (!env)
 		{
-			cd_error(); // HACER
+			ft_putstr_fd("minishell: cd: No such file or directory\n", 2);
+			ms->exit_status = 1;
+			free_str(tmp, 0);
 			return (1);
 		}
 		chdir(env->value);
@@ -69,11 +74,14 @@ void	ft_cd(t_minishell *ms, char *str)
 	{
 		if (ft_strlen(str) == 1 && str[0] == '/')
 			tmp[1] = ft_strdup("/\0");
-		else
-			tmp[1] = ft
+		if (chdir(tmp[1]) && chdir(str))
+		{
+			ft_putstr_fd("minishell: cd: No such file or directory\n", 2);
+			ms->exit_status = 1;
+			free_str(tmp, 0);
+			return ;
+		}
 	}
 	ms->exit_status = 0;
-	cd_update(); //HACER
+	cd_update(ms, tmp);
 }
-
-*/

@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:47:00 by erigolon          #+#    #+#             */
-/*   Updated: 2023/10/18 12:47:47 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:22:01 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 int	ft_bt_select(t_cmdlist *tmp, t_minishell *ms)
 {
 	if (!ft_strncmp(tmp->cmd[0], "cd", 3))
-	{
-		/* TERMINAR CD */
-	}
+		return (ft_cd(ms, tmp->cmd[1]), 1);
 	else if (!ft_strncmp(tmp->cmd[0], "echo", 5))
 		return (ft_echo(&tmp->cmd[1]), 1);
 	else if (!ft_strncmp(tmp->cmd[0], "env", 4))
@@ -37,17 +35,18 @@ void	testing(t_minishell *ms)
 {
 	t_cmdlist	tmp;
 
-	tmp.cmd = (char **)malloc(4 * sizeof(char *));
-	if (tmp.cmd) 
+	tmp.cmd = (char **)malloc(3 * sizeof(char *));
+	if (tmp.cmd)
 	{
-		tmp.cmd[0] = ft_strdup("exit");
-		tmp.cmd[1] = ft_strdup("123");
-		tmp.cmd[2] = ft_strdup("abc");
-		tmp.cmd[3] = NULL;
+		tmp.cmd[0] = ft_strdup("cd");
+		tmp.cmd[1] = ft_strdup("/Users/erigolon/cursus");
+		tmp.cmd[2] = NULL;
 	}
 	ft_bt_select(&tmp, ms);
-	for (int i = 0; tmp.cmd[i] != NULL; i++)
-		free(tmp.cmd[i]);
+	free(tmp.cmd[0]);
+	free(tmp.cmd[1]);
+	free(tmp.cmd[2]);
 	free(tmp.cmd);
+	ft_env(ms);
 }
 */
