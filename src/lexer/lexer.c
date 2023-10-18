@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:32:08 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/12 14:14:49 by vicrodri         ###   ########.fr       */
+/*   Updated: 2023/10/17 21:34:54 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,120 +25,162 @@ size_t	ft_strlenenv(const char *str)
 	return (i);
 }
 
-void ft_countquotes(char *input)
-{
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	while (input[i])
-	{
-		if (input[i] == '\'')
-			j++;
-		if (input[i] == '\"')
-			k++;
-		i++;
-	}
-	if (j % 2 != 0 || k % 2 != 0)
-	{
-		printf("Error: quotes\n");
-		exit(1);
-	}
-}
-
 void	ft_expander(t_minishell *ms)
 {
-	int	i;
-	int	j;
-	int k;
-	int l;
-	char *tmp;
+	int		i;
+	int		j;
+	int		k;
+	int		l;
+	char	*tmp;
 
 	i = 0;
-	j = 0;
-	l = 0;
-	while (ms->line[i])
+	while (ms->input[i] != NULL)
 	{
-		if (ms->line[i] == '\'' && j != 1)
-			j = 2;
-		else if (ms->line[i] == '\"' && j == 0)
-			j = 1;
-		if (ms->line[i] == '$' && j != 2)
+		j = 0;
+		l = 0;
+		while (ms->input[i][j] != '\0')
 		{
-			k = 0;
-			while (ms->envp[k])
+			if (ms->input[i][j] == '\'' && l != 1)
+				l = 2;
+			else if (ms->input[i][j] == '\"' && l == 0)
+				l = 1;
+			if (ms->input[i][j] == '$' && l != 2)
 			{
-				if (ft_strncmp(ms->envp[k], &ms->line[i + 1],
-						ft_strlenenv(ms->envp[k])) == 0
-					&& (ms->line[i + 1 + ft_strlenenv(ms->envp[k])] == ' '
-						|| ms->line[i + 1 + ft_strlenenv(ms->envp[k])] == '\0'
-						|| ms->line[i + 1 + ft_strlenenv(ms->envp[k])] == '\"' || ms->line[i + 1 + ft_strlenenv(ms->envp[k])] == '\''))
+				k = 0;
+				while (ms->envp[k])
 				{
-					tmp = ft_strdup(&ms->line[i + 1 + ft_strlenenv(ms->envp[k])]);
-					ft_memmove(&ms->line[i], &ms->envp[k][ft_strlenenv(ms->envp[k]) + 1],
-						ft_strlen(ms->envp[k]) - ft_strlenenv(ms->envp[k]));
-					ft_strlcat(ms->line, tmp, ft_strlen(ms->line) + ft_strlen(tmp) + 1);
-					free(tmp);
-					i = 0;
-					j = 0;
+					if (ft_strncmp(ms->envp[k], &ms->input[i][j + 1],
+						ft_strlenenv(ms->envp[k])) == 0
+						&& (ms->input[i][j + 1
+							+ ft_strlenenv(ms->envp[k])] == ' '
+							|| ms->input[i][j + 1
+							+ ft_strlenenv(ms->envp[k])] == '\0'
+							|| ms->input[i][j + 1
+							+ ft_strlenenv(ms->envp[k])] == '\"'
+							|| ms->input[i][j + 1
+							+ ft_strlenenv(ms->envp[k])] == '\''))
+					{
+						if (l == 1)
+							tmp = ft_strdup(&ms->input[i][j
+									+ 1 + ft_strlenenv(ms->envp[k])]);
+						ft_bzero(&ms->input[i][j], ft_strlen(&ms->input[i][j]));
+						ms->input[i] = ft_strjoin(ms->input[i],
+								&ms->envp[k][ft_strlenenv(ms->envp[k]) + 1]);
+						if (l == 1)
+						{
+							ft_strlcat(ms->input[i], tmp,
+								ft_strlen(ms->input[i]) + ft_strlen(tmp) + 1);
+							free(tmp);
+						}
+						l = 0;
+					}
+					k++;
 				}
-
-				k++;
 			}
+			if (ms->input[i][j] == '$' && l != 2)
+			{
+				ft_bzero(ms->input[i], ft_strlen(ms->input[i]));
+			}
+			j++;
 		}
-		else if (ms->line[i] == '$')
+		i++;
+	}	
+}
+
+void	ft_expander_directory(t_minishell *ms)
+{
+	int		i;
+	int		j;
+	int		k;
+	char	*tmp;
+
+	i = 0;
+	while (ms->input[i] != NULL)
+	{
+		j = 0;
+		while (ms->input[i][j] != '\0')
 		{
-			l = i;
-			while (ms->line[l] != ' ' && ms->line[l] != '\0' && ms->line[l] != '\"' && ms->line[l] != '\'')
-				l++;
-			tmp = ft_strdup(&ms->line[l]);
-			ft_bzero(&ms->line[i], ft_strlen(&ms->line[i]));
-			ft_strlcat(ms->line, tmp, ft_strlen(ms->line) + ft_strlen(tmp) + 1);
+			if (ms->input[i][j] == '~' && ms->input[i][j + 1] == '/')
+			{
+				k = 0;
+				while (ms->envp[k])
+				{
+					if (ft_strncmp(ms->envp[k], "HOME=", 5) == 0)
+					{
+						tmp = ft_strdup(&ms->input[i][j + 1]);
+						ft_bzero(ms->input[i], ft_strlen(&ms->input[i][j]));
+						tmp = ft_strjoin(&ms->envp[k][5], tmp);
+						ms->input[i] = ft_strdup(tmp);
+						free(tmp);
+					}
+					k++;
+				}
+			}
+			j++;
 		}
 		i++;
 	}
 }
 
-// void	ft_expander_double(t_minishell minishell)
-// {
-// 	int	i;
-// 	int	j;
-// 	int k;
-	
-// 	i = 0;
-// 	while (minishell.input[i])
-// 	{
-// 		j = 0;
-// 		while (minishell.input[i][j])
-// 		{
-// 			if (minishell.input[i][j] == '$'
-// 				&& minishell.input[i][j - 1] != '\'')
-// 			{
-// 				k = 0;
-// 				while (minishell.envp[k])
-// 				{
-// 					if (ft_strncmp(minishell.envp[k], &minishell.input[i][j + 1],
-// 						ft_strlenenv(minishell.envp[k])) == 0)
-// 						ft_memmove(&minishell.input[i][j],
-// 							&minishell.envp[k][ft_strlenenv(minishell.envp[k]) + 1],
-// 							ft_strlen(minishell.envp[k]) - 
-// 							ft_strlenenv(minishell.envp[k]) + 1);
-// 					k++;
-// 				}
-// 			}
-// 		j++;
-// 	}
-// 		i++;
-// 	}
-// }
+void	ft_quotestrim(t_minishell *ms)
+{
+	int		i;
+	int		j;
+	int		k;
+	int		l;
+	char	tmp;
 
+	i = 0;
+	while (ms->input[i] != NULL)
+	{
+		j = 0;
+		k = 0;
+		while (ms->input[i][j] != '\0')
+		{
+			if (ms->input[i][j] == '\"' || ms->input[i][j] == '\'')
+			{
+				k++;
+			}
+			j++;
+		}
+		if (k % 2 != 0)
+		{
+			printf("Error: quote\n");
+			return ;
+		}
+		k = 0;
+		j = 0;
+		while (ms->input[i][j] != '\0')
+		{
+			if (ms->input[i][j] == '\"' || ms->input[i][j] == '\'')
+			{
+				tmp = ms->input[i][j];
+				l = j;
+				while (ms->input[i][l] != '\0')
+				{
+					ms->input[i][l] = ms->input[i][l + 1];
+					l++;
+				}
+				j++;
+				while (ms->input[i][j] != tmp)
+				{
+					j++;
+				}
+				l = j;
+				while (ms->input[i][l] != '\0')
+				{
+					ms->input[i][l] = ms->input[i][l + 1];
+					l++;
+				}
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
 void	ft_lexer(char *input, t_minishell *minishell)
 {
-	ft_parser(minishell);
 	// printf("path: %s\n", minishell->cmds->path);
 	// printf("%d\n", minishell->cmds->i_fd_in);
 	// printf("%d\n", minishell->cmds->i_fd_out);
@@ -155,5 +197,4 @@ void	ft_lexer(char *input, t_minishell *minishell)
 	// printf("cmd: %s\n", minishell->cmds->next->next->cmd[0]);
 	// printf("cmd: %s\n", minishell->cmds->next->next->cmd[1]);
 	// printf("cmd: %s\n", minishell->cmds->next->next->cmd[2]);
-
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/12 14:16:17 by vicrodri         ###   ########.fr       */
+/*   Updated: 2023/10/17 21:14:27 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,20 @@ int	main(int argc, char **argv, char **envp)
 		}
 		else
 		{
-			ms.line = ft_strdup(input);
-			// ft_expander(&ms);
-			printf("after expander: %s\n", ms.line);
-			ms.input = ft_splitms(ms.line, ' ');
+			ms.input = ft_splitms(input, ' ');
+			ft_expander(&ms);
+			ft_expander_directory(&ms);
+			ft_quotestrim(&ms);
 			int i = 0;
 			while (ms.input[i])
 			{
 				printf("%s\n", ms.input[i]);
+				printf("%zu\n", ft_strlen(ms.input[i]));
 				i++;
 			}
-			// ft_lexer(input, &ms);
+			// ft_parser(&ms);
 			free(input);
 			free(ms.line);
-			
 		}
 	}	ft_free_minishell(&ms);
 	return (0);
