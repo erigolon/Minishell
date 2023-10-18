@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/12 11:58:21 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:02:53 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct envlist
 
 typedef struct minishell
 {
-	struct cmdlist	*cmdlist;
+	struct cmdlist	*cmds;
 	struct envlist	*envlist;
 	struct envlist	*explist;
 	char			*line;

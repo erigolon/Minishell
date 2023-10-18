@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/12 11:54:31 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:21:34 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_minishell	*init_ms(char **envp)
 	ms->explist = env_list(envp);
 	ms->exit = 1;
 	ms->exit_status = 0;
-	ms->cmdlist = 0;
+	ms->cmds = 0;
 	/* Por ahora no inicializo nada más en el struct */
 	return (ms);
 }
