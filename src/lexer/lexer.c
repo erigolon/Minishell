@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:32:08 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/18 18:07:02 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:07:02 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_expander(t_minishell *ms)
 	int		k;
 	int		l;
 	char	*tmp;
+	char	*tmp2;
 
 	i = 0;
 	while (ms->input[i] != NULL)
@@ -63,15 +64,11 @@ void	ft_expander(t_minishell *ms)
 						if (l == 1)
 							tmp = ft_strdup(&ms->input[i][j
 									+ 1 + ft_strlenenv(ms->envp[k])]);
-						ft_bzero(&ms->input[i][j], ft_strlen(&ms->input[i][j]));
+						ft_bzero(&ms->input[i][j], ft_strlen(&ms->input[i][j]));		
 						ms->input[i] = ft_strjoin(ms->input[i],
 								&ms->envp[k][ft_strlenenv(ms->envp[k]) + 1]);
-						if (l == 1)
-						{
-							ft_strlcat(ms->input[i], tmp,
-								ft_strlen(ms->input[i]) + ft_strlen(tmp) + 1);
-							free(tmp);
-						}
+						free(tmp);
+
 						l = 0;
 					}
 					k++;

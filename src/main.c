@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/18 18:19:00 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:03:02 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,15 @@ int	main(int argc, char **argv, char **envp)
 		{
 		ms->input = ft_splitms(prompt, ' ');
 		ft_expander(ms);
-		ft_expander_directory(ms);
-		ft_quotestrim(ms);
-		// int i = 0;
-		// while (ms->input[i])
-		// {
-		// 	printf("%s\n", ms->input[i]);
-		// 	printf("%zu\n", ft_strlen(ms->input[i]));
-		// i++;
-		// }
+		//ft_expander_directory(ms);
+		//ft_quotestrim(ms);
+		int i = 0;
+		while (ms->input[i])
+		{
+			printf("%s\n", ms->input[i]);
+			// printf("%zu\n", ft_strlen(ms->input[i]));
+		i++;
+		}
 		//ft_parser(ms);
 		add_history(prompt); // Ahora guarda todo, pero solo de be guardar lo que funciona
 		free_loop(ms, prompt); /* Liberar elementos que haya utilizado ahora */
