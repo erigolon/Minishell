@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:32:08 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/19 18:07:02 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/26 20:45:15 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	ft_expander(t_minishell *ms)
 	int		k;
 	int		l;
 	char	*tmp;
-	char	*tmp2;
 
 	i = 0;
 	while (ms->input[i] != NULL)
@@ -62,13 +61,16 @@ void	ft_expander(t_minishell *ms)
 							+ ft_strlenenv(ms->envp[k])] == '\''))
 					{
 						if (l == 1)
-							tmp = ft_strdup(&ms->input[i][j
+								tmp = ft_strdup(&ms->input[i][j
 									+ 1 + ft_strlenenv(ms->envp[k])]);
-						ft_bzero(&ms->input[i][j], ft_strlen(&ms->input[i][j]));		
-						ms->input[i] = ft_strjoin(ms->input[i],
+						ft_bzero(&ms->input[i][j], ft_strlen(&ms->input[i][j]));
+						ms->input[i] = ft_strjoinizq(ms->input[i],
 								&ms->envp[k][ft_strlenenv(ms->envp[k]) + 1]);
-						free(tmp);
-
+						if (l == 1)
+						{
+							ms->input[i] = ft_strjoinizq(ms->input[i], tmp);
+							free(tmp);
+						}
 						l = 0;
 					}
 					k++;
@@ -105,8 +107,8 @@ void	ft_expander_directory(t_minishell *ms)
 					if (ft_strncmp(ms->envp[k], "HOME=", 5) == 0)
 					{
 						tmp = ft_strdup(&ms->input[i][j + 1]);
-						ft_bzero(ms->input[i], ft_strlen(&ms->input[i][j]));
-						tmp = ft_strjoin(&ms->envp[k][5], tmp);
+						free(ms->input[i]);
+						tmp = ft_strjoinder(&ms->envp[k][5], tmp);
 						ms->input[i] = ft_strdup(tmp);
 						free(tmp);
 					}
@@ -176,22 +178,21 @@ void	ft_quotestrim(t_minishell *ms)
 	}
 }
 
-void	ft_lexer(char *input, t_minishell *minishell)
+void	ft_lexer(t_minishell *minishell)
 {
-	// printf("path: %s\n", minishell->cmds->path);
-	// printf("%d\n", minishell->cmds->i_fd_in);
-	// printf("%d\n", minishell->cmds->i_fd_out);
-	// printf("cmd: %s\n", minishell->cmds->cmd[0]);
-	// printf("cmd: %s\n", minishell->cmds->cmd[1]);
-	// printf("cmd: %s\n", minishell->cmds->cmd[2]);
-	// printf("path: %s\n", minishell->cmds->next->path);
-	// 	printf("%d\n", minishell->cmds->next->i_fd_in);
-	// printf("%d\n", minishell->cmds->next->i_fd_out);
-	// printf("cmd: %s\n", minishell->cmds->next->cmd[0]);
-	// printf("cmd: %s\n", minishell->cmds->next->cmd[1]);
-	// printf("cmd: %s\n", minishell->cmds->next->cmd[2]);
-	// 	printf("path: %s\n", minishell->cmds->next->next->path);
-	// printf("cmd: %s\n", minishell->cmds->next->next->cmd[0]);
-	// printf("cmd: %s\n", minishell->cmds->next->next->cmd[1]);
-	// printf("cmd: %s\n", minishell->cmds->next->next->cmd[2]);
+	printf("path: %s\n", minishell->cmds->path);
+	printf("%d\n", minishell->cmds->i_fd_in);
+	printf("%d\n", minishell->cmds->i_fd_out);
+	printf("cmd: %s\n", minishell->cmds->cmd[0]);
+	printf("cmd: %s\n", minishell->cmds->cmd[1]);
+	printf("path: %s\n", minishell->cmds->next->path);
+		printf("%d\n", minishell->cmds->next->i_fd_in);
+	printf("%d\n", minishell->cmds->next->i_fd_out);
+	printf("cmd: %s\n", minishell->cmds->next->cmd[0]);
+	printf("cmd: %s\n", minishell->cmds->next->cmd[1]);
+	printf("cmd: %s\n", minishell->cmds->next->cmd[2]);
+		printf("path: %s\n", minishell->cmds->next->next->path);
+	printf("cmd: %s\n", minishell->cmds->next->next->cmd[0]);
+	printf("cmd: %s\n", minishell->cmds->next->next->cmd[1]);
+	printf("cmd: %s\n", minishell->cmds->next->next->cmd[2]);
 }

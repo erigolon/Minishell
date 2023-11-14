@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 11:03:23 by erigolon          #+#    #+#             */
-/*   Updated: 2023/10/02 12:35:27 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/26 20:25:04 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@ void	free_str(char **str, int i)
 		return ;
 	if (i == 0)
 	{
-		while (str[i])
+		while (str[i] != NULL)
 		{
 			free(str[i]);
 			i++;
 		}
-		free(str[i]);
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 #    By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 12:57:38 by vicrodri          #+#    #+#              #
-#    Updated: 2023/10/12 12:00:45 by erigolon         ###   ########.fr        #
+#    Updated: 2023/11/02 19:16:22 by erigolon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME	=	minishell
 CC	=	gcc
 
 # -lreadline /opt/vagrant/embedded/lib -I /opt/vagrant/embedded/include/readline
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror 
+# -fsanitize=address
 
 USER = $(shell whoami)
 LIBS = -L "/Users/$(USER)/.brew/opt/readline/lib" -lreadline
@@ -26,7 +27,7 @@ INC			= libft/
 LIBFT		= $(INC)libft.a 
 
 SOURCES	=	$(wildcard src/*.c)	$(wildcard src/builtins/*.c) $(wildcard src/envlst/*.c) \
-			$(wildcard src/lexer/*.c) $(wildcard src/parser/*.c)
+			$(wildcard src/lexer/*.c) $(wildcard src/parser/*.c) $(wildcard src/executer/*.c)
 
 OBJECTS	=	$(SOURCES:.c=.o)
 

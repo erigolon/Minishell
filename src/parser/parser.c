@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 18:46:54 by erigolon          #+#    #+#             */
-/*   Updated: 2023/10/18 17:27:28 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/31 06:49:26 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_getcmd(t_minishell *minishell, t_cmdlist *cmds, char *cmdargs)
 			cmds->path = ft_join(paths[i], cmdargs);
 		if (access(cmds->path, X_OK) == 0)
 		{
+			// free_str(paths, 0);
 			break ;
 		}
 		else
@@ -90,14 +91,14 @@ void	ft_parser(t_minishell *minishell)
 		}
 		else if (minishell->input[i][0] == '<')
 		{
+			//error al ejecutar y leer el archivo con access
 			current_cmd->i_fd_in = open(minishell->input[i + 1], O_RDONLY);
-			dup2(current_cmd->i_fd_out, STDOUT_FILENO);
 		}
 		else if (minishell->input[i][0] == '>')
 		{
+			//error al ejecutar y excribir el archivo con access
 			current_cmd->i_fd_out = open(minishell->input[i + 1],
 					O_RDWR | O_CREAT | O_TRUNC, 0644);
-			dup2(current_cmd->i_fd_out, STDIN_FILENO);
 		}
 		else if (minishell->input[i][0] == '|')
 		{
@@ -109,4 +110,5 @@ void	ft_parser(t_minishell *minishell)
 		}
 		i++;
 	}
+	ft_free_cmdlist(current_cmd);
 }
