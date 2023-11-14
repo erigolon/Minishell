@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/18 17:25:08 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/11/02 18:04:50 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,14 @@ void		ft_cmdlstadd_back(t_cmdlist **cmdlist, t_cmdlist *new);
 t_cmdlist	*ft_cmdlstnew(void *content);
 char		**get_paths(char **envp);
 char		*ft_join(char *path, char *cmd);
+char		*ft_strjoinder(char const *s1, char const *s2);
+char		*ft_strjoinizq(char const *s1, char const *s2);
+void		ft_free_cmdlist(t_cmdlist *cmdlist);
+void	ft_lexer(t_minishell *minishell);
+
+
+
+
 
 // Manejo y creación de la lista de variables de entorno
 t_envlist	*env_list(char	**envp);
@@ -95,6 +103,12 @@ void		sort_envlst(t_envlist **lst);
 void		free_envlst(t_envlist *envlst);
 void		delete_env(t_envlist **lst);
 t_envlist	*check_env(char *env, t_envlist *explist);
+
+// ejecutar los comandos
+void	*pipex(t_minishell *ms);
+void	*pipex_child(t_minishell *ms, int fd[2], t_cmdlist *temp);
+
+
 
 // Manejo de señales
 void		ft_handler(int signum);

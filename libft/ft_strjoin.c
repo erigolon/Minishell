@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:50:02 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/19 18:08:08 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:01:27 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_memcpy(result, s1, ft_strlen(s1));
 	ft_memcpy(result + ft_strlen(s1), s2, ft_strlen(s2));
 	ft_bzero(result + (ft_strlen(s1) + ft_strlen(s2)), 1);
-	free((char *)s1);
-	// free((char *)s2);
 	return (result);
 }
 

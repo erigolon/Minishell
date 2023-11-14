@@ -6,13 +6,28 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:27:37 by erigolon          #+#    #+#             */
-/*   Updated: 2023/10/18 17:28:39 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/10/24 21:30:10 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+void	ft_free_cmdlist(t_cmdlist *cmdlist)
+{
+	t_cmdlist	*temp;
 
+	while (cmdlist)
+	{
+		temp = cmdlist->next;
+		if(cmdlist->cmd)
+			// free_str(cmdlist->cmd, 0);
+		// free(cmdlist->path);
+		// free(cmdlist->fd_in);
+		// free(cmdlist->fd_out);
+		//free(cmdlist);
+		cmdlist = temp;
+	}
+}
 t_cmdlist	*ft_cmdlstlast(t_cmdlist *lst)
 {
 	t_cmdlist	*result;
@@ -86,7 +101,7 @@ char	*ft_join(char *path, char *cmd)
 	tmp = ft_strjoin(path, "/");
 	tmp3 = ft_split(cmd, ' ');
 	tmp2 = ft_strjoin(tmp, tmp3[0]);
-	// free_arrays(tmp3);
+	// free_str(tmp3, 0);
 	free(tmp);
 	return (tmp2);
 }
