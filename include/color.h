@@ -6,12 +6,12 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:29:48 by erigolon          #+#    #+#             */
-/*   Updated: 2023/09/27 12:31:00 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/11/02 10:08:09 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _COLOR_H_
-#define _COLOR_H_
+# define _COLOR_H_
 
 # define RESET_COLOR	"\033[0m"
 # define CYAN_BOLD    	"\033[1;36m"

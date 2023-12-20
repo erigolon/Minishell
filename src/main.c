@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/11/02 19:29:16 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/12/20 11:59:50 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	free_loop(t_minishell *ms, char *prompt)
 t_minishell	*init_ms(char **envp)
 {
 	t_minishell	*ms;
-	int		i;
+	int			i;
 
 	i = 0;
 	ms = ft_calloc(1, sizeof(t_minishell));
@@ -64,7 +64,7 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, ft_handler);
 		signal(SIGQUIT, ft_handler);
 		prompt = readline(READLINE_MSG);
-		printf("prompt: %s\n", prompt);
+		printf("prompt: %s\n", prompt); 							// **QUITAR**
 		if (!prompt)
 			ft_exit(ms, NULL);
 		else
@@ -83,13 +83,14 @@ int	main(int argc, char **argv, char **envp)
 			ft_parser(ms);
 			// ft_lexer(ms);
 			// pipex(ms);	
-			printf("prompt: %s\n", prompt);	
-			add_history(prompt); // Ahora guarda todo, pero solo de be guardar lo que funciona
-			free_loop(ms, prompt); /* Liberar elementos que haya utilizado ahora */
-			printf("prompt: %s\n", prompt);	
-		}	
+			printf("prompt: %s\n", prompt);
+			if (!(!prompt || !*prompt))
+				add_history(prompt);
+			free_loop(ms, prompt);
+			printf("prompt: %s\n", prompt);
+		}
 	}
-	
+	printf("exit_status: %d\n", ms->exit_status);
 	free_all(ms);
 	return (ms->exit_status);
 }

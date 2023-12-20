@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 07:05:00 by erigolon          #+#    #+#             */
-/*   Updated: 2023/11/02 18:51:21 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/12/18 12:57:05 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*pipex(t_minishell *ms)
 {
 	int				fd[2];
 	t_cmdlist		*temp;
-	
+
 	temp = ms->cmds;
 	if (dup2(temp->i_fd_in, STDIN_FILENO) == -1)
 		return (0);
