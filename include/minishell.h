@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/11/02 18:04:50 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/12/22 19:04:54 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <termios.h>
+
+# define READ_END 0
+# define WRITE_END 1
 
 typedef struct cmdlist
 {
@@ -88,7 +91,7 @@ char		*ft_join(char *path, char *cmd);
 char		*ft_strjoinder(char const *s1, char const *s2);
 char		*ft_strjoinizq(char const *s1, char const *s2);
 void		ft_free_cmdlist(t_cmdlist *cmdlist);
-void	ft_lexer(t_minishell *minishell);
+void		ft_lexer(t_minishell *minishell);
 
 
 
@@ -105,9 +108,7 @@ void		delete_env(t_envlist **lst);
 t_envlist	*check_env(char *env, t_envlist *explist);
 
 // ejecutar los comandos
-void	*pipex(t_minishell *ms);
-void	*pipex_child(t_minishell *ms, int fd[2], t_cmdlist *temp);
-
+void		*exec(t_minishell *ms);
 
 
 // Manejo de señales
