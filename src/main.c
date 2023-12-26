@@ -6,11 +6,28 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/12/20 11:59:50 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/12/22 19:08:03 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+static void	mini_getpid(t_minishell *ms)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid < 0)
+	{
+		exit(1);
+	}
+	if (!pid)
+	{
+		exit(1);
+	}	
+	waitpid(pid, NULL, 0);
+	ms->child_pid = pid - 1;
+}
 
 static void	ft_leaks(void)
 {
@@ -64,7 +81,7 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, ft_handler);
 		signal(SIGQUIT, ft_handler);
 		prompt = readline(READLINE_MSG);
-		printf("prompt: %s\n", prompt); 							// **QUITAR**
+		mini_getpid(ms);
 		if (!prompt)
 			ft_exit(ms, NULL);
 		else
@@ -74,20 +91,18 @@ int	main(int argc, char **argv, char **envp)
 			ft_expander_directory(ms);
 			ft_quotestrim(ms);
 			int i = 0;
-			while (ms->input[i])
-			{
-				printf("%s\n", ms->input[i]);
-				// printf("%zu\n", ft_strlen(ms->input[i]));
-				i++;
-			}
+			// while (ms->input[i])
+			// {
+			// 	printf("%s\n", ms->input[i]);
+			// 	// printf("%zu\n", ft_strlen(ms->input[i]));
+			// 	i++;
+			// }
 			ft_parser(ms);
 			// ft_lexer(ms);
-			// pipex(ms);	
-			printf("prompt: %s\n", prompt);
+			exec(ms);	
 			if (!(!prompt || !*prompt))
 				add_history(prompt);
 			free_loop(ms, prompt);
-			printf("prompt: %s\n", prompt);
 		}
 	}
 	printf("exit_status: %d\n", ms->exit_status);
