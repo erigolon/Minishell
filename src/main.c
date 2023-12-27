@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/12/22 19:08:03 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/12/27 17:49:00 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	mini_getpid(t_minishell *ms)
 	if (!pid)
 	{
 		exit(1);
-	}	
+	}
 	waitpid(pid, NULL, 0);
 	ms->child_pid = pid - 1;
 }
@@ -76,12 +76,13 @@ int	main(int argc, char **argv, char **envp)
 	// atexit(ft_leaks);/* Borrar esto en un futuro */
 	rl_catch_signals = 0;
 	ms = init_ms(envp);
+	mini_getpid(ms);
 	while (ms->exit)
 	{
 		signal(SIGINT, ft_handler);
 		signal(SIGQUIT, ft_handler);
 		prompt = readline(READLINE_MSG);
-		mini_getpid(ms);
+		
 		if (!prompt)
 			ft_exit(ms, NULL);
 		else
@@ -90,7 +91,7 @@ int	main(int argc, char **argv, char **envp)
 			ft_expander(ms);
 			ft_expander_directory(ms);
 			ft_quotestrim(ms);
-			int i = 0;
+			// int i = 0;
 			// while (ms->input[i])
 			// {
 			// 	printf("%s\n", ms->input[i]);
@@ -99,7 +100,7 @@ int	main(int argc, char **argv, char **envp)
 			// }
 			ft_parser(ms);
 			// ft_lexer(ms);
-			exec(ms);	
+			exec2(ms);	
 			if (!(!prompt || !*prompt))
 				add_history(prompt);
 			free_loop(ms, prompt);
