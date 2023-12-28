@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:32:08 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/26 20:45:15 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/12/27 17:36:50 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,14 +185,14 @@ void	ft_lexer(t_minishell *minishell)
 	printf("%d\n", minishell->cmds->i_fd_out);
 	printf("cmd: %s\n", minishell->cmds->cmd[0]);
 	printf("cmd: %s\n", minishell->cmds->cmd[1]);
-	printf("path: %s\n", minishell->cmds->next->path);
+	// printf("path: %s\n", minishell->cmds->next->path);
 		printf("%d\n", minishell->cmds->next->i_fd_in);
 	printf("%d\n", minishell->cmds->next->i_fd_out);
 	printf("cmd: %s\n", minishell->cmds->next->cmd[0]);
 	printf("cmd: %s\n", minishell->cmds->next->cmd[1]);
-	printf("cmd: %s\n", minishell->cmds->next->cmd[2]);
-		printf("path: %s\n", minishell->cmds->next->next->path);
-	printf("cmd: %s\n", minishell->cmds->next->next->cmd[0]);
-	printf("cmd: %s\n", minishell->cmds->next->next->cmd[1]);
-	printf("cmd: %s\n", minishell->cmds->next->next->cmd[2]);
+	// printf("cmd: %s\n", minishell->cmds->next->cmd[2]);
+// 		printf("path: %s\n", minishell->cmds->next->next->path);
+// 	printf("cmd: %s\n", minishell->cmds->next->next->cmd[0]);
+// 	printf("cmd: %s\n", minishell->cmds->next->next->cmd[1]);
+// 	printf("cmd: %s\n", minishell->cmds->next->next->cmd[2]);
 }

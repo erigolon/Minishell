@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/12/22 19:04:54 by erigolon         ###   ########.fr       */
+/*   Updated: 2023/12/26 18:40:01 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void		delete_env(t_envlist **lst);
 t_envlist	*check_env(char *env, t_envlist *explist);
 
 // ejecutar los comandos
-void		*exec(t_minishell *ms);
+void exec2(t_minishell *ms);
 
 
 // Manejo de señales
@@ -122,7 +122,7 @@ void		ft_export(t_minishell *ms, char **str);
 void		ft_unset(t_minishell *ms, char **str);
 void		ft_echo(char **str);
 void		ft_cd(t_minishell *ms, char *str);
-
+int			ft_bt_select(t_cmdlist *tmp, t_minishell *ms);
 // Pruebas
 void		testing(t_minishell *ms);
 
