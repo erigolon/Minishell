@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:47:00 by erigolon          #+#    #+#             */
-/*   Updated: 2023/10/18 15:22:01 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:14:29 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,3 @@ int	ft_bt_select(t_cmdlist *tmp, t_minishell *ms)
 		return (ft_unset(ms, &tmp->cmd[1]), 1);
 	return (0);
 }
-/*
-void	testing(t_minishell *ms)
-{
-	t_cmdlist	tmp;
-
-	tmp.cmd = (char **)malloc(3 * sizeof(char *));
-	if (tmp.cmd)
-	{
-		tmp.cmd[0] = ft_strdup("cd");
-		tmp.cmd[1] = ft_strdup("/Users/erigolon/cursus");
-		tmp.cmd[2] = NULL;
-	}
-	ft_bt_select(&tmp, ms);
-	free(tmp.cmd[0]);
-	free(tmp.cmd[1]);
-	free(tmp.cmd[2]);
-	free(tmp.cmd);
-	ft_env(ms);
-}
-*/
