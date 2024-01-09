@@ -6,7 +6,7 @@
 /*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/12/26 18:40:01 by vicrodri         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:12:58 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void		delete_env(t_envlist **lst);
 t_envlist	*check_env(char *env, t_envlist *explist);
 
 // ejecutar los comandos
-void exec2(t_minishell *ms);
+void 		exec2(t_minishell *ms);
 
 
 // Manejo de señales

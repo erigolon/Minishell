@@ -6,7 +6,7 @@
 /*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:42:58 by erigolon          #+#    #+#             */
-/*   Updated: 2023/12/27 18:39:17 by vicrodri         ###   ########.fr       */
+/*   Updated: 2024/01/08 19:09:08 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,31 @@ void	*child_process(t_minishell *ms, int *fd)
 		return (0);
 	close(fd[WRITE_END]);
 	close(fd[READ_END]);
-	execve(ms->cmds->path,ms->cmds->cmd,ms->envp);
+	if (ms->cmds->path)
+{
+	ms->cmds->path = "/bin/ls";
+    printf("Ejecutando: %s\n", ms->cmds->path);
+    printf("Argumentos: ");
+    for (int i = 0; ms->cmds->cmd[i] != NULL; ++i)
+    {
+        printf("%s ", ms->cmds->cmd[i]);
+    }
+    printf("\n");
+    printf("Variables de entorno: ");
+    for (int i = 0; ms->envp[i] != NULL; ++i)
+    {
+        printf("%s ", ms->envp[i]);
+    }
+    printf("\n");
+
+    if (execve(ms->cmds->path, ms->cmds->cmd, ms->envp) == -1)
+    {
+        perror("Error en execve");
+        exit(1);
+    }
+
+	}
+		
 	return (0);
 }
 
@@ -59,7 +83,7 @@ void	*exec_cmd(t_minishell *ms)
 	if (ms->cmds->next && !(ms->cmds->next->i_fd_in))
 		ms->cmds->next->i_fd_in = fd[READ_END];
 	else
-		close(fd[READ_END]);
+		close(fd[READ_END]); 
 	if (ms->cmds->i_fd_in > 2)
 		close (ms->cmds->i_fd_in);
 	if (ms->cmds->i_fd_out > 2)
@@ -69,6 +93,9 @@ void	*exec_cmd(t_minishell *ms)
 
 void	exec2(t_minishell *ms)
 {
+	int i;
+
+	i = 0;
 	while (ms->cmds)
 	{
 		if(ft_strncmp(ms->cmds->cmd[0], "cd", 3) == 0 || ft_strncmp(ms->cmds->cmd[0], "echo", 5) == 0 || ft_strncmp(ms->cmds->cmd[0], "env", 4) == 0 || ft_strncmp(ms->cmds->cmd[0], "exit", 5) == 0 || ft_strncmp(ms->cmds->cmd[0], "export", 7) == 0 || ft_strncmp(ms->cmds->cmd[0], "pwd", 4) == 0 || ft_strncmp(ms->cmds->cmd[0], "unset", 6) == 0)
@@ -76,6 +103,11 @@ void	exec2(t_minishell *ms)
 		else
 			exec_cmd(ms);
 		ms->cmds = ms->cmds->next;
+		i++;
 	}
-	waitpid(-1, NULL, 0);
+	while (i > 0)
+	{
+		waitpid(-1, NULL, 0);
+		i--;
+	}
 }

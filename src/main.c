@@ -6,7 +6,7 @@
 /*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/12/27 17:49:00 by vicrodri         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:42:57 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, ft_handler);
 		signal(SIGQUIT, ft_handler);
 		prompt = readline(READLINE_MSG);
-		
+		printf("prompt: %s\n", prompt);
+		printf("%d\n", ms->child_pid);
 		if (!prompt)
 			ft_exit(ms, NULL);
 		else
