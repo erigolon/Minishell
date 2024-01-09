@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 18:46:54 by erigolon          #+#    #+#             */
-/*   Updated: 2023/12/27 17:48:35 by vicrodri         ###   ########.fr       */
+/*   Updated: 2024/01/09 16:34:55 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_parser(t_minishell *minishell)
 	current_cmd = ft_cmdlstnew(NULL);
 	current_cmd->cmd = ft_calloc(ft_strlen(minishell->input[i]), sizeof(char));
 	minishell->cmds = current_cmd;
-	
+
 	while (minishell->input[i])
 	{
 		if (minishell->input[i][0] != '<' && minishell->input[i][0] != '>'

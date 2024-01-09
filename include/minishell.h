@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/08 17:12:58 by vicrodri         ###   ########.fr       */
+/*   Updated: 2024/01/09 16:42:26 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,9 @@ void		free_str(char **str, int i);
 
 // dividir la cadena de entrada en pequeños trozos o tokens
 //para manejar mejor las tuberías, redirecciones y expansiones.
-char		**ft_splitms(char const *str, char c);
+char		**ft_splitms(char const *str, char c, int word, int i);
 int			ft_strcontpipex(char const *s, char c);
 int			ft_strcontcmd(char const *s, char c);
-
-
 
 //expandir las variables de entorno y las variables de shell
 void		ft_expander(t_minishell *ms);
@@ -93,10 +91,6 @@ char		*ft_strjoinizq(char const *s1, char const *s2);
 void		ft_free_cmdlist(t_cmdlist *cmdlist);
 void		ft_lexer(t_minishell *minishell);
 
-
-
-
-
 // Manejo y creación de la lista de variables de entorno
 t_envlist	*env_list(char	**envp);
 t_envlist	*lstnew_env(char *env);
@@ -108,8 +102,7 @@ void		delete_env(t_envlist **lst);
 t_envlist	*check_env(char *env, t_envlist *explist);
 
 // ejecutar los comandos
-void 		exec2(t_minishell *ms);
-
+void		exec2(t_minishell *ms);
 
 // Manejo de señales
 void		ft_handler(int signum);

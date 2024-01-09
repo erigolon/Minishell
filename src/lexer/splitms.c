@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:25:30 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/10/18 17:12:17 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/09 16:46:02 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*ft_wordcmd(char const *str, char s)
 	char	*word;
 
 	if (str[0] == s && str[1] == s)
-	{	
+	{
 		word = ft_calloc(3, sizeof(char));
 		word[2] = 0;
 		word[0] = s;
@@ -83,19 +83,14 @@ char	*ft_wordcmd(char const *str, char s)
 	return (word);
 }
 
-char	**ft_splitms(char const *str, char c)
+char	**ft_splitms(char const *str, char c, int i, int word)
 {
 	char	**split;
-	int		word;
-	int		i;
 	int		com;
 
-	word = 0;
-	i = 0;
 	split = ft_calloc((ft_strcontpipex(str, c)
 				+ ft_strcontcmd(str, '<') + ft_strcontcmd(str, '>')
-				+ ft_strcontcmd(str, '|') + 1),
-			sizeof(char *));
+				+ ft_strcontcmd(str, '|') + 1), sizeof(char *));
 	if (!split)
 		return (0);
 	while (str[i] != 0)
@@ -116,25 +111,25 @@ char	**ft_splitms(char const *str, char c)
 			split[word++] = ft_wordcmd(&str[i++], '<');
 			if (str[i] == '<')
 				i++;
-		}	
+		}
 		else if (str[i] == '>')
 		{
 			split[word++] = ft_wordcmd(&str[i++], '>');
 			if (str[i] == '>')
 				i++;
-		}	
+		}
 		else if (str[i] == '|')
 		{
 			split[word++] = ft_wordcmd(&str[i++], '|');
 			if (str[i] == '|')
 				i++;
-		}	
+		}
 		else if (str[i] != c && str[i] != 0)
-		{	
+		{
 			split[word++] = ft_wordpipex(&str[i], c);
 			while (str[i] != c && str[i] != '<'
 				&& str[i] != '>' && str[i] != '|' && str[i] != 0)
-			i++;
+				i++;
 		}
 	}
 	return (split);

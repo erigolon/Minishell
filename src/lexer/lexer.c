@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:32:08 by vicrodri          #+#    #+#             */
-/*   Updated: 2023/12/27 17:36:50 by vicrodri         ###   ########.fr       */
+/*   Updated: 2024/01/09 16:49:22 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_expander(t_minishell *ms)
 							+ ft_strlenenv(ms->envp[k])] == '\''))
 					{
 						if (l == 1)
-								tmp = ft_strdup(&ms->input[i][j
+							tmp = ft_strdup(&ms->input[i][j
 									+ 1 + ft_strlenenv(ms->envp[k])]);
 						ft_bzero(&ms->input[i][j], ft_strlen(&ms->input[i][j]));
 						ms->input[i] = ft_strjoinizq(ms->input[i],
@@ -77,13 +77,12 @@ void	ft_expander(t_minishell *ms)
 				}
 			}
 			if (ms->input[i][j] == '$' && l != 2)
-			{
 				ft_bzero(ms->input[i], ft_strlen(ms->input[i]));
-			}
 			j++;
 		}
 		i++;
-	}	
+	}
+	ft_expander_directory(ms);
 }
 
 void	ft_expander_directory(t_minishell *ms)
@@ -119,6 +118,7 @@ void	ft_expander_directory(t_minishell *ms)
 		}
 		i++;
 	}
+	ft_quotestrim(ms);
 }
 
 void	ft_quotestrim(t_minishell *ms)
