@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 18:46:54 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/09 16:34:55 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:03:54 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_parser(t_minishell *minishell)
 {
 	int			i;
 	int			j;
-	int			fd;
+//	int			fd;
 	t_cmdlist	*current_cmd;
 
 	i = 0;

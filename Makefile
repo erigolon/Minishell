@@ -6,33 +6,35 @@
 #    By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 12:57:38 by vicrodri          #+#    #+#              #
-#    Updated: 2023/11/02 19:16:22 by erigolon         ###   ########.fr        #
+#    Updated: 2024/01/09 17:02:19 by erigolon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	minishell
-
-CC	=	gcc
+NAME		= minishell
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror
 
 # -lreadline /opt/vagrant/embedded/lib -I /opt/vagrant/embedded/include/readline
-CFLAGS	=	-Wall -Wextra -Werror 
 # -fsanitize=address
 
-USER = $(shell whoami)
-LIBS = -L "/Users/$(USER)/.brew/opt/readline/lib" -lreadline
-RLHEADER = -I "/Users/$(USER)/.brew/opt/readline/include"
+USER		= $(shell whoami)
+LIBS		= -L "/Users/$(USER)/.brew/opt/readline/lib" -lreadline
+RLHEADER	= -I "/Users/$(USER)/.brew/opt/readline/include"
 
 INC			= libft/
+LIBFT		= $(INC)libft.a
 
-LIBFT		= $(INC)libft.a 
+SRCDIR		= src
+BUILDDIR	= build
 
-SOURCES	=	$(wildcard src/*.c)	$(wildcard src/builtins/*.c) $(wildcard src/envlst/*.c) \
-			$(wildcard src/lexer/*.c) $(wildcard src/parser/*.c) $(wildcard src/executer/*.c)
+SOURCES		= $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/builtins/*.c) $(wildcard $(SRCDIR)/envlst/*.c) \
+				$(wildcard $(SRCDIR)/lexer/*.c) $(wildcard $(SRCDIR)/parser/*.c) $(wildcard $(SRCDIR)/executer/*.c)
 
-OBJECTS	=	$(SOURCES:.c=.o)
+OBJECTS		= $(patsubst $(SRCDIR)/%.c,$(BUILDDIR)/%.o,$(SOURCES))
 
-%.o: %.c
-	@$(CC)$(FLAGS) -c $< -o $@ $(RLHEADER)
+$(BUILDDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) -c $< -o $@ $(RLHEADER)
 
 all: $(LIBFT)	$(NAME)
 
@@ -44,6 +46,7 @@ $(NAME): $(LIBFT) $(OBJECTS)
 	@echo "$(GREEN)$(NAME) -> program created! $(DEFAULT)"
 
 clean:
+	@rm -rf $(BUILDDIR)
 	@rm -f $(OBJECTS)
 	@make -C $(INC) clean
 	@echo "$(YELLOW)$(NAME) -> Object files deleted. "

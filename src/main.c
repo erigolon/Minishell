@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/09 16:41:58 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:03:02 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ static void	mini_getpid(t_minishell *ms)
 	ms->child_pid = pid - 1;
 }
 
-static void	ft_leaks(void)
-{
-	system("leaks -q minishell");
-}
+// static void	ft_leaks(void)
+// {
+// 	system("leaks -q minishell");
+// }
 
 void	free_all(t_minishell *ms)
 {

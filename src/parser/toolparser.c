@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:27:37 by erigolon          #+#    #+#             */
-/*   Updated: 2023/10/24 21:30:10 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:05:12 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_cmdlist	*ft_cmdlstnew(void *content)
 {
 	t_cmdlist	*result;
 
+	(void) content; //??
 	result = (t_cmdlist *)malloc(sizeof(t_cmdlist));
 	if (!result)
 		return (NULL);
