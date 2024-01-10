@@ -6,28 +6,28 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/09 17:03:02 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:32:53 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	mini_getpid(t_minishell *ms)
-{
-	pid_t	pid;
+// static void	mini_getpid(t_minishell *ms)
+// {
+// 	pid_t	pid;
 
-	pid = fork();
-	if (pid < 0)
-	{
-		exit(1);
-	}
-	if (!pid)
-	{
-		exit(1);
-	}
-	waitpid(pid, NULL, 0);
-	ms->child_pid = pid - 1;
-}
+// 	pid = fork();
+// 	if (pid < 0)
+// 	{
+// 		exit(1);
+// 	}
+// 	if (!pid)
+// 	{
+// 		exit(1);
+// 	}
+// 	waitpid(pid, NULL, 0);
+// 	ms->child_pid = pid - 1;
+// }
 
 // static void	ft_leaks(void)
 // {
@@ -45,8 +45,9 @@ void	free_all(t_minishell *ms)
 void	free_loop(t_minishell *ms, char *prompt)
 {
 	free(prompt);
-//	free_str(ms->input, 0);
-	ft_free_cmdlist(ms->cmds);
+	free_str(ms->input, 0);
+	if (ms->cmds)
+		ft_free_cmdlist(ms); // ??
 }
 
 t_minishell	*init_ms(int argc, char **argv, char **envp)
@@ -76,7 +77,7 @@ int	main(int argc, char **argv, char **envp)
 	// atexit(ft_leaks);/* Borrar esto en un futuro */
 	rl_catch_signals = 0;
 	ms = init_ms(argc, argv, envp);
-	mini_getpid(ms);
+	// mini_getpid(ms);
 	while (ms->exit)
 	{
 		signal(SIGINT, ft_handler);
@@ -90,7 +91,6 @@ int	main(int argc, char **argv, char **envp)
 		ms->input = ft_splitms(prompt, ' ', 0, 0);
 		ft_expander(ms);
 		ft_parser(ms);
-		// ft_lexer(ms);
 		exec2(ms);
 		if (!(!prompt || !*prompt))
 			add_history(prompt);

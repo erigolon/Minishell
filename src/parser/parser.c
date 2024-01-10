@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 18:46:54 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/09 17:08:54 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:34:59 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	ft_parser(t_minishell *minishell)
 {
 	int			i;
 	int			j;
-//	int			fd; ??
 	t_cmdlist	*current_cmd;
 
 	i = 0;
@@ -111,5 +110,5 @@ void	ft_parser(t_minishell *minishell)
 		}
 		i++;
 	}
-	ft_free_cmdlist(current_cmd);
+	ft_free_cmdlist(minishell);
 }
