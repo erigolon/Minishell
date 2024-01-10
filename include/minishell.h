@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/10 12:12:47 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:17:16 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char		**get_paths(char **envp);
 char		*ft_join(char *path, char *cmd);
 char		*ft_strjoinder(char const *s1, char const *s2);
 char		*ft_strjoinizq(char const *s1, char const *s2);
-void		ft_free_cmdlist(t_minishell *minishell);
+void		ft_free_cmdlist(t_cmdlist *cmdlist);
 void		ft_lexer(t_minishell *minishell);
 
 // Manejo y creación de la lista de variables de entorno

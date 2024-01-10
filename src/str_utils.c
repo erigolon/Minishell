@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 11:03:23 by erigolon          #+#    #+#             */
-/*   Updated: 2023/10/26 20:25:04 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:30:41 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,10 @@
 
 void	free_str(char **str, int i)
 {
-	if (!str)
-		return ;
-	if (i == 0)
+	while (str[i])
 	{
-		while (str[i] != NULL)
-		{
-			free(str[i]);
-			i++;
-		}
-	}
-	else
-	{
-		while (i >= 0)
-		{
-			free(str[i]);
-			i--;
-		}
+		free(str[i]);
+		i++;
 	}
 	free(str);
 }

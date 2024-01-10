@@ -3,32 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   toolparser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:27:37 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/10 17:44:16 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:31:46 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_free_cmdlist(t_minishell *minishell)
+void	ft_free_cmdlist(t_cmdlist *cmdlist)
 {
 	t_cmdlist	*temp;
-	t_cmdlist	*cmdlist;
 
-	cmdlist = minishell->cmds;
-	while (cmdlist)
+	while (cmdlist != NULL)
 	{
+		printf("freeing cmd: %s\n", cmdlist->cmd[0]);
 		temp = cmdlist->next;
-		// if (cmdlist->path)
-		// 	free(cmdlist->path);
-		// if (cmdlist->cmd)
-		// 	free_str(cmdlist->cmd, 0);
-		// free(cmdlist);
+		free(cmdlist->path);
+		// printf("freeing cmd: %s\n", cmdlist->cmd[0]);
+		// free_str(cmdlist->cmd, 0);
+		free(cmdlist);
 		cmdlist = temp;
 	}
-	//minishell->cmds = 0;
 }
 t_cmdlist	*ft_cmdlstlast(t_cmdlist *lst)
 {

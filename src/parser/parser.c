@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 18:46:54 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/10 17:34:59 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:18:05 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_parser(t_minishell *minishell)
 	i = 0;
 	j = 0;
 	current_cmd = ft_cmdlstnew(NULL);
-	current_cmd->cmd = ft_calloc(ft_strlen(minishell->input[i]), sizeof(char));
+	current_cmd->cmd = ft_calloc(ft_strlen(minishell->input[i]), sizeof(char *));
 	minishell->cmds = current_cmd;
 
 	while (minishell->input[i])
@@ -87,6 +87,7 @@ void	ft_parser(t_minishell *minishell)
 			if (current_cmd->path == NULL)
 				ft_path(minishell, minishell->input[i], current_cmd);
 			current_cmd->cmd[j] = ft_strdup(minishell->input[i]);
+			current_cmd->cmd[j + 1] = NULL;
 			j++;
 		}
 		else if (minishell->input[i][0] == '<')
@@ -110,5 +111,5 @@ void	ft_parser(t_minishell *minishell)
 		}
 		i++;
 	}
-	ft_free_cmdlist(minishell);
+	current_cmd->next = NULL;
 }

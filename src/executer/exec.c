@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:42:58 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/10 17:31:39 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:32:08 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,15 @@ void	*child_process(t_minishell *ms, int *fd)
 	close(fd[READ_END]);
 	if (ms->cmds->path)
 	{
-		// ms->cmds->path = "/bin/ls";
-		// printf("Ejecutando: %s\n", ms->cmds->path);
-		// printf("Argumentos: ");
-		// for (int i = 0; ms->cmds->cmd[i] != NULL; ++i)
-		//	printf("%s ", ms->cmds->cmd[i]);
-		// printf("\n");
-		// printf("Variables de entorno: ");
-		// for (int i = 0; ms->envp[i] != NULL; ++i)
-		// 	printf("%s ", ms->envp[i]);
-		// printf("\n");
+		printf("Ejecutando: %s\n", ms->cmds->path);
+		printf("Con argumentos: ");
+		int i = 0;
+		while (ms->cmds->cmd[i])
+		{
+			printf("%s ", ms->cmds->cmd[i]);
+			i++;
+		}
+		printf("\n");
 		if (execve(ms->cmds->path, ms->cmds->cmd, ms->envp) == -1)
 		{
 			perror("Error en execve");
