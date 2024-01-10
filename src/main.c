@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/10 17:32:53 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:12:39 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	free_loop(t_minishell *ms, char *prompt)
 	free(prompt);
 	free_str(ms->input, 0);
 	if (ms->cmds)
-		ft_free_cmdlist(ms); // ??
+		ft_free_cmdlist(ms->cmds);
 }
 
 t_minishell	*init_ms(int argc, char **argv, char **envp)

@@ -6,29 +6,26 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:27:37 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/10 17:44:16 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:35:22 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_free_cmdlist(t_minishell *minishell)
+void	ft_free_cmdlist(t_cmdlist *cmdlist)
 {
 	t_cmdlist	*temp;
-	t_cmdlist	*cmdlist;
 
-	cmdlist = minishell->cmds;
 	while (cmdlist)
 	{
 		temp = cmdlist->next;
-		// if (cmdlist->path)
-		// 	free(cmdlist->path);
-		// if (cmdlist->cmd)
-		// 	free_str(cmdlist->cmd, 0);
-		// free(cmdlist);
+		if (cmdlist->path)
+			free(cmdlist->path);
+		if (cmdlist->cmd)
+			free_str(cmdlist->cmd, 0);
+		free(cmdlist);
 		cmdlist = temp;
 	}
-	//minishell->cmds = 0;
 }
 t_cmdlist	*ft_cmdlstlast(t_cmdlist *lst)
 {
