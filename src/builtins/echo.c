@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:43:29 by erigolon          #+#    #+#             */
-/*   Updated: 2023/12/26 09:57:37 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/11 13:13:42 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	ft_echo(char **str)
 	if (line)
 	{
 		printf("\n");
-		printf("PEPE");
 	}
 }
 /*

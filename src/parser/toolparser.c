@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   toolparser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:27:37 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/10 18:31:46 by vicrodri         ###   ########.fr       */
+/*   Updated: 2024/01/11 13:27:05 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_free_cmdlist(t_cmdlist *cmdlist)
 {
 	t_cmdlist	*temp;
 
+	write(1, "tercero", 7); //
 	while (cmdlist != NULL)
 	{
 		printf("freeing cmd: %s\n", cmdlist->cmd[0]);
@@ -52,11 +53,10 @@ void	ft_cmdlstadd_back(t_cmdlist **cmdlist, t_cmdlist *new)
 		*cmdlist = new;
 }
 
-t_cmdlist	*ft_cmdlstnew(void *content)
+t_cmdlist	*ft_cmdlstnew(void)
 {
 	t_cmdlist	*result;
 
-	(void) content;
 	result = (t_cmdlist *)malloc(sizeof(t_cmdlist));
 	if (!result)
 		return (NULL);

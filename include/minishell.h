@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/10 18:17:16 by vicrodri         ###   ########.fr       */
+/*   Updated: 2024/01/11 13:27:32 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void		ft_quotestrim(t_minishell *ms);
 void		ft_parser(t_minishell *minishell);
 t_cmdlist	*ft_cmdlstlast(t_cmdlist *lst);
 void		ft_cmdlstadd_back(t_cmdlist **cmdlist, t_cmdlist *new);
-t_cmdlist	*ft_cmdlstnew(void *content);
+t_cmdlist	*ft_cmdlstnew(void);
 char		**get_paths(char **envp);
 char		*ft_join(char *path, char *cmd);
 char		*ft_strjoinder(char const *s1, char const *s2);
