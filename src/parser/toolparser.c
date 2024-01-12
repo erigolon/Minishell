@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:27:37 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/11 13:27:05 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:04:32 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_free_cmdlist(t_cmdlist *cmdlist)
 {
 	t_cmdlist	*temp;
 
-	write(1, "tercero", 7); //
+	// write(1, "tercero", 7); //
 	while (cmdlist != NULL)
 	{
 		printf("freeing cmd: %s\n", cmdlist->cmd[0]);

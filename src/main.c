@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/11 13:23:58 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:26:53 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	free_loop(t_minishell *ms, char *prompt)
 {
 	free(prompt);
 	free_str(ms->input, 0);
-	write(1, "primero", 7); //
+	// write(1, "primero", 7); //
 	if (ms->cmds)
 	{
-		write(1, "segundo", 7); //
+	//	write(1, "segundo", 7); //
 		ft_free_cmdlist(ms->cmds);
 	}
 }
@@ -100,7 +100,6 @@ int	main(int argc, char **argv, char **envp)
 			add_history(prompt);
 		free_loop(ms, prompt);
 	}
-	printf("exit_status: %d\n", ms->exit_status);
 	free_all(ms);
 	return (ms->exit_status);
 }
