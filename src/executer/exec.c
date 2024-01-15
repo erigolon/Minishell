@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:42:58 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/12 16:29:58 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:44:21 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,9 @@ void	*exec_cmd(t_minishell *ms)
 {
 	int	fd[2];
 
-
-	if (pipe(fd) == -1)
+	if (pipe(fd) == -1 || ms->input == NULL)
 		return (0);
-	write(1, "primer", 6);
 	exec_fork(ms, fd);
-	write(1, "segundo", 7);
 	close(fd[WRITE_END]);
 	if (ms->cmds->next && !(ms->cmds->next->i_fd_in))
 		ms->cmds->next->i_fd_in = fd[READ_END];
