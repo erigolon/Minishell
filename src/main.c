@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/16 18:23:53 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:39:51 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		}
 		lex_parser(ms, prompt);
-		exec2(ms);
+		if (prompt != NULL & ft_strlen(prompt) != 0)
+			exec2(ms);
 		if (!(!prompt || !*prompt))
 			add_history(prompt);
 		free_loop(ms, prompt);
