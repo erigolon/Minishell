@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:32:08 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/15 15:21:40 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:19:18 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void	ft_expander(t_minishell *ms)
 	char	*tmp;
 
 	i = 0;
-	if (ms->input == NULL)
-		return ;
 	while (ms->input[i] != NULL)
 	{
 		j = 0;

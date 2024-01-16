@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 18:46:54 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/15 15:22:54 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:19:24 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ void	ft_parser(t_minishell *minishell)
 
 	i = 0;
 	j = 0;
-	if (minishell->input == NULL)
-		return ;
 	current_cmd = ft_cmdlstnew();
 	current_cmd->cmd = ft_calloc(ft_strlen(minishell->input[i]), sizeof(char *));
 	minishell->cmds = current_cmd;

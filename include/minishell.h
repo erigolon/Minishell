@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/11 13:27:32 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:16:50 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,7 @@ void		ft_cd(t_minishell *ms, char *str);
 int			ft_bt_select(t_cmdlist *tmp, t_minishell *ms);
 // Pruebas
 void		testing(t_minishell *ms);
+
+void		lex_parser(t_minishell *ms, char *prompt);
 
 #endif

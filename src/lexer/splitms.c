@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:25:30 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/15 15:17:41 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:19:09 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ char	**ft_splitms(char const *str, char c, int i, int word)
 	char	**split;
 	int		com;
 
-	if (str == NULL || ft_strlen(str) == 0)
-		return (0);
 	split = ft_calloc((ft_strcontpipex(str, c)
 				+ ft_strcontcmd(str, '<') + ft_strcontcmd(str, '>')
 				+ ft_strcontcmd(str, '|') + 1), sizeof(char *));
