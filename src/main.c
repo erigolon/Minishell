@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/16 18:39:51 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/16 19:33:19 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,9 @@ void	free_loop(t_minishell *ms, char *prompt)
 t_minishell	*init_ms(int argc, char **argv, char **envp)
 {
 	t_minishell	*ms;
-	int			i;
 
 	(void)argc;
 	(void)argv;
-	i = 0;
 	ms = ft_calloc(1, sizeof(t_minishell));
 	ms->envp = ft_strddup(envp);
 	ms->envlist = env_list(envp);
@@ -59,6 +57,7 @@ t_minishell	*init_ms(int argc, char **argv, char **envp)
 int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	*ms;
+	t_lexer		*lexer;
 	char		*prompt;
 
 	// atexit(ft_leaks);/* Borrar esto en un futuro */
@@ -74,7 +73,7 @@ int	main(int argc, char **argv, char **envp)
 			ft_exit(ms, NULL);
 			break ;
 		}
-		lex_parser(ms, prompt);
+		lexer = lex_parser(ms, prompt);
 		if (prompt != NULL & ft_strlen(prompt) != 0)
 			exec2(ms);
 		if (!(!prompt || !*prompt))
