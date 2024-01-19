@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ato_int128.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franmart <franmart@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:10:37 by juan-aga          #+#    #+#             */
-/*   Updated: 2023/06/07 10:39:45 by franmart         ###   ########.fr       */
+/*   Updated: 2024/01/17 22:20:57 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 __int128	ft_ato_int128(char *str)
 {

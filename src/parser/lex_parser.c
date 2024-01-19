@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lex_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 18:12:32 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/16 19:28:15 by vicrodri         ###   ########.fr       */
+/*   Created: 2024/01/17 18:19:24 by erigolon          #+#    #+#             */
+/*   Updated: 2024/01/17 18:19:25 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "../../include/minishell.h"
 
@@ -17,7 +19,7 @@ t_lexer	*lex_parser(t_minishell *ms, char *prompt)
 	t_lexer	*lexer;
 
 	if (prompt == NULL || ft_strlen(prompt) == 0)
-		return ;
+		return(0) ;
 	lexer = ft_calloc(1, sizeof(t_lexer));
 	lexer->error = 0;
 	lexer->token_list = new_token(NULL, ft_strlen(prompt));

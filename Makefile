@@ -6,7 +6,7 @@
 #    By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/24 12:57:38 by vicrodri          #+#    #+#              #
-#    Updated: 2024/01/09 17:02:19 by erigolon         ###   ########.fr        #
+#    Updated: 2024/01/17 22:31:36 by erigolon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,9 @@ SRCDIR		= src
 BUILDDIR	= build
 
 SOURCES		= $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/builtins/*.c) $(wildcard $(SRCDIR)/envlst/*.c) \
-				$(wildcard $(SRCDIR)/lexer/*.c) $(wildcard $(SRCDIR)/parser/*.c) $(wildcard $(SRCDIR)/executer/*.c)
+				$(wildcard $(SRCDIR)/parser/*.c) $(wildcard $(SRCDIR)/executor/*.c) $(wildcard $(SRCDIR)/expander/*.c) \
+				$(wildcard $(SRCDIR)/utils/*.c) $(wildcard $(SRCDIR)/wildcard/*.c) 
+
 
 OBJECTS		= $(patsubst $(SRCDIR)/%.c,$(BUILDDIR)/%.o,$(SOURCES))
 

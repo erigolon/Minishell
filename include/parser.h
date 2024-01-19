@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:10:50 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/16 20:08:30 by vicrodri         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:59:04 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-typedef struct s_ms		t_ms;
-typedef struct s_cmdlist	t_cmdlist;
-typedef struct s_envlist	t_envlist;
+typedef struct minishell	t_minishell;
+typedef struct cmdlist		t_cmdlist;
+typedef struct envlist		t_envlist;
 
 enum e_tokens {
 	CHAR_PIPE = '|',
@@ -69,7 +69,7 @@ typedef struct s_lexer
 }	t_lexer;
 
 
-t_lexer		*ft_tokenize_line(char *input, t_ms *ms);
+t_lexer		*ft_tokenize_line(char *input, t_minishell *ms);
 void		join_tokens(t_token *token);
 void		join_dollars(t_token *token);
 
@@ -96,14 +96,14 @@ void		remove_empty_tokens(t_lexer	*lexer);
 void		trim_quotes_token(t_token *token);
 
 /* parser/expander.c */
-t_token		*expand_tokens(t_lexer *lexer, t_ms *ms);
-int			replace_next_dollar(char *str, t_ms *ms, t_token *tok);
-int			replace_exit_status(t_token *tok, t_ms *ms, char *free_str);
-int			replace_dollar_digit(t_token *tok, t_ms *ms, char *free_str);
-void		replace_tilde(t_token *tok, t_ms *ms);
+t_token		*expand_tokens(t_lexer *lexer, t_minishell *ms);
+int			replace_next_dollar(char *str, t_minishell *ms, t_token *tok);
+int			replace_exit_status(t_token *tok, t_minishell *ms, char *free_str);
+int			replace_dollar_digit(t_token *tok, t_minishell *ms, char *free_str);
+void		replace_tilde(t_token *tok, t_minishell *ms);
 
 /* parser/expander_utils.c */
-t_envlist	*get_env_var(char *str, t_ms *ms);
+t_envlist	*get_env_var(char *str, t_minishell *ms);
 char		*replace_str(char *og, char *find, char *repl);
 char		*get_dollar_name(char *str);
 
@@ -112,7 +112,7 @@ void		expand_all_wildcards(t_lexer *lex);
 t_token		*expand_wildcard(t_token *tok, char **wildcards);
 
 /* parser/fill_cmds.c */
-void		tokens_to_commands(t_ms *ms, t_lexer *lex);
+void		tokens_to_commands(t_minishell *ms, t_lexer *lex);
 t_token		*fill_cmd(t_cmdlist *s, t_token *tok);
 void		get_all_args(t_cmdlist *cmd, t_token *tok);
 int			count_args(t_token *tok);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 18:23:28 by franmart          #+#    #+#             */
-/*   Updated: 2024/01/16 19:34:33 by vicrodri         ###   ########.fr       */
+/*   Created: 2024/01/17 18:19:54 by erigolon          #+#    #+#             */
+/*   Updated: 2024/01/17 18:19:56 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@ a special char */
 
 t_token	*other_tokens(t_token *tok, int type, int *j, int len)
 {
-	if (type == CH_SPACE && *j == 0 && tok->status == NO_QUOTE)
+	if (type == CHAR_SPACE && *j == 0 && tok->status == NO_QUOTE)
 	{
 		if (tok->prev && tok->prev->status != NO_QUOTE)
 			tok->prev->join_next = 0;
 		return (tok);
 	}
-	else if (type == CH_DQUOTE || type == CH_SQUOTE)
+	else if (type == CHAR_DQUOTE || type == CHAR_SQUOTE)
 		return (quote_token(tok, type, j, len));
 	else if (*j > 0 && tok->status == NO_QUOTE)
 	{
 		tok = new_token(tok, 2);
 		*j = 0;
 	}
-	else if ((*j > 0 && tok->status != NO_QUOTE) || tok->type == CH_TILDE)
+	else if ((*j > 0 && tok->status != NO_QUOTE) || tok->type == CHAR_TILDE)
 	{
 		tok->str[(*j)++] = type;
 		return (tok);
@@ -58,8 +58,8 @@ t_token	*redirect_token(t_token *token, char *input, int *j, int *i)
 		token = new_token(token, ft_strlen(input) - *i);
 		*j = 0;
 	}
-	if ((input[*i] == CH_GREAT && input[*i + 1] == CH_GREAT) || \
-		(input[*i] == CH_LESS && input[*i + 1] == CH_LESS))
+	if ((input[*i] == CHAR_GREAT && input[*i + 1] == CHAR_GREAT) || \
+		(input[*i] == CHAR_LESS && input[*i + 1] == CHAR_LESS))
 	{
 		token->type = input[(*i)] + 3;
 		token->str[(*j)++] = input[(*i)++];

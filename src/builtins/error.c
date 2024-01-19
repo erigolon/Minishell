@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 14:24:08 by erigolon          #+#    #+#             */
-/*   Updated: 2023/09/27 12:12:12 by erigolon         ###   ########.fr       */
+/*   Created: 2024/01/17 21:14:46 by erigolon          #+#    #+#             */
+/*   Updated: 2024/01/17 21:56:12 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	ft_pwd(void)
+void	ft_error_exe(char **arg, char *msg, t_minishell *ms)
 {
-	char	buffer[1024];
+	ft_putstr_fd("Minishell: ", 2);
+	ft_putstr_fd(arg[0], 2);
+	ft_putstr_fd(msg, 2);
+	ft_free_fork(ms);
+	exit(-1);
+}
 
-	if (getcwd(buffer, 1024))
-	{
-		printf("%s\n", buffer);
-		return (0);
-	}
+void	ft_error_file(char *file, t_minishell *ms)
+{
+	ft_putstr_fd("Minishell: ", 2);
+	ft_putstr_fd(file, 2);
+	if (access(file, F_OK))
+		ft_putstr_fd(": No such file or directory\n", 2);
 	else
-		return (1);
+		ft_putstr_fd(": Permission denied\n", 2);
+	ft_free_fork(ms);
+	exit(-1);
 }

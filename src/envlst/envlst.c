@@ -5,83 +5,90 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 12:44:29 by erigolon          #+#    #+#             */
-/*   Updated: 2023/10/01 18:25:28 by erigolon         ###   ########.fr       */
+/*   Created: 2024/01/17 22:43:09 by erigolon          #+#    #+#             */
+/*   Updated: 2024/01/17 22:45:31 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+
 #include "../../include/minishell.h"
 
-t_envlist	*lstlast_env(t_envlist *lst)
+t_envlist	*ft_envlstnew(char *str)
 {
-	if (!lst)
-		return (0);
-	while (lst->next != 0)
-		lst = lst->next;
-	return (lst);
-}
+	t_envlist	*envlst;
 
-void	lstadd_back_env(t_envlist **envlst, t_envlist *new)
-{
-	t_envlist	*back;
-
-	if (envlst && new)
-	{
-		if (!*envlst)
-			*envlst = new;
-		else
-		{
-			back = lstlast_env(*envlst);
-			back->next = new;
-		}
-	}
-}
-
-t_envlist	*lstnew_env(char *env)
-{
-	t_envlist	*new_env;
-
-	new_env = (t_envlist *)ft_calloc(1, sizeof(t_envlist));
-	if (!new_env)
-		return (NULL);
-	new_env->env = NULL;
-	new_env->value = NULL;
-	new_env->next = NULL;
-	new_env->prev = NULL;
-	split_n_fill_env(new_env, env);
-	return (new_env);
-}
-
-t_envlist	*env_list(char	**envp)
-{
-	t_envlist	*lst;
-	int			i;
-
-	i = 0;
-	while (envp[i])
-	{
-		if (i == 0)
-			lst = lstnew_env(envp[i]);
-		else
-			lstadd_back_env(&lst, lstnew_env(envp[i]));
-		i++;
-	}
-	return (lst);
-}
-
-void	free_envlst(t_envlist *envlst)
-{
-	t_envlist	*temp;
-
+	envlst = (t_envlist *) ft_calloc(1, sizeof(t_envlist));
 	if (!envlst)
+		return (NULL);
+	envlst->env = NULL;
+	envlst->value = NULL;
+	envlst->next = NULL;
+	envlst->prev = NULL;
+	ft_envlst_fill(envlst, str);
+	return (envlst);
+}
+
+void	ft_envlstadd_back(t_envlist **envlst, t_envlist *add)
+{
+	t_envlist	*last;
+
+	if (!envlst || !add)
 		return ;
+	if (!envlst)
+	{
+		*envlst = add;
+		return ;
+	}
+	last = ft_envlstlast(*envlst);
+	last->next = add;
+	add->prev = last;
+}
+
+t_envlist	*ft_envlstlast(t_envlist *envlst)
+{
+	t_envlist	*last;
+
+	last = envlst;
+	if (envlst)
+	{
+		while (last->next)
+			last = last->next;
+	}
+	return (last);
+}
+
+void	ft_free_envlst(t_envlist *envlst)
+{
+	t_envlist	*tmp;
+
 	while (envlst)
 	{
-		temp = envlst->next;
+		tmp = envlst->next;
 		free(envlst->env);
 		if (envlst->value)
 			free(envlst->value);
 		free(envlst);
-		envlst = temp;
+		envlst = tmp;
 	}
+}
+
+t_envlist	*ft_envlst_fill(t_envlist *envlst, char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != '=')
+		i++;
+	if (envlst->env)
+		free(envlst->env);
+	envlst->env = ft_calloc(sizeof(char), i + 2);
+	ft_strlcpy(envlst->env, str, i + 1);
+	if (envlst->value)
+		free(envlst->value);
+	if (str[i] == '=')
+		envlst->value = ft_strdup(&str[i + 1]);
+	else
+		envlst->value = NULL;
+	return (envlst);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 18:23:21 by franmart          #+#    #+#             */
-/*   Updated: 2024/01/16 19:34:34 by vicrodri         ###   ########.fr       */
+/*   Created: 2024/01/17 18:19:48 by erigolon          #+#    #+#             */
+/*   Updated: 2024/01/17 18:19:50 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 int	get_token_type(char c)
 {
 	if (c == '|')
-		return (CH_PIPE);
+		return (CHAR_PIPE);
 	if (c == '\'')
-		return (CH_SQUOTE);
+		return (CHAR_SQUOTE);
 	if (c == '\"')
-		return (CH_DQUOTE);
+		return (CHAR_DQUOTE);
 	if (c == ' ')
-		return (CH_SPACE);
+		return (CHAR_SPACE);
 	if (c == '>')
-		return (CH_GREAT);
+		return (CHAR_GREAT);
 	if (c == '<')
-		return (CH_LESS);
+		return (CHAR_LESS);
 	if (c == 0)
-		return (CH_NULL);
+		return (CHAR_NULL);
 	if (c == '~')
-		return (CH_TILDE);
-	return (CH_NORMAL);
+		return (CHAR_TILDE);
+	return (CHAR_NORMAL);
 }
 
 /* Allocate a new token and insert it after the given "token" var. The "size"
@@ -50,7 +50,7 @@ t_token	*new_token(t_token *token, int size)
 		token = token->next;
 	}
 	token->str = ft_calloc(size + 1, sizeof(char));
-	token->type = CH_NORMAL;
+	token->type = CHAR_NORMAL;
 	token->status = NO_QUOTE;
 	token->escaped = NORMAL;
 	token->join_next = 1;

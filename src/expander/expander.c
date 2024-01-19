@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 18:22:43 by franmart          #+#    #+#             */
-/*   Updated: 2024/01/16 19:34:54 by vicrodri         ###   ########.fr       */
+/*   Created: 2024/01/17 18:19:04 by erigolon          #+#    #+#             */
+/*   Updated: 2024/01/17 22:18:54 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "../../include/minishell.h"
 
@@ -19,7 +21,7 @@ as the variable value that it replaced. This function has to return a token
 pointer because it can update the list head reference and it can cause leaks or
 double frees */
 
-t_token	*expand_tokens(t_lexer *lexer, t_ms *ms)
+t_token	*expand_tokens(t_lexer *lexer, t_minishell *ms)
 {
 	t_token		*tk;
 	int			i;
@@ -49,11 +51,11 @@ token string lenght, it has to return how many positions has moved. It's
 negative if it couldn't find an env value for the given variable name, and it
 moves back <strlen(var_name)> positions */
 
-int	replace_next_dollar(char *str, t_ms *ms, t_token *tok)
+int	replace_next_dollar(char *str, t_minishell *ms, t_token *tok)
 {
 	char		*name;
 	int			len;
-	t_envlst	*env;
+	t_envlist	*env;
 
 	name = get_dollar_name(str);
 	if (!name)
@@ -62,7 +64,7 @@ int	replace_next_dollar(char *str, t_ms *ms, t_token *tok)
 		return (replace_exit_status(tok, ms, name));
 	if (ft_isdigit(name[1]) || !ft_isalpha(name[1]))
 		return (replace_dollar_digit(tok, ms, name));
-	env = ft_getenv(&name[1], ms->envlst);
+	env = ft_getenv(&name[1], ms->envlist);
 	len = ft_strlen(name);
 	if (!env)
 	{
@@ -78,7 +80,7 @@ int	replace_next_dollar(char *str, t_ms *ms, t_token *tok)
 /* I handle the $? variable as a regular dollar, replacing $? for the
 ms->exit_status */
 
-int	replace_exit_status(t_token *tok, t_ms *ms, char *free_str)
+int	replace_exit_status(t_token *tok, t_minishell *ms, char *free_str)
 {
 	char	*status;
 
@@ -93,12 +95,12 @@ int	replace_exit_status(t_token *tok, t_ms *ms, char *free_str)
 a variable name that starts with a number, for example $123abc. In this case,
 bash prints 23abc, ommiting the 1 */
 
-int	replace_dollar_digit(t_token *tok, t_ms *ms, char *free_str)
+int	replace_dollar_digit(t_token *tok, t_minishell *ms, char *free_str)
 {
 	char		*str;
-	t_envlst	*env;
+	t_envlist	*env;
 
-	env = ft_getenv(&free_str[1], ms->envlst);
+	env = ft_getenv(&free_str[1], ms->envlist);
 	if (env)
 	{
 		tok->str = replace_str(tok->str, free_str, env->value);
@@ -119,9 +121,9 @@ int	replace_dollar_digit(t_token *tok, t_ms *ms, char *free_str)
 the user. It also adds a fallback in case that HOME is not found in the
 environment, concatenating /Users/ with the USER name */
 
-void	replace_tilde(t_token *tok, t_ms *ms)
+void	replace_tilde(t_token *tok, t_minishell *ms)
 {
-	t_envlst	*home;
+	t_envlist	*home;
 	t_token		*tk;
 	char		*s;
 
@@ -129,13 +131,13 @@ void	replace_tilde(t_token *tok, t_ms *ms)
 	while (tk)
 	{
 		if (tk->str && tk->str[0] == '~' && (tk->str[1] == '/' || \
-			tk->str[1] == '\0') && tk->type == CH_TILDE)
+			tk->str[1] == '\0') && tk->type == CHAR_TILDE)
 		{
-			home = ft_getenv("HOME", ms->envlst);
+			home = ft_getenv("HOME", ms->envlist);
 			tk->type = EXPANDED;
 			if (!home)
 			{
-				s = ft_strjoin("/Users/", ft_getenv("USER", ms->envlst)->value);
+				s = ft_strjoin("/Users/", ft_getenv("USER", ms->envlist)->value);
 				tk->str = replace_str(tk->str, ft_strdup("~"), s);
 				free(s);
 			}
@@ -143,7 +145,7 @@ void	replace_tilde(t_token *tok, t_ms *ms)
 				tk->str = replace_str(tk->str, ft_strdup("~"), home->value);
 		}
 		else if (tk->str && ft_strchr(tk->str, '~'))
-			tk->type = CH_NORMAL;
+			tk->type = CHAR_NORMAL;
 		tk = tk->next;
 	}
 }

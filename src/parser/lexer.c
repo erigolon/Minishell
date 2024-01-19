@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 18:23:12 by franmart          #+#    #+#             */
-/*   Updated: 2024/01/16 19:34:38 by vicrodri         ###   ########.fr       */
+/*   Created: 2024/01/17 18:19:33 by erigolon          #+#    #+#             */
+/*   Updated: 2024/01/17 18:19:36 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* This funtion does all the job of parsing the readline input, tokenizing it */
 
-t_lexer	*ft_tokenize_line(char *input, t_ms *ms)
+t_lexer	*ft_tokenize_line(char *input, t_minishell *ms)
 {
 	t_lexer	*lexer;
 
@@ -53,8 +53,8 @@ void	join_tokens(t_token *tk)
 	while (tk)
 	{
 		while (tk->next && tk->join_next && \
-			(tk->type == CH_NORMAL || tk->type == CH_TILDE) && \
-			(tk->next->type == CH_NORMAL || tk->next->type == CH_TILDE))
+			(tk->type == CHAR_NORMAL || tk->type == CHAR_TILDE) && \
+			(tk->next->type == CHAR_NORMAL || tk->next->type == CHAR_TILDE))
 		{
 			tmp_str = ft_strjoin(tk->str, tk->next->str);
 			free(tk->str);

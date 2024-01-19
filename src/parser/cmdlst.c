@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   cmdlst.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/05 16:10:03 by juan-aga          #+#    #+#             */
-/*   Updated: 2024/01/16 19:45:56 by vicrodri         ###   ########.fr       */
+/*   Created: 2024/01/17 18:19:15 by erigolon          #+#    #+#             */
+/*   Updated: 2024/01/17 21:15:15 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../include/minishell.h"
 

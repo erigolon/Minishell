@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 18:23:17 by franmart          #+#    #+#             */
-/*   Updated: 2024/01/16 19:34:36 by vicrodri         ###   ########.fr       */
+/*   Created: 2024/01/17 18:19:42 by erigolon          #+#    #+#             */
+/*   Updated: 2024/01/17 18:19:43 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "../../include/minishell.h"
 
@@ -21,7 +23,7 @@ void	trim_quotes_token(t_token *token)
 
 	while (token)
 	{
-		if ((token->status == CH_SQUOTE || token->status == CH_DQUOTE) && \
+		if ((token->status == CHAR_SQUOTE || token->status == CHAR_DQUOTE) && \
 			token->type != DELIMITER)
 		{
 			tmp = ft_substr(token->str, 1, ft_strlen(token->str) - 2);
@@ -37,7 +39,7 @@ the same kind */
 
 t_token	*quote_token(t_token *tok, int type, int *j, int len)
 {
-	if (*j > 0 && (tok->str[0] != CH_DQUOTE && tok->str[0] != CH_SQUOTE))
+	if (*j > 0 && (tok->str[0] != CHAR_DQUOTE && tok->str[0] != CHAR_SQUOTE))
 	{
 		tok = new_token(tok, len);
 		*j = 0;
@@ -66,7 +68,7 @@ int	close_quotes(t_token *tok)
 	flag = 0;
 	while (tok)
 	{
-		if (tok->str[0] == CH_SQUOTE || tok->str[0] == CH_DQUOTE)
+		if (tok->str[0] == CHAR_SQUOTE || tok->str[0] == CHAR_DQUOTE)
 		{
 			open_quote = tok->str[0];
 			len = ft_strlen(tok->str);

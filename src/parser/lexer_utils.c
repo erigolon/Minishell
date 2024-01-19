@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 18:23:07 by franmart          #+#    #+#             */
-/*   Updated: 2024/01/16 19:34:39 by vicrodri         ###   ########.fr       */
+/*   Created: 2024/01/17 18:19:28 by erigolon          #+#    #+#             */
+/*   Updated: 2024/01/17 18:19:29 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "../../include/minishell.h"
 
@@ -27,12 +29,12 @@ void	lexer_init(char *input, t_token *token)
 	while (input[++i] != '\0')
 	{
 		type = get_token_type(input[i]);
-		if ((type == CH_GREAT || type == CH_LESS) && \
+		if ((type == CHAR_GREAT || type == CHAR_LESS) && \
 			token->status == NO_QUOTE)
 			token = redirect_token(token, input, &j, &i);
-		else if (type == CH_NORMAL)
+		else if (type == CHAR_NORMAL)
 			token->str[j++] = input[i];
-		else if (type == CH_SPACE && j > 0 && token->status == NO_QUOTE)
+		else if (type == CHAR_SPACE && j > 0 && token->status == NO_QUOTE)
 		{
 			token->join_next = 0;
 			token = new_token(token, ft_strlen(input) - i);
@@ -76,13 +78,13 @@ int	lexer_files(t_token *token)
 			ft_putstr_fd("No filename given\n", 2);
 			return (1);
 		}
-		if (tok->type == CH_LESS)
+		if (tok->type == CHAR_LESS)
 			tok->next->type = INFILE;
-		if (tok->type == CH_GREAT)
+		if (tok->type == CHAR_GREAT)
 			tok->next->type = OUTFILE;
-		if (tok->type == CH_LESSLESS)
+		if (tok->type == CHAR_LESSLESS)
 			tok->next->type = DELIMITER;
-		if (tok->type == CH_GREATGREAT)
+		if (tok->type == CHAR_GREATGREAT)
 			tok->next->type = OUTFILE_APPEND;
 		tok = tok->next;
 	}

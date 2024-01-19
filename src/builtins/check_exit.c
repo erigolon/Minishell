@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   check_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 12:03:09 by erigolon          #+#    #+#             */
-/*   Updated: 2023/10/11 11:36:40 by erigolon         ###   ########.fr       */
+/*   Created: 2024/01/17 21:14:28 by erigolon          #+#    #+#             */
+/*   Updated: 2024/01/17 21:45:30 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_unset(t_minishell *ms, char **str)
+static int	ft_limitsll(t_minishell *ms, char *str);
+
+int	ft_check_exit(t_minishell *ms, char *str)
 {
-	t_envlist	*tmp;
-	int			i;
-	int			status;
+	int	i;
 
 	i = 0;
-	status = 0;
-	if (!str)
-		return ;
-	while (str[i])
-	{
-		if (ft_strchr(str[i], '='))
-		{
-			ft_putstr_fd ("minishell: unset: not a valid identifier", 2);
-			status = 1;
-		}
-		else
-		{
-			tmp = check_env(str[i], ms->envlist);
-			delete_env(&tmp);
-			tmp = check_env(str[i], ms->explist);
-			delete_env(&tmp);
-		}
+	if (ft_issign(str[i]))
 		i++;
-	}
-	ms->exit_status = status;
+	while (ft_isdigit(str[i]))
+		i++;
+	if (str[i] != '\0' || ft_issign(str[i - 1]))
+		return (0);
+	if (!ft_limitsll(ms, str))
+		return (0);
+	return (1);
+}
+
+static int	ft_limitsll(t_minishell *ms, char *str)
+{
+	__int128	i;
+
+	i = ft_ato_int128(str);
+	if (i < LLONG_MIN || i > LLONG_MAX)
+		return (0);
+	ms->exit_status = i;
+	return (1);
 }

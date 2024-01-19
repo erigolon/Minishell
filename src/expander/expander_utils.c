@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 18:22:36 by franmart          #+#    #+#             */
-/*   Updated: 2024/01/16 19:34:53 by vicrodri         ###   ########.fr       */
+/*   Created: 2024/01/17 18:18:59 by erigolon          #+#    #+#             */
+/*   Updated: 2024/01/17 22:19:16 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "../../include/minishell.h"
 
 /* Given a token, searchs for a valid dollar variable and returns its
 envlst node. Return NULL if can't find it */
 
-t_envlst	*get_env_var(char *str, t_ms *ms)
+t_envlist	*get_env_var(char *str, t_minishell *ms)
 {
 	int			i;
 	char		*word;
 	char		*v_name;
-	t_envlst	*env_variable;
+	t_envlist	*env_variable;
 
 	word = ft_strchr(str, '$');
 	env_variable = 0;
@@ -31,7 +33,7 @@ t_envlst	*get_env_var(char *str, t_ms *ms)
 			(ft_isalnum(word[i]) || word[i] == '_'))
 			i++;
 		v_name = ft_substr(word, 1, i - 1);
-		env_variable = ft_getenv(v_name, ms->envlst);
+		env_variable = ft_getenv(v_name, ms->envlist);
 		free(v_name);
 	}
 	return (env_variable);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_expander.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 18:22:50 by franmart          #+#    #+#             */
-/*   Updated: 2024/01/16 19:34:55 by vicrodri         ###   ########.fr       */
+/*   Created: 2024/01/17 18:19:09 by erigolon          #+#    #+#             */
+/*   Updated: 2024/01/17 22:21:50 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	expand_all_wildcards(t_lexer *lex)
 	token = lex->token_list;
 	while (token)
 	{
-		if (token->str && token->type == CH_NORMAL && \
+		if (token->str && token->type == CHAR_NORMAL && \
 			token->status == NO_QUOTE && ft_strchr(token->str, '*'))
 		{
 			wildcards = ft_wildcard(&token->str);
