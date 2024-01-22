@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:19:15 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/17 21:15:15 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:47:53 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_free_cmdlst(t_minishell	*ms)
 		if (cmdlist->path)
 			free(cmdlist->path);
 		if (cmdlist->cmd)
-			ft_free_array(cmdlist->cmd, 0);
+			free_str(cmdlist->cmd, 0);
 		free(cmdlist);
 		cmdlist = tmp;
 	}

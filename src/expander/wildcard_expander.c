@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:19:09 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/17 22:21:50 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:48:49 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	expand_all_wildcards(t_lexer *lex)
 			if (wildcards)
 			{
 				token = expand_wildcard(token, wildcards);
-				ft_free_array(wildcards, 0);
+				free_str(wildcards, 0);
 			}
 		}
 		token = token->next;

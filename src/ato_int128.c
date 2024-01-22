@@ -6,11 +6,11 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:10:37 by juan-aga          #+#    #+#             */
-/*   Updated: 2024/01/17 22:20:57 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:45:50 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../include/minishell.h"
 
 __int128	ft_ato_int128(char *str)
 {

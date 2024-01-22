@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:18:50 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/19 16:45:38 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:48:24 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_childs_exe(t_minishell *ms, t_cmdlist *tmp);
 static void	ft_child_redir_file(t_minishell *ms, t_cmdlist *tmp);
 static void	ft_exec_init(t_minishell *ms);
 
-void	ft_exec(t_minishell *ms)
+void	exec(t_minishell *ms)
 {
 	t_cmdlist	*tmp;
 	
@@ -42,7 +42,7 @@ void	ft_exec(t_minishell *ms)
 	ft_close_pipe(ms);
 	free(ms->pipe);
 	if (ms->path)
-		ft_free_array(ms->path, 0);
+		free_str(ms->path, 0);
 }
 
 static void	ft_exec_init(t_minishell *ms)
@@ -113,9 +113,11 @@ static void	ft_childs_exe(t_minishell *ms, t_cmdlist *tmp)
 	ft_accept_redirections(ms, tmp);
 	close(ms->pipe[2 * ms->exe - 2]);
 	ft_get_path(ms, tmp);
-	if (!tmp->path)
-		ft_error_exe(tmp->cmd, ": command not found\n", ms);
+	// if (!tmp->path)
+	// 	ft_error_exe(tmp->cmd, ": command not found\n", ms);
 	ft_envlst_to_env(ms);
-	execve(tmp->path, tmp->cmd, ms->envp);
-	ft_free_array(ms->envp, 0);
+	// tmp->path = "/bin/ls";
+	if (execve(tmp->path, tmp->cmd, ms->envp) == -1)
+		perror("hola");
+	free_str(ms->envp, 0);
 }

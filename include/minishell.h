@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/19 16:44:56 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:49:09 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,91 @@ void	ft_handler(int signum);
 void	free_str(char **str, int i);
 void	free_envlst(t_envlist *envlst);
 char		**ft_strddup(char **envp);
-t_envlist	*env_list(char	**envp);
 void		ft_exit(t_minishell *ms, char **nb);
-void		ft_exit_ms(t_minishell *ms, char **num);
 char	*ft_strjoin_va(char const *s, ...);
 char	*ft_chrjoin(char *s1, char c);
 char	*ft_ftoa(double d);
 double	ft_power_double(double n, int pov);
 int	ft_issign(char c);
 t_envlist	*split_n_fill_env(t_envlist	*new_env, char *env);
+
+
+
+void		ft_exit(t_minishell *ms, char **nb);
+
 void	free_all(t_minishell *ms);
+void	free_loop(t_minishell *g_ms, char *prompt, t_lexer *lex);
+
+
+// // Duplicación del string
+// char		**ft_strddup(char **envp);
+// void		free_str(char **str, int i);
+
+// // dividir la cadena de entrada en pequeños trozos o tokens
+// //para manejar mejor las tuberías, redirecciones y expansiones.
+// char		**ft_splitms(char const *str, char c, int word, int i);
+// int			ft_strcontpipex(char const *s, char c);
+// int			ft_strcontcmd(char const *s, char c);
+
+// //expandir las variables de entorno y las variables de shell
+// void		ft_expander(t_minishell *ms);
+// void		ft_expander_directory(t_minishell *ms);
+
+// //eliminar las comillas de la cadena de entrada (comprobar que estan pares)
+// void		ft_quotestrim(t_minishell *ms);
+
+// //almacenar la cadena tokenizada y guardarla de forma útil para 
+// //que el ejecutor pueda utilizarla posteriormente.
+// void		ft_parser(t_minishell *minishell);
+// t_cmdlist	*ft_cmdlstlast(t_cmdlist *lst);
+// void		ft_cmdlstadd_back(t_cmdlist **cmdlist, t_cmdlist *new);
+// t_cmdlist	*ft_cmdlstnew(void);
+// char		**get_paths(char **envp);
+// char		*ft_join(char *path, char *cmd);
+// char		*ft_strjoinder(char const *s1, char const *s2);
+// char		*ft_strjoinizq(char const *s1, char const *s2);
+// void		ft_free_cmdlist(t_cmdlist *cmdlist);
+// void		ft_lexer(t_minishell *minishell);
+
+// // Manejo y creación de la lista de variables de entorno
+// t_envlist	*env_list(char	**envp);
+// t_envlist	*lstnew_env(char *env);
+// void		lstadd_back_env(t_envlist **envlst, t_envlist *new);
+// t_envlist	*split_n_fill_env(t_envlist	*new_env, char *env);
+// void		sort_envlst(t_envlist **lst);
+// void		free_envlst(t_envlist *envlst);
+// void		delete_env(t_envlist **lst);
+// t_envlist	*check_env(char *env, t_envlist *explist);
+
+// // ejecutar los comandos
+// void		exec2(t_minishell *ms);
+
+// // Manejo de señales
+// void		ft_handler(int signum);
+
+// // Builtins
+// int			ft_pwd(void);
+// void		ft_env(t_minishell *ms);
+// void		ft_exit(t_minishell *ms, char **nb);
+// void		ft_export(t_minishell *ms, char **str);
+// void		ft_unset(t_minishell *ms, char **str);
+// void		ft_echo(char **str);
+// void		ft_cd(t_minishell *ms, char *str);
+// int			ft_bt_select(t_cmdlist *tmp, t_minishell *ms);
+// // Pruebas
+// void		testing(t_minishell *ms);
+
+// void		lex_parser(t_minishell *ms, char *prompt);
+
+// #endif
+
+
+
+
+
+
+
+
 
 
 
@@ -111,7 +186,7 @@ t_envlist	*ft_envlstlast(t_envlist *envlst);
 void		ft_free_envlst(t_envlist *envlst);
 t_envlist	*ft_envlst_fill(t_envlist *envlst, char *str);
 /*		envlst utils								*/
-t_envlist	*ft_copy_env(char **env);
+t_envlist	*env_list(char	**envp);
 void		ft_envlst_short(t_envlist **lst);
 void		ft_envlst_to_env(t_minishell *ms);
 void		ft_envlst_del(t_envlist **lst);
@@ -122,7 +197,6 @@ void		ft_free(t_minishell *ms);
 /*		exit builtin				*/
 /*		it change exit to 0			*/
 void		ft_exit_minishell(t_minishell *ms, char **num);
-int			ft_check_exit(t_minishell *ms, char *str);
 __int128	ft_ato_int128(char *str);
 void		ft_pwd(t_minishell *ms);
 void		ft_cd(char *str, t_minishell *ms);
@@ -143,7 +217,6 @@ int			ft_check_env(char *str, t_minishell *ms, char c);
 int			ft_is_builtin(t_minishell *ms, t_cmdlist *tmp);
 void		ft_accept_redirections(t_minishell *ms, t_cmdlist *tmp);
 /*		enviroment utils				*/
-void		ft_free_array(char **str, int i);
 /*
  * 		do a copy of the array with extra space
  * 		if add is 0 it only do a copy.		*/
@@ -160,7 +233,7 @@ void		ft_del_items_array(char **str, int del);
 t_envlist	*ft_getenv(char *str, t_envlist *lst);
 void		ft_shlvl_update(t_minishell *ms);
 /*		redirections				*/
-void		ft_exec(t_minishell *ms);
+void		exec(t_minishell *ms);
 /*		redirections utils			*/
 void		ft_dup(int in, int out);
 void		ft_close_pipe(t_minishell *ms);

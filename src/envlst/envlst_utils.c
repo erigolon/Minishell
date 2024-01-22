@@ -6,32 +6,30 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 22:43:04 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/17 22:46:25 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:02:17 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "../../include/minishell.h"
 
-t_envlist	*ft_copy_env(char **env)
+t_envlist	*env_list(char **envp)
 {
-	t_envlist	*new;
+	t_envlist	*lst;
 	int			i;
 
 	i = 0;
-	new = NULL;
-	if (!*env)
+	lst = NULL;
+	if (!*envp)
 		return (NULL);
-	while (env[i])
+	while (envp[i])
 	{
 		if (i == 0)
-			new = ft_envlstnew(env[i]);
+			lst = ft_envlstnew(envp[i]);
 		else
-			ft_envlstadd_back(&new, ft_envlstnew(env[i]));
+			ft_envlstadd_back(&lst, ft_envlstnew(envp[i]));
 		i++;
 	}
-	return (new);
+	return (lst);
 }
 
 void	ft_envlst_short(t_envlist **lst)

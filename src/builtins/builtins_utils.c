@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:13:55 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/17 21:32:01 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:09:57 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	ft_no_redirections(t_minishell *ms, t_cmdlist *tmp)
 	else if (!ft_strncmp("exit", tmp->cmd[0], 5))
 	{
 		if (ms->num_com == 1)
-			ft_exit_ms(ms, &tmp->cmd[1]);
+			ft_exit(ms, &tmp->cmd[1]);
 		return (1);
 	}
 	return (0);

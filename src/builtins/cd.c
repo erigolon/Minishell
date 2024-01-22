@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:14:21 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/17 21:44:57 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:47:38 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static void	ft_cd_error(char *str, t_minishell *ms, int err, char **to_free)
 		free(tmp);
 	}
 	ms->exit_status = 1;
-	ft_free_array(to_free, 0);
+	free_str(to_free, 0);
 }
 
 static void	ft_cd_update(t_minishell *ms, char **dir)
@@ -129,6 +129,6 @@ static void	ft_cd_update(t_minishell *ms, char **dir)
 		free(to_export[3]);
 	}
 	ft_export(to_export, ms);
-	ft_free_array(to_export, 0);
-	ft_free_array(dir, 0);
+	free_str(to_export, 0);
+	free_str(dir, 0);
 }

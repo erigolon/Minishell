@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:09:33 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/19 17:10:07 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:48:41 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void	ft_get_path(t_minishell *ms, t_cmdlist *tmp)
 		return ;
 	while (ms->path[i])
 	{
-		tmp->path = ft_strjoin_va("%s/%s", ms->path[i], tmp->cmd[0]);
+		tmp->path = ft_strjoin(ms->path[i], "/");
+		tmp->path = ft_strjoin(tmp->path, tmp->cmd[0]);
 		if (!access(tmp->path, F_OK))
 		{
 			return ;
 		}
 		free(tmp->path);
-
 		i++;
 	}
 	tmp->path = NULL;
@@ -61,7 +61,7 @@ void	ft_free_fork(t_minishell *ms)
 	lexer_free(ms->lexer);
 	free(ms->pipe);
 	if (ms->path)
-		ft_free_array(ms->path, 0);
+		free_str(ms->path, 0);
 	ft_free_cmdlst(ms);
 	free_all(ms);
 }

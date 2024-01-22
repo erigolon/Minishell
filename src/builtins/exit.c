@@ -1,42 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_exit.c                                       :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 21:14:28 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/17 21:45:30 by erigolon         ###   ########.fr       */
+/*   Created: 2023/09/20 13:29:00 by erigolon          #+#    #+#             */
+/*   Updated: 2024/01/22 17:52:50 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int	ft_limitsll(t_minishell *ms, char *str);
-
-int	ft_check_exit(t_minishell *ms, char *str)
+int	check_exit(char *str)
 {
 	int	i;
 
 	i = 0;
-	if (ft_issign(str[i]))
+	while (str[i])
+	{
+		if (!(str[i] >= 48 && str[i] <= 57))
+			return (1);
 		i++;
-	while (ft_isdigit(str[i]))
-		i++;
-	if (str[i] != '\0' || ft_issign(str[i - 1]))
-		return (0);
-	if (!ft_limitsll(ms, str))
-		return (0);
-	return (1);
+	}
+	return (0);
 }
 
-static int	ft_limitsll(t_minishell *ms, char *str)
+void	ft_exit(t_minishell *ms, char **nb)
 {
-	__int128	i;
-
-	i = ft_ato_int128(str);
-	if (i < LLONG_MIN || i > LLONG_MAX)
-		return (0);
-	ms->exit_status = i;
-	return (1);
+	ft_putstr_fd("exit\n", 2);
+	if (nb && nb[0])
+	{
+		if (check_exit(nb[0]))
+		{
+			ft_putstr_fd("minishell: exit: numeric argument required", 2);
+			ms->exit_status = 255;
+		}
+		else if (nb[1])
+		{
+			ft_putstr_fd("minishell: exit: too many arguments", 2);
+			ms->exit_status = 1;
+		}
+	}
+	ms->exit = 0;
 }
