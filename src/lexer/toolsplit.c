@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:12:28 by erigolon          #+#    #+#             */
-/*   Updated: 2023/10/23 18:01:16 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:52:21 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int	ft_strcontpipex(char const *s, char c)
 			tmp = s[i];
 			i++;
 			while ((s[i] != tmp) && s[i] != 0)
-					i++;
+				i++;
 			if (s[i] == tmp)
-			{	
+			{
 				i++;
 				n++;
 			}

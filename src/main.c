@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/16 18:39:51 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:47:53 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ void	free_loop(t_minishell *ms, char *prompt)
 {
 	if (!prompt || ms->input == NULL)
 		return ;
-	if (prompt)
-		free(prompt);
+	free(prompt);
 	if (ms->input)
 		free_str(ms->input, 0);
 	if (ms->cmds)
@@ -52,7 +51,8 @@ t_minishell	*init_ms(int argc, char **argv, char **envp)
 	ms->exit = 1;
 	ms->exit_status = 0;
 	ms->cmds = 0;
-	/* Por ahora no inicializo nada más en el struct */
+	ms->input = 0;
+	ms->child_pid = 0;
 	return (ms);
 }
 
