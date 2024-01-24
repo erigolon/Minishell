@@ -6,13 +6,13 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:19:48 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/17 18:19:50 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:41:46 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	get_token_type(char c)
+int	type_token(char c)
 {
 	if (c == '|')
 		return (CHAR_PIPE);
@@ -32,9 +32,6 @@ int	get_token_type(char c)
 		return (CHAR_TILDE);
 	return (CHAR_NORMAL);
 }
-
-/* Allocate a new token and insert it after the given "token" var. The "size"
-variable equals the lenght of the new token string */
 
 t_token	*new_token(t_token *token, int size)
 {
@@ -58,8 +55,6 @@ t_token	*new_token(t_token *token, int size)
 	return (token);
 }
 
-/* Free the token and update the double linked list */
-
 void	free_token(t_token *token)
 {
 	if (token->prev && token->next)
@@ -76,9 +71,6 @@ void	free_token(t_token *token)
 	if (token)
 		free(token);
 }
-
-/* Remove empty tokens that can result from transformations like replacing
-$USER when USER is not found on the environment */
 
 void	remove_empty_tokens(t_lexer *lexer)
 {

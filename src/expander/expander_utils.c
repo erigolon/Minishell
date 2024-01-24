@@ -6,16 +6,11 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:18:59 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/17 22:19:16 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/24 19:28:18 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "../../include/minishell.h"
-
-/* Given a token, searchs for a valid dollar variable and returns its
-envlst node. Return NULL if can't find it */
 
 t_envlist	*get_env_var(char *str, t_minishell *ms)
 {
@@ -39,10 +34,6 @@ t_envlist	*get_env_var(char *str, t_minishell *ms)
 	return (env_variable);
 }
 
-/* Find and replace function. Given a string to find "find" in "og", it replaces
-every coincidence for the "repl" string. For convenience and to reduce function
-lines elsewhere, it frees both original string and the "find" string */
-
 char	*replace_str(char *og, char *find, char *repl)
 {
 	int		final_len;
@@ -65,8 +56,6 @@ char	*replace_str(char *og, char *find, char *repl)
 	free(find);
 	return (str);
 }
-
-/* Given a string, return a substring with the dollar variable name */
 
 char	*get_dollar_name(char *str)
 {

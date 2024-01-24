@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/22 17:46:30 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:46:30 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	free_loop(t_minishell *g_ms, char *prompt, t_lexer *lex)
 {
 	free(prompt);
 	free(g_ms->line);
-	lexer_free(lex);
+	free_lexer(lex);
 	if (g_ms->cmds)
 		ft_free_cmdlst(g_ms);
 }
