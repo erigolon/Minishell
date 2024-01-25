@@ -6,20 +6,11 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:19:04 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/17 22:18:54 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/24 19:31:40 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "../../include/minishell.h"
-
-/* This function travels all the token list and replaces every $ variable it
-finds, but only when the token is not in single quotes or is a here_doc
-delimiter. To travel a token string, it uses [i] that advances as many positions
-as the variable value that it replaced. This function has to return a token
-pointer because it can update the list head reference and it can cause leaks or
-double frees */
 
 t_token	*expand_tokens(t_lexer *lexer, t_minishell *ms)
 {
@@ -45,11 +36,6 @@ t_token	*expand_tokens(t_lexer *lexer, t_minishell *ms)
 	}
 	return (lexer->token_list);
 }
-
-/* Replaces all dollar variables in an individual token. As it updates the
-token string lenght, it has to return how many positions has moved. It's
-negative if it couldn't find an env value for the given variable name, and it
-moves back <strlen(var_name)> positions */
 
 int	replace_next_dollar(char *str, t_minishell *ms, t_token *tok)
 {
@@ -77,9 +63,6 @@ int	replace_next_dollar(char *str, t_minishell *ms, t_token *tok)
 	return (len);
 }
 
-/* I handle the $? variable as a regular dollar, replacing $? for the
-ms->exit_status */
-
 int	replace_exit_status(t_token *tok, t_minishell *ms, char *free_str)
 {
 	char	*status;
@@ -90,10 +73,6 @@ int	replace_exit_status(t_token *tok, t_minishell *ms, char *free_str)
 	free(status);
 	return (1);
 }
-
-/* This function is required to replicate a bash corner case in which we have
-a variable name that starts with a number, for example $123abc. In this case,
-bash prints 23abc, ommiting the 1 */
 
 int	replace_dollar_digit(t_token *tok, t_minishell *ms, char *free_str)
 {
@@ -117,11 +96,7 @@ int	replace_dollar_digit(t_token *tok, t_minishell *ms, char *free_str)
 	return (-2);
 }
 
-/* This function replaces a token that contains the tilde char with the HOME of
-the user. It also adds a fallback in case that HOME is not found in the
-environment, concatenating /Users/ with the USER name */
-
-void	replace_tilde(t_token *tok, t_minishell *ms)
+void	ft_expander_directory(t_token *tok, t_minishell *m)
 {
 	t_envlist	*home;
 	t_token		*tk;
@@ -133,11 +108,11 @@ void	replace_tilde(t_token *tok, t_minishell *ms)
 		if (tk->str && tk->str[0] == '~' && (tk->str[1] == '/' || \
 			tk->str[1] == '\0') && tk->type == CHAR_TILDE)
 		{
-			home = ft_getenv("HOME", ms->envlist);
+			home = ft_getenv("HOME", m->envlist);
 			tk->type = EXPANDED;
 			if (!home)
 			{
-				s = ft_strjoin("/Users/", ft_getenv("USER", ms->envlist)->value);
+				s = ft_strjoin("/Users/", ft_getenv("USER", m->envlist)->value);
 				tk->str = replace_str(tk->str, ft_strdup("~"), s);
 				free(s);
 			}

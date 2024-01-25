@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:09:33 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/22 17:48:41 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:46:42 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_get_path(t_minishell *ms, t_cmdlist *tmp)
 
 void	ft_free_fork(t_minishell *ms)
 {
-	lexer_free(ms->lexer);
+	free_lexer(ms->lexer);
 	free(ms->pipe);
 	if (ms->path)
 		free_str(ms->path, 0);

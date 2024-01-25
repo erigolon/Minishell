@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:10:50 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/17 17:59:04 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/24 19:26:44 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void		join_dollars(t_token *token);
 /* parser/lexer_utils.c */
 
 void		lexer_init(char *input, t_token *token);
-void		lexer_free(t_lexer *lexer);
+void		free_lexer(t_lexer *lexer);
 int			lexer_files(t_token *token);
 int			count_tokens(t_lexer *lexer);
 
@@ -89,18 +89,18 @@ t_token		*quote_token(t_token *token, int type, int *j, int len);
 
 /* parser/tokens_utils.c */
 
-int			get_token_type(char c);
+int			type_token(char c);
 t_token		*new_token(t_token *token, int size);
 void		free_token(t_token *token);
 void		remove_empty_tokens(t_lexer	*lexer);
-void		trim_quotes_token(t_token *token);
+void		ft_quotestrim(t_token *token);
 
 /* parser/expander.c */
 t_token		*expand_tokens(t_lexer *lexer, t_minishell *ms);
 int			replace_next_dollar(char *str, t_minishell *ms, t_token *tok);
 int			replace_exit_status(t_token *tok, t_minishell *ms, char *free_str);
 int			replace_dollar_digit(t_token *tok, t_minishell *ms, char *free_str);
-void		replace_tilde(t_token *tok, t_minishell *ms);
+void		ft_expander_directory(t_token *tok, t_minishell *ms);
 
 /* parser/expander_utils.c */
 t_envlist	*get_env_var(char *str, t_minishell *ms);

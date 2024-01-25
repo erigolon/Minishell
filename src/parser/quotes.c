@@ -6,18 +6,13 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:19:42 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/17 18:19:43 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:49:45 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "../../include/minishell.h"
 
-/* Remove start and end quotes from the token string after it has been 
-classified in single quotes or double quotes */
-
-void	trim_quotes_token(t_token *token)
+void	ft_quotestrim(t_token *token)
 {
 	char	*tmp;
 
@@ -33,9 +28,6 @@ void	trim_quotes_token(t_token *token)
 		token = token->next;
 	}
 }
-
-/* checks if the char is a quote and ensures if the open and close quotes are
-the same kind */
 
 t_token	*quote_token(t_token *tok, int type, int *j, int len)
 {
@@ -55,9 +47,6 @@ t_token	*quote_token(t_token *tok, int type, int *j, int len)
 	}
 	return (tok);
 }
-
-/* Checks if any token in the token list is quoted, and raises an error if a
-quoted token is not correct */
 
 int	close_quotes(t_token *tok)
 {

@@ -6,17 +6,11 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:19:28 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/17 18:19:29 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:47:52 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "../../include/minishell.h"
-
-/* this function is pretty stacked. It reads every char in input and calls other
-functions to classify each type of token, creating new empty tokens when
-necessary */
 
 void	lexer_init(char *input, t_token *token)
 {
@@ -28,7 +22,7 @@ void	lexer_init(char *input, t_token *token)
 	j = 0;
 	while (input[++i] != '\0')
 	{
-		type = get_token_type(input[i]);
+		type = type_token(input[i]);
 		if ((type == CHAR_GREAT || type == CHAR_LESS) && \
 			token->status == NO_QUOTE)
 			token = redirect_token(token, input, &j, &i);
@@ -45,7 +39,7 @@ void	lexer_init(char *input, t_token *token)
 	}
 }
 
-void	lexer_free(t_lexer *lexer)
+void	free_lexer(t_lexer *lexer)
 {
 	t_token	*token;
 	t_token	*next;
@@ -62,46 +56,43 @@ void	lexer_free(t_lexer *lexer)
 	free(lexer);
 }
 
-/* It travels the token list and assigns the corresponding file token type
-depending on the token delimiter it found for it */
-
 int	lexer_files(t_token *token)
 {
-	t_token	*tok;
+	t_token	*tmp;
 
-	tok = token;
-	while (tok)
+	tmp = token;
+	while (tmp)
 	{
-		if (tok->type > 59 && tok->type < 66 && \
-			(!tok->next || tok->next->type != -1))
+		if (tmp->type > 59 && tmp->type < 66 && \
+			(!tmp->next || tmp->next->type != -1))
 		{
 			ft_putstr_fd("No filename given\n", 2);
 			return (1);
 		}
-		if (tok->type == CHAR_LESS)
-			tok->next->type = INFILE;
-		if (tok->type == CHAR_GREAT)
-			tok->next->type = OUTFILE;
-		if (tok->type == CHAR_LESSLESS)
-			tok->next->type = DELIMITER;
-		if (tok->type == CHAR_GREATGREAT)
-			tok->next->type = OUTFILE_APPEND;
-		tok = tok->next;
+		if (tmp->type == CHAR_LESS)
+			tmp->next->type = INFILE;
+		if (tmp->type == CHAR_GREAT)
+			tmp->next->type = OUTFILE;
+		if (tmp->type == CHAR_LESSLESS)
+			tmp->next->type = DELIMITER;
+		if (tmp->type == CHAR_GREATGREAT)
+			tmp->next->type = OUTFILE_APPEND;
+		tmp = tmp->next;
 	}
 	return (0);
 }
 
 int	count_tokens(t_lexer *lexer)
 {
-	t_token	*tok;
+	t_token	*tmp;
 	int		i;
 
-	tok = lexer->token_list;
+	tmp = lexer->token_list;
 	i = 0;
-	while (tok)
+	while (tmp)
 	{
 		i++;
-		tok = tok->next;
+		tmp = tmp->next;
 	}
 	lexer->n_tokens = i;
 	return (i);

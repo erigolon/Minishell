@@ -6,16 +6,11 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:19:20 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/17 18:19:21 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/24 19:15:17 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "../../include/minishell.h"
-
-/* Transforms tokens into a command list */
-
 
 void	tokens_to_commands(t_minishell *ms, t_lexer *lex)
 {
@@ -45,8 +40,6 @@ void	tokens_to_commands(t_minishell *ms, t_lexer *lex)
 	ms->num_com = n_cmds;
 }
 
-/* This function fills the redirection part of the command and also the args */
-
 t_token	*fill_cmd(t_cmdlist *cmd, t_token *tok)
 {
 	if (tok->type == INFILE)
@@ -71,9 +64,6 @@ t_token	*fill_cmd(t_cmdlist *cmd, t_token *tok)
 	return (0);
 }
 
-/* Find all tokens until the end or until a pipe is encountered and save them
-as arguments for the command in a 2D CHARar array */
-
 void	get_all_args(t_cmdlist *cmd, t_token *tok)
 {
 	int	i;
@@ -91,9 +81,6 @@ void	get_all_args(t_cmdlist *cmd, t_token *tok)
 	cmd->cmd[i + 1] = NULL;
 }
 
-/* Count the args previously so the get_all_args function can allocate the
-number of rows for the 2D array */
-
 int	count_args(t_token *tok)
 {
 	int	i;
@@ -107,8 +94,6 @@ int	count_args(t_token *tok)
 	}
 	return (i);
 }
-
-/* Self explanatory, also raises errors if it encounters any */
 
 int	open_files_cmd(t_cmdlist *cmd)
 {
