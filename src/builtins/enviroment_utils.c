@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enviroment_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:14:35 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/17 21:55:52 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:11:02 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ void	ft_shlvl_update(t_minishell *ms)
 	lvl = 1;
 	if (ms->explist && tmp && tmp->value)
 		lvl = ft_atoi(tmp->value) + 1;
-	str[0] = ft_strjoin_va("SHLVL=%i", lvl);
+	str[0] = ft_strjoin("SHLVL=", ft_itoa(lvl));
 	ft_export(str, ms);
 	free (str[0]);
 	if (!ms->envlist)
 	{
 		str[0] = "OLDPWD\0";
 		str[2] = getcwd(str[2], 0);
-		str[1] = ft_strjoin_va("%s=%s", "PWD", str[2]);
+		str[1] = ft_strjoin("PWD=", str[2]);
 		free(str[2]);
 		str[2] = NULL;
 		ft_export(str, ms);

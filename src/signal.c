@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:59:31 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/25 17:16:21 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:59:27 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 extern t_minishell	*g_ms;
-
 
 // Aquí se maneja tanto la señnal SIGQUIT como SIGINT
 void	ft_handler(int signum)
@@ -27,6 +26,7 @@ void	ft_handler(int signum)
 		signal(SIGINT, ft_handler);
 	}
 }
+
 void	ft_sigint_proc(int sig)
 {
 	int	i;
