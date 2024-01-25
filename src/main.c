@@ -6,18 +6,18 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/24 18:46:30 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:14:58 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+t_minishell	*g_ms;
+
 // static void	ft_leaks(void)
 // {
 // 	system("leaks -q minishell");
 // }
-
-t_minishell		*g_ms;
 
 void	free_all(t_minishell *ms)
 {
