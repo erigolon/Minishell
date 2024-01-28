@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:14:52 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/17 21:57:55 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:35:50 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_export(char **str, t_minishell *ms)
 	j = 0;
 	if (!str[0])
 	{
-		ft_envlst_short(&ms->explist);
+		sort_envlst(&ms->explist);
 		while (tmp)
 		{
 			printf("declare -x %s", tmp->env);
@@ -91,15 +91,15 @@ static void	ft_export_add(char *str, t_minishell *ms, int diff)
 		return ;
 	if (!ms->explist && !ms->envlist)
 	{
-		ms->explist = ft_envlstnew(str);
+		ms->explist = lstnew_env(str);
 		if (!diff)
-			ms->envlist = ft_envlstnew(str);
+			ms->envlist = lstnew_env(str);
 	}
 	else
 	{
-		ft_envlstadd_back(&ms->explist, ft_envlstnew(str));
+		lstadd_back_env(&ms->explist, lstnew_env(str));
 		if (!diff)
-			ft_envlstadd_back(&ms->envlist, ft_envlstnew(str));
+			lstadd_back_env(&ms->envlist, lstnew_env(str));
 	}
 }
 
@@ -120,10 +120,10 @@ void	ft_export_to_env(char *str, t_envlist *envlst)
 	{
 		if (!ft_strncmp(str, tmp->env, i) && !tmp->env[i])
 		{
-			tmp = ft_envlst_fill(tmp, str);
+			tmp = split_n_fill_env(tmp, str);
 			return ;
 		}
 		tmp = tmp->next;
 	}
-	ft_envlstadd_back(&envlst, ft_envlstnew(str));
+	lstadd_back_env(&envlst, lstnew_env(str));
 }

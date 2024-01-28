@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:18:50 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/24 19:34:46 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:31:40 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	ft_childs_exe(t_minishell *ms, t_cmdlist *tmp)
 	ft_get_path(ms, tmp);
 	if (!tmp->path)
 		ft_error_exe(tmp->cmd, ": command not found\n", ms);
-	ft_envlst_to_env(ms);
+	envlst_to_env(ms);
 	execve(tmp->path, tmp->cmd, ms->envp);
 	free_str(ms->envp, 0);
 }

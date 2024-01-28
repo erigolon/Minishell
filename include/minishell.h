@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/25 19:31:25 by vicrodri         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:31:19 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ t_envlist	*split_n_fill_env(t_envlist *envlst, char *env);
 /*		envlst utils								*/
 t_envlist	*env_list(char	**envp);
 void	sort_envlst(t_envlist **lst);
-void		ft_envlst_to_env(t_minishell *ms);
+void		envlst_to_env(t_minishell *ms);
 void		delete_env(t_envlist **lst);
 
 /*		free all at exit			*/

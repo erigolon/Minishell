@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/25 17:14:58 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:21:24 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	free_all(t_minishell *ms)
 {
 	free(ms->line);
 	free_str(ms->envp, 0);
-	ft_free_envlst(ms->envlist);
-	ft_free_envlst(ms->explist);
+	free_envlst(ms->envlist);
+	free_envlst(ms->explist);
 	free(ms);
 }
 

@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:14:41 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/17 22:39:34 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:21:58 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	ft_unset(char **str, t_minishell *ms)
 		else
 		{
 			tmp = ft_getenv(str[i], ms->explist);
-			ft_envlst_del(&tmp);
+			delete_env(&tmp);
 			tmp = ft_getenv(str[i], ms->envlist);
-			ft_envlst_del(&tmp);
+			delete_env(&tmp);
 		}
 		i++;
 	}

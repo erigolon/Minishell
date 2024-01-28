@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envlst.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 22:43:09 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/25 19:31:07 by vicrodri         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:26:40 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_envlist	*lstnew_env(char *env)
 	new_env->value = NULL;
 	new_env->next = NULL;
 	new_env->prev = NULL;
-	ft_envlst_fill(new_env, env);
+	split_n_fill_env(new_env, env);
 	return (new_env);
 }
 
@@ -68,7 +68,7 @@ t_envlist	*env_list(char **envp)
 	while (envp[i])
 	{
 		if (i == 0)
-			lst = ft_envlstnew(envp[i]);
+			lst = lstnew_env(envp[i]);
 		else
 			lstadd_back_env(&lst, lstnew_env(envp[i]));
 		i++;

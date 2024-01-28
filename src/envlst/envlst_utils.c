@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envlst_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 22:43:04 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/25 19:32:27 by vicrodri         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:31:07 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,33 +57,33 @@ void	sort_envlst(t_envlist **lst)
 	}
 }
 
-// void	ft_envlst_to_env(t_minishell *ms)
-// {
-// 	t_envlist	*tmp;
-// 	int			i;
-// 	char		**new;
+void	envlst_to_env(t_minishell *ms)
+{
+	t_envlist	*tmp;
+	int			i;
+	char		**new;
 
-// 	i = 0;
-// 	tmp = ms->envlist;
-// 	while (tmp)
-// 	{
-// 		i++;
-// 		tmp = tmp->next;
-// 	}
-// 	tmp = ms->envlist;
-// 	new = ft_calloc(sizeof(char *), i + 1);
-// 	if (!new)
-// 		return ;
-// 	i = 0;
-// 	while (tmp)
-// 	{
-// 		new[i] = ft_strjoin(tmp->env, "=");
-// 		new[i] = ft_strjoin(new[i], tmp->value);
-// 		i++;
-// 		tmp = tmp->next;
-// 	}
-// 	ms->envp = new;
-// }
+	i = 0;
+	tmp = ms->envlist;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	tmp = ms->envlist;
+	new = ft_calloc(sizeof(char *), i + 1);
+	if (!new)
+		return ;
+	i = 0;
+	while (tmp)
+	{
+		new[i] = ft_strjoin(tmp->env, "=");
+		new[i] = ft_strjoin(new[i], tmp->value);
+		i++;
+		tmp = tmp->next;
+	}
+	ms->envp = new;
+}
 
 t_envlist	*split_n_fill_env(t_envlist *envlst, char *env)
 {
