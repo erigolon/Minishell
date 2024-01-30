@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:13:55 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/22 17:09:57 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:26:21 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	ft_is_builtin(t_minishell *ms, t_cmdlist *tmp)
 	if (!ft_strncmp("cd", tmp->cmd[0], 3))
 	{
 		if (ms->num_com == 1)
-			ft_cd(tmp->cmd[1], ms);
+			ft_cd(ms, tmp->cmd[1]);
 		return (1);
-	}	
+	}
 	return (0);
 }
 
@@ -38,14 +38,14 @@ static int	ft_no_redirections(t_minishell *ms, t_cmdlist *tmp)
 		if (!tmp->cmd[1])
 			return (0);
 		if (ms->num_com == 1)
-			ft_export(&tmp->cmd[1], ms);
+			ft_export(ms, &tmp->cmd[1]);
 		ms->exit_status = 0;
 		return (1);
 	}
 	else if (!ft_strncmp("unset", tmp->cmd[0], 6))
 	{
 		if (ms->num_com == 1)
-			ft_unset(&tmp->cmd[1], ms);
+			ft_unset(ms, &tmp->cmd[1]);
 		ms->exit_status = 0;
 		return (1);
 	}
@@ -67,7 +67,7 @@ void	ft_accept_redirections(t_minishell *ms, t_cmdlist *tmp)
 	if (!ft_strncmp("env", tmp->cmd[0], 4))
 		ft_env(ms);
 	else if (!ft_strncmp("pwd", tmp->cmd[0], 4))
-		ft_pwd(ms);
+		ft_pwd();
 	else if (!ft_strncmp("echo", tmp->cmd[0], 5))
 		ft_echo(&tmp->cmd[1]);
 	else if (!ft_strncmp("getenv", tmp->cmd[0], 7))
@@ -79,7 +79,7 @@ void	ft_accept_redirections(t_minishell *ms, t_cmdlist *tmp)
 			printf("%s\n", get->value);
 	}
 	else if (!ft_strncmp("export", tmp->cmd[0], 7))
-		ft_export(&tmp->cmd[1], ms);
+		ft_export(ms, &tmp->cmd[1]);
 	else
 		return ;
 	ft_free_fork(ms);

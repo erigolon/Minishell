@@ -1,46 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 13:29:00 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/30 10:38:31 by erigolon         ###   ########.fr       */
+/*   Created: 2023/10/09 12:03:09 by erigolon          #+#    #+#             */
+/*   Updated: 2024/01/30 11:25:43 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	check_exit(char *str)
+void	ft_unset(t_minishell *ms, char **str)
 {
-	int	i;
+	t_envlist	*tmp;
+	int			i;
+	int			status;
 
 	i = 0;
+	status = 0;
+	if (!str)
+		return ;
 	while (str[i])
 	{
-		if (!(str[i] >= 48 && str[i] <= 57))
-			return (1);
+		if (ft_strchr(str[i], '='))
+		{
+			ft_putstr_fd ("minishell: unset: not a valid identifier", 2);
+			status = 1;
+		}
+		else
+		{
+			tmp = check_env(str[i], ms->envlist);
+			delete_env(&tmp);
+			tmp = check_env(str[i], ms->explist);
+			delete_env(&tmp);
+		}
 		i++;
 	}
-	return (0);
-}
-
-void	ft_exit(t_minishell *ms, char **nb)
-{
-	ft_putstr_fd("exit\n", 2);
-	if (nb && nb[0])
-	{
-		if (check_exit(nb[0]))
-		{
-			ft_putstr_fd("minishell: exit: numeric argument required", 2);
-			ms->exit_status = 255;
-		}
-		else if (nb[1])
-		{
-			ft_putstr_fd("minishell: exit: too many arguments", 2);
-			ms->exit_status = 1;
-		}
-	}
-	ms->exit = 0;
+	ms->exit_status = status;
 }

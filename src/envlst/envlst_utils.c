@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 22:43:04 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/28 17:31:07 by erigolon         ###   ########.fr       */
+/*   Created: 2023/09/25 22:43:04 by erigolon          #+#    #+#             */
+/*   Updated: 2024/01/30 10:55:25 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,24 @@ void	envlst_to_env(t_minishell *ms)
 		tmp = tmp->next;
 	}
 	ms->envp = new;
+}
+
+t_envlist	*check_env(char *env, t_envlist *explist)
+{
+	t_envlist	*tmp;
+
+	if (!explist)
+		return (NULL);
+	tmp = explist;
+	while (tmp)
+	{
+		if (!ft_strncmp(env, tmp->env, 100))
+			break ;
+		tmp = tmp->next;
+	}
+	if (tmp)
+		return (tmp);
+	return (NULL);
 }
 
 t_envlist	*split_n_fill_env(t_envlist *envlst, char *env)

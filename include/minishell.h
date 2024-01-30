@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/28 17:31:19 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:27:19 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,8 @@ void		free_envlst(t_envlist *envlst);
 t_envlist	*split_n_fill_env(t_envlist *envlst, char *env);
 /*		envlst utils								*/
 t_envlist	*env_list(char	**envp);
-void	sort_envlst(t_envlist **lst);
+t_envlist	*check_env(char *env, t_envlist *explist);
+void		sort_envlst(t_envlist **lst);
 void		envlst_to_env(t_minishell *ms);
 void		delete_env(t_envlist **lst);
 
@@ -198,13 +199,13 @@ void		ft_free(t_minishell *ms);
 /*		it change exit to 0			*/
 void		ft_exit_minishell(t_minishell *ms, char **num);
 __int128	ft_ato_int128(char *str);
-void		ft_pwd(t_minishell *ms);
-void		ft_cd(char *str, t_minishell *ms);
+int			ft_pwd(void);
+void		ft_cd(t_minishell *ms, char *str);
 void		ft_echo(char **str);
 /*		enviroment builtin functions						*/
-void		ft_export(char **str, t_minishell *ms);
+void		ft_export(t_minishell *ms, char **str);
 void		ft_env(t_minishell *ms);
-void		ft_unset(char **str, t_minishell *ms);
+void		ft_unset(t_minishell *ms, char **str);
 void		ft_export_to_env(char *str, t_envlist *envlst);
 
 /*

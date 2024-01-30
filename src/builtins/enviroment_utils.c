@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enviroment_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:14:35 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/25 19:11:02 by vicrodri         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:04:04 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_shlvl_update(t_minishell *ms)
 	if (ms->explist && tmp && tmp->value)
 		lvl = ft_atoi(tmp->value) + 1;
 	str[0] = ft_strjoin("SHLVL=", ft_itoa(lvl));
-	ft_export(str, ms);
+	ft_export(ms, str);
 	free (str[0]);
 	if (!ms->envlist)
 	{
@@ -51,7 +51,7 @@ void	ft_shlvl_update(t_minishell *ms)
 		str[1] = ft_strjoin("PWD=", str[2]);
 		free(str[2]);
 		str[2] = NULL;
-		ft_export(str, ms);
+		ft_export(ms, str);
 		free(str[1]);
 	}
 	free(str);

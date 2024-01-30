@@ -1,46 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 13:29:00 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/30 10:38:31 by erigolon         ###   ########.fr       */
+/*   Created: 2023/10/03 12:43:29 by erigolon          #+#    #+#             */
+/*   Updated: 2024/01/30 11:06:20 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	check_exit(char *str)
+void	ft_echo(char **str)
 {
+	int	line;
 	int	i;
 
 	i = 0;
+	line = 1;
+	if ((str[i][0] == '-' && str[i][1] == 'n' && str[i][2] == '\0'))
+		line = 0;
+	if (line == 0)
+		i = 1;
 	while (str[i])
 	{
-		if (!(str[i] >= 48 && str[i] <= 57))
-			return (1);
+		printf("%s", str[i]);
 		i++;
+		if (str[i])
+			printf(" ");
 	}
-	return (0);
-}
-
-void	ft_exit(t_minishell *ms, char **nb)
-{
-	ft_putstr_fd("exit\n", 2);
-	if (nb && nb[0])
+	if (line)
 	{
-		if (check_exit(nb[0]))
-		{
-			ft_putstr_fd("minishell: exit: numeric argument required", 2);
-			ms->exit_status = 255;
-		}
-		else if (nb[1])
-		{
-			ft_putstr_fd("minishell: exit: too many arguments", 2);
-			ms->exit_status = 1;
-		}
+		printf("\n");
 	}
-	ms->exit = 0;
 }
