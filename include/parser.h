@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:10:50 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/24 19:26:44 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:15:04 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 typedef struct minishell	t_minishell;
 typedef struct cmdlist		t_cmdlist;
 typedef struct envlist		t_envlist;
+typedef struct s_token		t_token;
 
-enum e_tokens {
+enum e_tokens
+{
 	CHAR_PIPE = '|',
 	CHAR_SQUOTE = '\'',
 	CHAR_DQUOTE = '\"',
@@ -36,19 +38,19 @@ enum e_tokens {
 	CHAR_NULL = 0,
 };
 
-enum e_status {
+enum e_status
+{
 	NORMAL,
 	ESCAPED,
 };
 
-enum e_quote_status {
+enum e_quote_status
+{
 	NO_QUOTE,
 	DOUBT_QUOTE,
 	SINGLE_QUOTE = '\'',
 	DOUBLE_QUOTE = '\"',
 };
-
-typedef struct s_token	t_token;
 
 typedef struct s_token
 {
@@ -68,8 +70,6 @@ typedef struct s_lexer
 	int		error;
 }	t_lexer;
 
-
-t_lexer		*ft_tokenize_line(char *input, t_minishell *ms);
 void		join_tokens(t_token *token);
 void		join_dollars(t_token *token);
 
@@ -106,10 +106,6 @@ void		ft_expander_directory(t_token *tok, t_minishell *ms);
 t_envlist	*get_env_var(char *str, t_minishell *ms);
 char		*replace_str(char *og, char *find, char *repl);
 char		*get_dollar_name(char *str);
-
-/* parser/wildcard_expander.c */
-void		expand_all_wildcards(t_lexer *lex);
-t_token		*expand_wildcard(t_token *tok, char **wildcards);
 
 /* parser/fill_cmds.c */
 void		tokens_to_commands(t_minishell *ms, t_lexer *lex);
