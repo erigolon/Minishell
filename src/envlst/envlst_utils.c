@@ -6,33 +6,31 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 22:43:04 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/22 17:02:17 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:31:07 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-t_envlist	*env_list(char **envp)
+void	delete_env(t_envlist **lst)
 {
-	t_envlist	*lst;
-	int			i;
-
-	i = 0;
-	lst = NULL;
-	if (!*envp)
-		return (NULL);
-	while (envp[i])
+	if (!*lst)
+		return ;
+	if ((*lst)->next && (*lst)->prev)
 	{
-		if (i == 0)
-			lst = ft_envlstnew(envp[i]);
-		else
-			ft_envlstadd_back(&lst, ft_envlstnew(envp[i]));
-		i++;
+		(*lst)->prev->next = (*lst)->next;
+		(*lst)->next->prev = (*lst)->prev;
 	}
-	return (lst);
+	else if ((*lst)->next)
+		(*lst)->next->prev = NULL;
+	else if ((*lst)->prev)
+		(*lst)->prev->next = NULL;
+	(*lst)->prev = NULL;
+	(*lst)->next = NULL;
+	free_envlst(*lst);
 }
 
-void	ft_envlst_short(t_envlist **lst)
+void	sort_envlst(t_envlist **lst)
 {
 	int			diff;
 	char		*change;
@@ -59,7 +57,7 @@ void	ft_envlst_short(t_envlist **lst)
 	}
 }
 
-void	ft_envlst_to_env(t_minishell *ms)
+void	envlst_to_env(t_minishell *ms)
 {
 	t_envlist	*tmp;
 	int			i;
@@ -79,27 +77,30 @@ void	ft_envlst_to_env(t_minishell *ms)
 	i = 0;
 	while (tmp)
 	{
-		new[i] = ft_strjoin_va("%s=%s", tmp->env, tmp->value);
+		new[i] = ft_strjoin(tmp->env, "=");
+		new[i] = ft_strjoin(new[i], tmp->value);
 		i++;
 		tmp = tmp->next;
 	}
 	ms->envp = new;
 }
 
-void	ft_envlst_del(t_envlist **lst)
+t_envlist	*split_n_fill_env(t_envlist *envlst, char *env)
 {
-	if (!*lst)
-		return ;
-	if ((*lst)->next && (*lst)->prev)
-	{
-		(*lst)->prev->next = (*lst)->next;
-		(*lst)->next->prev = (*lst)->prev;
-	}
-	else if ((*lst)->next)
-		(*lst)->next->prev = NULL;
-	else if ((*lst)->prev)
-		(*lst)->prev->next = NULL;
-	(*lst)->prev = NULL;
-	(*lst)->next = NULL;
-	ft_free_envlst(*lst);
+	int	i;
+
+	i = 0;
+	while (env[i] && env[i] != '=')
+		i++;
+	if (envlst->env)
+		free(envlst->env);
+	envlst->env = ft_calloc(sizeof(char), i + 2);
+	ft_strlcpy(envlst->env, env, i + 1);
+	if (envlst->value)
+		free(envlst->value);
+	if (env[i] == '=')
+		envlst->value = ft_strdup(&env[i + 1]);
+	else
+		envlst->value = NULL;
+	return (envlst);
 }

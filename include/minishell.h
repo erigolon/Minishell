@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/22 17:49:09 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:31:19 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,16 +180,16 @@ t_cmdlist	*ft_cmdlstlast(t_cmdlist *cmdlst);
 void		ft_free_cmdlst(t_minishell	*ms);
 
 /*		envlst functions							*/
-t_envlist	*ft_envlstnew(char *str);
-void		ft_envlstadd_back(t_envlist **envlst, t_envlist *add);
-t_envlist	*ft_envlstlast(t_envlist *envlst);
-void		ft_free_envlst(t_envlist *envlst);
-t_envlist	*ft_envlst_fill(t_envlist *envlst, char *str);
+t_envlist	*lstnew_env(char *env);
+void		envlstadd_back(t_envlist **envlst, t_envlist *add);
+void	lstadd_back_env(t_envlist **envlst, t_envlist *new);
+void		free_envlst(t_envlist *envlst);
+t_envlist	*split_n_fill_env(t_envlist *envlst, char *env);
 /*		envlst utils								*/
 t_envlist	*env_list(char	**envp);
-void		ft_envlst_short(t_envlist **lst);
-void		ft_envlst_to_env(t_minishell *ms);
-void		ft_envlst_del(t_envlist **lst);
+void	sort_envlst(t_envlist **lst);
+void		envlst_to_env(t_minishell *ms);
+void		delete_env(t_envlist **lst);
 
 /*		free all at exit			*/
 void		ft_free(t_minishell *ms);

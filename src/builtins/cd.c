@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:14:21 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/22 17:47:38 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:08:48 by vicrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ void	ft_cd(char *str, t_minishell *ms)
 		if (ft_strlen(str) == 1 && str[0] == '/')
 			tmp[1] = ft_strdup("/\0");
 		else
-			tmp[1] = ft_strjoin_va("%s/%s", tmp[0], str);
+		{
+			tmp[1] = ft_strjoin(tmp[0], "/");
+			tmp[1] = ft_strjoin(tmp[1], str);
+		}
 		if (chdir(tmp[1]) && chdir(str))
 		{
 			ft_cd_error(str, ms, 1, tmp);
@@ -88,17 +91,25 @@ static void	ft_cd_error(char *str, t_minishell *ms, int err, char **to_free)
 	{
 		stat(str, &st);
 		if (!S_ISREG(st.st_mode) && S_ISDIR(st.st_mode))
-			tmp = ft_strjoin_va(
-					"minishell: cd: %s: Permission denied\n", str);
+		{
+			tmp = ft_strjoin("minishell: cd: ", str);
+			tmp = ft_strjoin(tmp, ": Permission denied\n");
+		}
 		else if (!S_ISDIR(st.st_mode) && !access(str, F_OK))
-			tmp = ft_strjoin_va(
-					"minishell: cd: %s: Not a directory\n", str);
+		{
+			tmp = ft_strjoin("minishell: cd: ", str);
+			tmp = ft_strjoin(tmp, ": Not a directory\n");
+		}
 		else if (ft_strlen(str) > 255)
-			tmp = ft_strjoin_va(
-					"minishell: cd: %s: File name too long\n", str);
+		{
+			tmp = ft_strjoin("minishell: cd: ", str);
+			tmp = ft_strjoin(tmp, ": File name too long\n");
+		}
 		else
-			tmp = ft_strjoin_va(
-					"minishell: cd: %s: No such file or directory\n", str);
+		{
+			tmp = ft_strjoin("minishell: cd: ", str);
+			tmp = ft_strjoin(tmp, ": No such file or directory\n");
+		}
 		ft_putstr_fd(tmp, 2);
 		free(tmp);
 	}
@@ -118,14 +129,14 @@ static void	ft_cd_update(t_minishell *ms, char **dir)
 	if (!old)
 		to_export[0] = ft_strdup("");
 	else if (pwd)
-		to_export[0] = ft_strjoin_va("OLDPWD=%s", pwd->value);
+		to_export[0] = ft_strjoin("OLDPWD=", pwd->value);
 	else
-		to_export[0] = ft_strjoin_va("OLDPWD=%s", dir[0]);
+		to_export[0] = ft_strjoin("OLDPWD=", dir[0]);
 	if (pwd)
 	{
 		to_export[3] = NULL;
 		to_export[3] = getcwd(to_export[3], 0);
-		to_export[1] = ft_strjoin_va("PWD=%s", to_export[3]);
+		to_export[1] = ft_strjoin("PWD=", to_export[3]);
 		free(to_export[3]);
 	}
 	ft_export(to_export, ms);
