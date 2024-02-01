@@ -33,12 +33,12 @@ void	ft_exit(t_minishell *ms, char **nb)
 	{
 		if (check_exit(nb[0]))
 		{
-			ft_putstr_fd("minishell: exit: numeric argument required", 2);
+			ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
 			ms->exit_status = 255;
 		}
 		else if (nb[1])
 		{
-			ft_putstr_fd("minishell: exit: too many arguments", 2);
+			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 			ms->exit_status = 1;
 		}
 	}
