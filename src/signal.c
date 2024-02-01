@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicrodri <vicrodri@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:59:31 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/25 18:59:27 by vicrodri         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:54:51 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 extern t_minishell	*g_ms;
 
-// Aquí se maneja tanto la señnal SIGQUIT como SIGINT
 void	ft_handler(int signum)
 {
 	if (signum == SIGINT)

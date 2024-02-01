@@ -6,18 +6,13 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:17:26 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/30 12:11:53 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:55:39 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 t_minishell	*g_ms;
-
-// static void	ft_leaks(void)
-// {
-// 	system("leaks -q minishell");
-// }
 
 void	free_all(t_minishell *ms)
 {
@@ -58,7 +53,6 @@ int	main(int argc, char **argv, char **envp)
 	t_lexer		*lexer;
 	char		*prompt;
 
-	// atexit(ft_leaks);/* Borrar esto en un futuro */
 	rl_catch_signals = 0;
 	g_ms = init_ms(argc, argv, envp);
 	while (g_ms->exit)

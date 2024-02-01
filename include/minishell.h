@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:27:52 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/30 14:13:47 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:56:16 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 # include <readline/history.h>
 # include <termios.h>
 # include <limits.h>
-
 
 # define READ_END 0
 # define WRITE_END 1
@@ -73,7 +72,6 @@ typedef struct minishell
 	int				exit;
 	t_lexer			*lexer;
 }	t_minishell;
-
 
 void		ft_handler(int signum);
 void		free_str(char **str, int i);

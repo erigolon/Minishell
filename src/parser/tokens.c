@@ -6,15 +6,11 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:19:54 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/17 18:19:56 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:52:33 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-/* Classifies all tokens that are not redirections or normal chars. It removes
-consecutive espaces, quotes a token, and allocates a new token if the input is
-a special char */
 
 t_token	*other_tokens(t_token *tok, int type, int *j, int len)
 {
@@ -42,14 +38,6 @@ t_token	*other_tokens(t_token *tok, int type, int *j, int len)
 	tok = new_token(tok, len);
 	return (tok);
 }
-
-/* I have done a little hack in line 53 to determine the kind of double
-token, because on the token types enum, both GREATGREAT(65) and LESSLESS(63) are
-GREAT(62) + 3 or LESS(60) + 3.
-Norminette makes you make things like this >:(
-
-It checks the kind of redirection, and if the redirection char is inside quotes,
-it treats it as a normal char */
 
 t_token	*redirect_token(t_token *token, char *input, int *j, int *i)
 {

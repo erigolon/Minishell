@@ -6,10 +6,9 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:19:15 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/22 17:47:53 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:53:22 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../include/minishell.h"
 
@@ -56,7 +55,7 @@ t_cmdlist	*ft_cmdlstlast(t_cmdlist *cmdlist)
 	if (cmdlist)
 	{
 		while (last->next)
-		last = last->next;
+			last = last->next;
 	}
 	return (last);
 }
