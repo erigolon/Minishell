@@ -40,6 +40,7 @@ void	ft_exit(t_minishell *ms, char **nb)
 		{
 			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 			ms->exit_status = 1;
+			return ;
 		}
 	}
 	ms->exit = 0;

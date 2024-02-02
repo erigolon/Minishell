@@ -12,6 +12,25 @@
 
 #include "../../include/minishell.h"
 
+int	check_n(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '-')
+	{
+		i++;
+		while (str[i] != '\0')
+		{
+			if (str[i] != 'n')
+				return (0);
+			i++;
+		}
+		return (1);
+	}
+	return (0);
+}
+
 void	ft_echo(char **str)
 {
 	int	line;
@@ -19,19 +38,21 @@ void	ft_echo(char **str)
 
 	i = 0;
 	line = 1;
-	if ((str[i][0] == '-' && str[i][1] == 'n' && str[i][2] == '\0'))
-		line = 0;
-	if (line == 0)
-		i = 1;
-	while (str[i])
+	if (str[i])
 	{
-		printf("%s", str[i]);
-		i++;
-		if (str[i])
-			printf(" ");
+		while (check_n(str[i]))
+		{
+			line = 0;
+			i++;
+		}
+		while (str[i])
+		{
+			printf("%s", str[i]);
+			i++;
+			if (str[i])
+				printf(" ");
+		}
 	}
 	if (line)
-	{
 		printf("\n");
-	}
 }
