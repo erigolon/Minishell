@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:10:50 by vicrodri          #+#    #+#             */
-/*   Updated: 2024/01/30 14:15:04 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/02/04 17:32:23 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int			count_tokens(t_lexer *lexer);
 /* parser/tokens.c */
 
 int			close_quotes(t_token *tok);
+int			check_pipe(t_token *tok);
 t_token		*other_tokens(t_token *token, int type, int *j, int len);
 t_token		*redirect_token(t_token *token, char *input, int *j, int *i);
 t_token		*quote_token(t_token *token, int type, int *j, int len);

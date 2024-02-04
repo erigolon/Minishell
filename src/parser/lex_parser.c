@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:19:24 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/24 19:26:23 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/02/04 17:35:00 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ t_lexer	*lex_parser(t_minishell *ms, char *prompt)
 	lexer->error = 0;
 	lexer->token_list = new_token(NULL, ft_strlen(prompt));
 	lexer_init(prompt, lexer->token_list);
-	if (close_quotes(lexer->token_list))
+	if (close_quotes(lexer->token_list)
+		|| check_pipe(lexer->token_list))
 		lexer->error = 1;
 	remove_empty_tokens(lexer);
 	if (lexer_files(lexer->token_list))

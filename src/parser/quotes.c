@@ -6,7 +6,7 @@
 /*   By: erigolon <erigolon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:19:42 by erigolon          #+#    #+#             */
-/*   Updated: 2024/01/24 18:49:45 by erigolon         ###   ########.fr       */
+/*   Updated: 2024/02/04 17:34:16 by erigolon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,13 @@ int	close_quotes(t_token *tok)
 		return (1);
 	}
 	return (0);
+}
+int	check_pipe(t_token *tok)
+{
+	if (tok->str[0] == CHAR_PIPE)
+	{	
+		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
+		return 1;
+	}
+	return 0;
 }
